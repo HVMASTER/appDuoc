@@ -1,20 +1,35 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Header Toolbar</ion-title>
+    <app-header-buttons></app-header-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <app-carrusel [imagenes]="imagenes" titulo="imagenes referenciales" ></app-carrusel>
+
 </ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <h3>TeLlevoAPP</h3>
+          <p>Todos los derechos reservados &copy; 2023</p>
+        </ion-col>
+        <ion-col size="6">
+          <h3>Enlaces</h3>
+          <ion-list>
+            <ion-item routerLink="/home">Inicio</ion-item>
+            <ion-item routerLink="/login">Iniciar Sesión</ion-item>
+            <ion-item routerLink="/registro">Registro</ion-item>
+            <ion-item routerLink="/soporte">Soporte</ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>
