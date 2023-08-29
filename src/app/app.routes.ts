@@ -16,10 +16,10 @@ export const routes: Routes = [
   },
   {
     path: 'registro',
-    loadComponent: () => import('./pages/registro/registro.page').then( m => m.RegistroPage)
+    loadComponent: () => import('./modules/auth/registro/registro.page').then( m => m.RegistroPage)
   },
   {
     path: 'login',
-    loadComponent: () => import('./pages/login/login.page').then( m => m.LoginPage)
+    loadComponent: () => import('./modules/auth/login/login.page').then( m => m.LoginPage)
   },
 ];
