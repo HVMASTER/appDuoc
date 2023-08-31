@@ -37,6 +37,9 @@ export class RegistroService {
     
   ];
 
+  //Este es el nombre de la variable
+  usuarioLogueado: IAuth | null = null; //Esto asigna el valor inicial a la variable. En este caso, la variable usuarioLogueado se inicializa con el valor null
+
   //En resumen, este código en el constructor se encarga de inicializar el almacenamiento local con la lista de usuarios registrados en el momento en que se crea una instancia del servicio. Esto asegura que la información de los usuarios registrados esté disponible incluso después de que la página se recargue o cierre.
   constructor() { 
     localStorage.setItem('users', JSON.stringify(this.users)); //se crea la variable users en el localstorage y se le asigna el valor de la variable users
@@ -62,7 +65,12 @@ export class RegistroService {
   //La función validarCredenciales toma el correo electrónico y la contraseña proporcionados, busca en la lista de usuarios (this.users) y verifica si existe un usuario con esas credenciales. Si existe un usuario, devuelve true, lo que indica que las credenciales son válidas. Si no existe un usuario, devuelve false, indicando que las credenciales son inválidas y el usuario no puede iniciar sesión.
   validarCredenciales(correo: string, contrasena: string): boolean {
     const usuarioEncontrado = this.users.find(user => user.correo === correo && user.contrasena === contrasena);
-    return !!usuarioEncontrado;
+
+    if (usuarioEncontrado) {
+      this.usuarioLogueado = usuarioEncontrado; // Asigna el usuario logueado
+      return true;
+    }
+    return false;
   }
 
 }
