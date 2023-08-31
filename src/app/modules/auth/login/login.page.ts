@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RegistroService } from '../auth.service'; // Asumo que tienes un servicio similar para el registro
+import { RegistroService } from '../auth.service'; 
 import { Router } from '@angular/router';
 
 @Component({

@@ -1,4 +1,7 @@
 <ion-toolbar>
+  <ng-container *ngIf="nombre && apellidos">
+    <ion-title slot="end">Bienvenido: {{ nombre }} {{ apellidos }}</ion-title>
+  </ng-container>
   <ion-buttons slot="secondary">
     <ion-button href="/login"> Login </ion-button>
   </ion-buttons>
