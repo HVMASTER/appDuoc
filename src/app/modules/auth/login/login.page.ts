@@ -22,6 +22,10 @@ export class LoginPage implements OnInit {
 
   // FormGroup para gestionar el formulario de inicio de sesión
   formularioLogin: FormGroup;
+  
+  formularioRecuperacion!: FormGroup; 
+  
+  mostrarRecuperacion = false;
 
   // Constructor del componente
   constructor(private formBuilder: FormBuilder, private registroService: RegistroService, private router: Router) {
@@ -43,6 +47,30 @@ export class LoginPage implements OnInit {
         this.router.navigate(['/home']); // Cambia 'inicio' por la ruta deseada después del inicio de sesión
       } else {
         alert('Credenciales inválidas');
+      }
+    }
+  }
+
+  mostrarFormularioRecuperacion() {
+    this.mostrarRecuperacion = true;
+  }
+
+  cancelarRecuperacion() {
+    this.mostrarRecuperacion = false;
+  }
+
+  enviarCorreoRecuperacion() {
+    if (this.formularioRecuperacion.valid) {
+      const correoRecuperacion = this.formularioRecuperacion.value.correoRecuperacion;
+
+      // Aquí podrías implementar la lógica para enviar un correo de recuperación
+      const contrasenaRecuperada = localStorage.getItem(correoRecuperacion);
+
+      if (contrasenaRecuperada) {
+        alert(`Tu contraseña es: ${contrasenaRecuperada}`);
+        this.cancelarRecuperacion();
+      } else {
+        alert('No se encontró una contraseña asociada a ese correo.');
       }
     }
   }
