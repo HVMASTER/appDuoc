@@ -1,9 +1,10 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="#003785">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>  
-    <ion-title>Login</ion-title>
+    <ion-title class="titulo" *ngIf="!mostrarRecuperacion">LOGIN</ion-title> <!-- En esta línea, se muestra el título "LOGIN" cuando la variable mostrarRecuperacion es false. -->
+    <ion-title class="titulo" *ngIf="mostrarRecuperacion">RECUPERAR PASSWORD</ion-title> <!-- En esta línea, se muestra el título "RECUPERAR PASSWORD" cuando la variable mostrarRecuperacion es true.  -->
   </ion-toolbar>
 </ion-header>
 
@@ -11,11 +12,12 @@
   <div class="container">
     <ion-card class="animate__animated animate__backInRight">
       <ion-card-header>
-        <ion-card-title>Iniciar Sesión</ion-card-title>
+        <ion-card-title *ngIf="!mostrarRecuperacion">Iniciar Sesión</ion-card-title>
       </ion-card-header>
-      <form [formGroup]="formularioLogin" (ngSubmit)="iniciarSesion()">
+      <ion-title class="title" *ngIf="mostrarRecuperacion">Recuperar Contraseña</ion-title>
+      <form [formGroup]="formularioLogin" (ngSubmit)="iniciarSesion()" *ngIf="!mostrarRecuperacion">
         <ion-item>
-          <ion-label position="floating">Correo</ion-label>
+          <ion-label class= "correo" position="floating">Correo</ion-label>
           <ion-input formControlName="correo"></ion-input>
         </ion-item>
         <ion-item>
@@ -23,6 +25,17 @@
           <ion-input formControlName="contrasena" type="password"></ion-input>
         </ion-item>
         <ion-button expand="block" type="submit">Iniciar Sesión</ion-button>
+        <ion-button expand="block" color="medium" (click)="mostrarFormularioRecuperacion()">¿Olvidaste tu contraseña?</ion-button>
+      </form>
+
+
+      <form [formGroup]="formularioRecuperacion" (ngSubmit)="enviarCorreoRecuperacion()" *ngIf="mostrarRecuperacion">
+        <ion-item>
+          <ion-label class="email" position="floating">Correo de recuperación</ion-label>
+          <ion-input formControlName="correoRecuperacion"></ion-input>
+        </ion-item>
+        <ion-button expand="block" type="submit">Enviar correo de recuperación</ion-button>
+        <ion-button expand="block" color="danger" (click)="cancelarRecuperacion()">Cancelar</ion-button>
       </form>
     </ion-card>
   </div>
