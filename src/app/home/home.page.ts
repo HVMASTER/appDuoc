@@ -3,6 +3,9 @@ import { IonicModule } from '@ionic/angular';
 import { HeaderButtonsComponent } from '../components/header-buttons/header-buttons.component';
 import { HomeCarruselComponent } from '../components/carrusel/carrusel.component';
 import { CarruselItem } from '../components/carrusel/carrusel.interface';
+import { CommonModule } from '@angular/common';
+import { HomeCardComponent } from '../components/home-card/home-card.component';
+import { RegistroService } from 'src/app/modules/auth/auth.service';
 
 
 @Component({
@@ -10,13 +13,13 @@ import { CarruselItem } from '../components/carrusel/carrusel.interface';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonicModule, HeaderButtonsComponent, HomeCarruselComponent],
+  imports: [IonicModule, HeaderButtonsComponent, HomeCarruselComponent, CommonModule, HomeCardComponent],
 })
 export class HomePage {
 
   imagenes: CarruselItem[] = []; 
 
-  constructor() {
+  constructor(private registroService: RegistroService) {
 
     this.imagenes = [
       {
@@ -32,6 +35,10 @@ export class HomePage {
         alt: 'descripcion',
       },
     ];
+  }
+
+  get usuarioLogueado() {
+    return this.registroService.usuarioLogueado;
   }
 
 }

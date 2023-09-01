@@ -1,34 +1,29 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Header Toolbar</ion-title>
+  <ion-toolbar color="tertiary">
+    <ion-title class="title">TeLlevoAPP</ion-title>
     <app-header-buttons></app-header-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content color="light" [fullscreen]="true">
 
   <app-carrusel [imagenes]="imagenes" titulo="imagenes referenciales" ></app-carrusel>
 
-</ion-content>
+  <div *ngIf="usuarioLogueado">
+    <app-home-card></app-home-card>
+  </div>
 
+</ion-content>
 
 <ion-footer>
   <ion-toolbar>
     <ion-grid>
       <ion-row>
-        <ion-col size="6">
-          <h3>TeLlevoAPP</h3>
-          <p>Todos los derechos reservados &copy; 2023</p>
+        <ion-col>Redes sociales
+
         </ion-col>
-        <ion-col size="6">
-          <h3>Enlaces</h3>
-          <ion-list>
-            <ion-item routerLink="/home">Inicio</ion-item>
-            <ion-item routerLink="/login">Iniciar Sesión</ion-item>
-            <ion-item routerLink="/registro">Registro</ion-item>
-            <ion-item routerLink="/soporte">Soporte</ion-item>
-          </ion-list>
-        </ion-col>
+        <ion-col>Contacto</ion-col>
+        <ion-col>Sobre nosotros</ion-col>
       </ion-row>
     </ion-grid>
   </ion-toolbar>
