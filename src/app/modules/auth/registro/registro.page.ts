@@ -67,8 +67,6 @@ export class RegistroPage implements OnInit {
         return;
       }
 
-
-
       this.nombre = this.formularioRegistro.value.nombre;
       this.apellidos = this.formularioRegistro.value.apellidos
       this.rut = this.formularioRegistro.value.rut;
