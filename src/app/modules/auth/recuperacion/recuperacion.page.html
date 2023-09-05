@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="#003785">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>  
+    <ion-title class="titulo">Recuperacion de contraseña</ion-title> 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card class="animate__animated animate__backInRight">
+    <!-- Mostrar el mensaje de éxito si mostrarMensajeExito es true -->
+    <div *ngIf="mostrarMensajeExito" class="success-message">
+      Recuperación de contraseña exitosa. Se ha enviado un correo con instrucciones.
+    </div>
+    
+    <form (ngSubmit)="recuperarContrasena()">
+      <ion-item>
+        <ion-label class="correo" position="floating">Correo</ion-label>
+        <ion-input [(ngModel)]="correo" name="correo" type="email" required></ion-input>
+      </ion-item>
+      <ion-button expand="block" type="submit">Recuperar Contraseña</ion-button>
+      <ion-button expand="block" color="danger" href="/login">Cancelar</ion-button>
+    </form>
+  </ion-card>
+</ion-content>
