@@ -5,7 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegistroService } from '../auth.service';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -26,9 +27,11 @@ export class RegistroPage implements OnInit {
   contrasena = '';
   tipo = '';
 
+  // FormGroup para gestionar el formulario del registro
   formularioRegistro: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private registroService: RegistroService, private router: Router) {
+  // Constructor del componente: creo mi formlario del registro y le entrego las reglas de validacion asociadas
+  constructor(private formBuilder: FormBuilder, private registroService: RegistroService, private router: Router, private alertController: AlertController) {
     this.formularioRegistro = this.formBuilder.group({
       nombre: ['', Validators.required],
       apellidos: ['', Validators.required],
@@ -39,10 +42,19 @@ export class RegistroPage implements OnInit {
     });
   }
 
+  async mostrarAlertaRegistro() {
+    const alert = await this.alertController.create({
+      header: 'Registro Exitoso',
+      message: ' ¡Felicidades! Tu registro ha sido completado con éxito. Ahora puedes iniciar sesión con tu nueva cuenta.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
   registrarse() {
-    
-    //console.log('datos de usuario1 ', this.usuarios)
-    
+
+
     if (this.formularioRegistro.valid) {
 
       if (this.formularioRegistro.value.contrasena != this.formularioRegistro.value.confirmarContrasena) {
@@ -50,7 +62,7 @@ export class RegistroPage implements OnInit {
         return;
       }
 
-      if (this.usuarios !== null && this.usuarios.includes( this.formularioRegistro.value.correo)) {
+      if (this.usuarios !== null && this.usuarios.includes(this.formularioRegistro.value.correo)) {
         alert('El correo ya existe');
         return;
       }
@@ -61,17 +73,20 @@ export class RegistroPage implements OnInit {
       this.correo = this.formularioRegistro.value.correo;
       this.contrasena = this.formularioRegistro.value.contrasena;
       this.tipo = 'user';
-      
+
       //solicita el registro y envia los datos
       this.registroService.registro(this.nombre, this.apellidos, this.rut, this.correo, this.contrasena, this.tipo);
 
       //console.log('datos de usuario2 ', this.usuarios)
+      this.mostrarAlertaRegistro();
       this.router.navigate(['/login']);
+    } else {
+      alert('Por favor, verifica que todos los campos estén llenos y sean válidos.');
     }
   }
 
   ngOnInit() {
-    
+
   }
 
 }

@@ -1,16 +1,16 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="#003785">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>  
-    <ion-title>Formulario de Registro</ion-title>
+    <ion-title class="titulo">Formulario Registro</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-card class="animate__animated animate__backInRight">
     <ion-card-header>
-      <ion-card-title>Registro</ion-card-title>
+      <ion-card-title class="title">Registro</ion-card-title>
     </ion-card-header>
     <form [formGroup]="formularioRegistro" (ngSubmit)="registrarse()">
       <ion-item>
@@ -37,7 +37,7 @@
         <ion-label position="floating">Confirmar contraseña</ion-label>
         <ion-input formControlName="confirmarContrasena" type="password"></ion-input>
       </ion-item>
-      <ion-button expand="block" type="submit">Registrarse</ion-button>
+      <ion-button expand="block" type="submit" >Registrarse</ion-button>
     </form>
   </ion-card>
 </ion-content>

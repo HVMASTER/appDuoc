@@ -116,5 +116,22 @@ export class RegistroService {
     }
     return false;
   }
- 
+
+  simularEnvioCorreoRecuperacion(correo: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      setTimeout(() => {
+        // Busca el correo en la lista de usuarios
+        const usuarioEncontrado = this.users.find(users => users.correo === correo);
+
+        if (usuarioEncontrado) {
+          // Simulación de envío de correo exitoso
+          resolve();
+        } else {
+          // No se encontró el correo en la lista de usuarios
+          reject(new Error('Correo no encontrado en la lista de usuarios'));
+        }
+      }, 1000); // Simula un retraso de 1 segundo
+    });
+  }
+
 }

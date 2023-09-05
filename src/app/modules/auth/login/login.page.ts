@@ -4,8 +4,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RegistroService } from '../auth.service'; 
+import { RegistroService } from '../auth.service';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -21,33 +22,48 @@ export class LoginPage implements OnInit {
   contrasena = '';
 
   // FormGroup para gestionar el formulario de inicio de sesión
+  // FormBuilder defino las validaciones de mi formulario y le entrego funciones (Validators.required
+
   formularioLogin: FormGroup;
 
-  // Constructor del componente
-  constructor(private formBuilder: FormBuilder, private registroService: RegistroService, private router: Router) {
+  // Constructor del componente: creo mi formlario del login y le entrego las reglas de validacion asociadas
+  constructor(private formBuilder: FormBuilder, private registroService: RegistroService, private router: Router, private alertController: AlertController) {
     this.formularioLogin = this.formBuilder.group({
       correo: ['', [Validators.required, Validators.email]],
-      contrasena: ['', Validators.required]
+      contrasena: ['', Validators.required],
     });
+  }
+
+  //Alerta al iniciar sesión
+  async mostrarAlertaInicioSesion() {
+    const alert = await this.alertController.create({
+      header: 'Sesión Iniciada',
+      message: '¡Bienvenido! Has iniciado sesión con éxito en tu cuenta.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 
   // Método para manejar el evento de inicio de sesión
   iniciarSesion() {
     if (this.formularioLogin.valid) {
-      // Aquí podrías realizar la lógica de autenticación con el servicio correspondiente
+      // Aquí realizo la lógica de autenticación con el servicio correspondiente
       const correo = this.formularioLogin.value.correo;
       const contrasena = this.formularioLogin.value.contrasena;
 
       if (this.registroService.validarCredenciales(correo, contrasena)) {
         // Inicio de sesión exitoso
-        this.router.navigate(['/home']); // Cambia 'inicio' por la ruta deseada después del inicio de sesión
+        this.mostrarAlertaInicioSesion()
+        this.router.navigate(['/home']);// Cambia 'home' por la ruta deseada después del inicio de sesión
+        return;
       } else {
         alert('Credenciales inválidas');
       }
+    } else {
+      alert('Por favor, verifica que todos los campos estén llenos y sean válidos.');
     }
   }
-
-  // Método que se ejecuta al inicializar el componente
   ngOnInit() {
   }
 
