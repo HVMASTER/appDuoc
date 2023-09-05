@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegistroService } from '../auth.service';
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'; 
 
 
 @Component({
@@ -54,8 +54,6 @@ export class RegistroPage implements OnInit {
         alert('El correo ya existe');
         return;
       }
-
-      
 
       this.nombre = this.formularioRegistro.value.nombre;
       this.apellidos = this.formularioRegistro.value.apellidos

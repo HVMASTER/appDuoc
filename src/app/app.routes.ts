@@ -3,16 +3,12 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
+    loadComponent: () => import('./modules/home/home.page').then((m) => m.HomePage),
   },
   {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
-  },
-  {
-    path: 'admin',
-    loadComponent: () => import('./pages/admin/admin.page').then( m => m.AdminPage)
   },
   {
     path: 'registro',
@@ -22,4 +18,9 @@ export const routes: Routes = [
     path: 'login',
     loadComponent: () => import('./modules/auth/login/login.page').then( m => m.LoginPage)
   },
+  {
+    path: 'registro-conductor',
+    loadComponent: () => import('./modules/auth/registro-conductor/registro-conductor.page').then( m => m.RegistroConductorPage)
+  },
+
 ];

@@ -7,3 +7,17 @@ export interface IAuth {
     contrasena: string;
     tipo: string;
 }
+
+export interface IAuthConductor {
+    id: number;
+    tipoVehiculo: string;
+    patente: string;
+    modelo: string;
+    marca: string;
+    color: string;
+    anio: number;
+    capacidad: number;
+    idRuta: number;
+
+}
+

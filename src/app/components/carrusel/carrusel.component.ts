@@ -19,9 +19,8 @@ export class HomeCarruselComponent  implements OnInit {
 
   @Input()
   titulo: string = '';
-  constructor() {
-    
-   }
+
+  constructor() {}
 
   ngOnInit() {
     
