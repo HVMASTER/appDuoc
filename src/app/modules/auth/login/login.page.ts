@@ -55,7 +55,15 @@ export class LoginPage implements OnInit {
       if (this.registroService.validarCredenciales(correo, contrasena)) {
         // Inicio de sesión exitoso
         this.mostrarAlertaInicioSesion()
-        this.router.navigate(['/home']);// Cambia 'home' por la ruta deseada después del inicio de sesión
+
+        this.registroService.setTipoUsuario(this.registroService.usuarioLogueado?.tipo || '');
+        
+        if (this.registroService.tipoUsuario === 'user') {
+          this.router.navigate(['/home']);
+        } else if (this.registroService.tipoUsuario === 'conductor') {
+          this.router.navigate(['/home-conductor']);
+        }
+
         return;
       } else {
         alert('Credenciales inválidas');

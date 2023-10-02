@@ -17,7 +17,6 @@ export interface IAuthConductor {
     color: string;
     anio: number;
     capacidad: number;
-    tipo: string;
 
 }
 
