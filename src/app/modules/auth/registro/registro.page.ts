@@ -18,7 +18,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class RegistroPage implements OnInit {
 
-  usuarios = localStorage.getItem('users');
+  usuarios = localStorage.getItem('users'); 
 
   nombre = '';
   apellidos = '';

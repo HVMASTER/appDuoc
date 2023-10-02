@@ -47,7 +47,7 @@ export class RegistroService {
       color: 'Rojo',
       anio: 2016,
       capacidad: 4,
-      idRuta: 10,
+      tipo: 'conductor',
     },
     {
       id: 2,
@@ -58,13 +58,13 @@ export class RegistroService {
       color: 'negro',
       anio: 2018,
       capacidad: 4,
-      idRuta: 20,
+      tipo: 'conductor',
     },
   ];
 
   //Este es el nombre de la variable
-  usuarioLogueado: IAuth | null = null; //Esto asigna el valor inicial a la variable. En este caso, la variable usuarioLogueado se inicializa con el valor null
-
+  usuarioLogueado: IAuth |  null = null; //Esto asigna el valor inicial a la variable. En este caso, la variable usuarioLogueado se inicializa con el valor null
+  conductorLogueado: IAuthConductor | null = null;
   //En resumen, este código en el constructor se encarga de inicializar el almacenamiento local con la lista de usuarios registrados en el momento en que se crea una instancia del servicio. Esto asegura que la información de los usuarios registrados esté disponible incluso después de que la página se recargue o cierre.
   constructor() { 
     localStorage.setItem('users', JSON.stringify(this.users)); //se crea la variable users en el localstorage y se le asigna el valor de la variable users
@@ -89,7 +89,7 @@ export class RegistroService {
     localStorage.setItem('users', JSON.stringify(this.users));
   }
 
-  registroConductor(tipoVehiculo: string, patente: string, modelo: string, marca: string, color: string, anio: number, capacidad: number, idRuta: number) {
+  registroConductor(tipoVehiculo: string, patente: string, modelo: string, marca: string, color: string, anio: number, capacidad: number, tipo: string) {
     const id = this.conductor.length + 1;
     const newConductor: IAuthConductor = {
       id,
@@ -100,7 +100,7 @@ export class RegistroService {
       color,
       anio,
       capacidad,
-      idRuta,
+      tipo,
     };
     this.conductor.push(newConductor);
     localStorage.setItem('conductor', JSON.stringify(this.conductor));

@@ -1,9 +1,12 @@
 <ion-header>
-  <ion-toolbar color="#003785">
+  <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
-    </ion-buttons>  
-    <ion-title class="titulo">Registro Conductor</ion-title>
+      <ion-button (click)="cancel()">Volver</ion-button>
+    </ion-buttons>
+    <ion-title>Solicitudes</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()" [strong]="true">Confirmar</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
