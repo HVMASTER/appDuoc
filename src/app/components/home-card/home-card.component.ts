@@ -6,6 +6,7 @@ import { RegistroService } from 'src/app/modules/auth/auth.service';
 import { Router } from '@angular/router';
 import { OverlayEventDetail } from '@ionic/core';
 import { ModalController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home-card',
@@ -21,7 +22,7 @@ export class HomeCardComponent  implements OnInit {
   @ViewChild(IonModal) modal!: IonModal;
   modalController: any;
 
-  constructor(private registroService: RegistroService, private router: Router, modalController: ModalController) { }
+  constructor(private registroService: RegistroService, private router: Router, modalController: ModalController, private alertController: AlertController) { }
 
   cancel() {
     this.modal.dismiss({ confirmed: true});
@@ -31,13 +32,24 @@ export class HomeCardComponent  implements OnInit {
 
   confirm() {
     this.modal.dismiss({ confirmed: false});
+    this.alertaModal();
     console.log('confirm');
+  }
+
+  async alertaModal(){
+    const alert = await this.alertController.create({
+      header: 'Viaje solicitado',
+      message: '¡Genial! Has creado un viaje con exito.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 
   onWillDismiss(event: Event){
     const ev = event as CustomEvent<OverlayEventDetail<string>>;
     if (ev.detail.role === 'confirm'){
-      this.message = `hola, ${ev.detail.data}!`;
+      
     };
   }
 

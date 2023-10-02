@@ -31,7 +31,7 @@
   </ion-card-content>
 </ion-card>
 
-<ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+<ion-modal trigger="open-modal" (onWillDismiss)="onWillDismiss($event)">
   <ng-template>
       <ion-toolbar>
         <ion-buttons slot="start">
@@ -45,9 +45,9 @@
     <ion-content class="ion-padding">
       <ion-item>
         <ion-label position="stacked">Ingresa tu nombre</ion-label>
-        <ion-input type="text" placeholder="nombre"></ion-input>
+        <ion-input aria-label="" type="text" placeholder="nombre"></ion-input>
         <ion-label position="stacked">Ingresa tu rut</ion-label>
-        <ion-input type="text" placeholder="rut"></ion-input>
+        <ion-input aria-label="" type="text" placeholder="rut"></ion-input>
       </ion-item>
     </ion-content>
   </ng-template>
