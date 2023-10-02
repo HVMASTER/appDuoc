@@ -23,7 +23,7 @@ export class RegistroService {
       rut: '12345678-9',
       correo: 'pedro@gmail.com',
       contrasena: '12345',
-      tipo: 'user',
+      tipo: 'conductor',
     },
     {
       id: 3,
@@ -47,7 +47,6 @@ export class RegistroService {
       color: 'Rojo',
       anio: 2016,
       capacidad: 4,
-      tipo: 'conductor',
     },
     {
       id: 2,
@@ -58,13 +57,14 @@ export class RegistroService {
       color: 'negro',
       anio: 2018,
       capacidad: 4,
-      tipo: 'conductor',
     },
   ];
 
   //Este es el nombre de la variable
   usuarioLogueado: IAuth |  null = null; //Esto asigna el valor inicial a la variable. En este caso, la variable usuarioLogueado se inicializa con el valor null
-  conductorLogueado: IAuthConductor | null = null;
+  
+  tipoUsuario: string | null = null;
+
   //En resumen, este código en el constructor se encarga de inicializar el almacenamiento local con la lista de usuarios registrados en el momento en que se crea una instancia del servicio. Esto asegura que la información de los usuarios registrados esté disponible incluso después de que la página se recargue o cierre.
   constructor() { 
     localStorage.setItem('users', JSON.stringify(this.users)); //se crea la variable users en el localstorage y se le asigna el valor de la variable users
@@ -100,7 +100,6 @@ export class RegistroService {
       color,
       anio,
       capacidad,
-      tipo,
     };
     this.conductor.push(newConductor);
     localStorage.setItem('conductor', JSON.stringify(this.conductor));
@@ -112,9 +111,14 @@ export class RegistroService {
 
     if (usuarioEncontrado) {
       this.usuarioLogueado = usuarioEncontrado; // Asigna el usuario logueado
+      this.tipoUsuario = usuarioEncontrado.tipo;
       return true;
     }
     return false;
+  }
+
+  setTipoUsuario(tipo: string) {
+    this.tipoUsuario = tipo;
   }
 
   simularEnvioCorreoRecuperacion(correo: string): Promise<void> {
