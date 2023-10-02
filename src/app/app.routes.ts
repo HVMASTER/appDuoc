@@ -33,6 +33,11 @@ export const routes: Routes = [
     path: 'rutas',
     loadComponent: () => import('./modules/auth/rutas/rutas.page').then( m => m.RutasPage)
   },
+  {
+    path: 'viajes',
+    loadComponent: () => import('./modules/auth/viajes/viajes.page').then( m => m.ViajesPage)
+  },
+
 
 
 
