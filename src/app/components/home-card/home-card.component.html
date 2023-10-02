@@ -1,4 +1,4 @@
-<ion-card (click)="functionFrom()">
+<ion-card (click)="registroConductor()">
   <ion-card-header>
     <ion-card-title>Conduce con nosotros</ion-card-title>
     <ion-card-subtitle>Presiona aqui y registrate como conductor</ion-card-subtitle>
@@ -12,7 +12,7 @@
 <ion-card (click)="functionFrom()">
   <ion-card-header>
     <ion-card-title>Rutas</ion-card-title>
-    <ion-card-subtitle>Presiona aqui y registrate como conductor</ion-card-subtitle>
+    <ion-card-subtitle>Presiona aqui y consulta tus rutas</ion-card-subtitle>
   </ion-card-header>
 
   <ion-card-content>
@@ -20,13 +20,35 @@
   </ion-card-content>
 </ion-card>
 
-<ion-card (click)="functionFrom()">
+<ion-card id="open-modal" (click)="abrirModal()">
   <ion-card-header>
     <ion-card-title>Solicita un viaje</ion-card-title>
-    <ion-card-subtitle>Presiona aqui y registrate como conductor</ion-card-subtitle>
+    <ion-card-subtitle>Presiona aqui y solicita un nuevo viaje</ion-card-subtitle>
   </ion-card-header>
 
   <ion-card-content>
     ¡Genera ingresos con tan solo volver a tu casa!
   </ion-card-content>
 </ion-card>
+
+<ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+  <ng-template>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="cancel()">Volver</ion-button>
+        </ion-buttons>
+        <ion-title>Solicitudes</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="confirm()" [strong]="true">Confirmar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    <ion-content class="ion-padding">
+      <ion-item>
+        <ion-label position="stacked">Ingresa tu nombre</ion-label>
+        <ion-input type="text" placeholder="nombre"></ion-input>
+        <ion-label position="stacked">Ingresa tu rut</ion-label>
+        <ion-input type="text" placeholder="rut"></ion-input>
+      </ion-item>
+    </ion-content>
+  </ng-template>
+</ion-modal>

@@ -72,6 +72,10 @@ export class RegistroService {
     localStorage.setItem('conductor', JSON.stringify(this.conductor));
   }
 
+  modalPrueba(){
+    console.log("funciona")
+  }
+
   //En resumen, la función registro toma los detalles del nuevo usuario, crea un objeto de usuario con esos detalles, agrega ese objeto a la lista de usuarios registrados y actualiza el almacenamiento local con la lista actualizada de usuarios.
   //metodo para registro
   registro(nombre: string, apellidos: string, rut: string, correo: string, contrasena: string, tipo: string) {
