@@ -11,27 +11,27 @@
   <ion-card class="animate__animated animate__backInRight">
     <ion-item>
       <ion-label position="floating">Nombre</ion-label>
-      <ion-input [(ngModel)]="nombre" required></ion-input>
+      <ion-input aria-label="" [(ngModel)]="nombre" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Origen</ion-label>
-      <ion-input [(ngModel)]="origen" required></ion-input>
+      <ion-input aria-label="" [(ngModel)]="origen" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Destino</ion-label>
-      <ion-input [(ngModel)]="destino" required></ion-input>
+      <ion-input aria-label="" [(ngModel)]="destino" required></ion-input>
     </ion-item>
     <ion-item *ngIf="mostrarDetalles">
       <ion-label position="floating">Distancia (km)</ion-label>
-      <ion-input [(ngModel)]="distancia" required></ion-input>
+      <ion-input aria-label="" [(ngModel)]="distancia" required></ion-input>
     </ion-item>
     <ion-item *ngIf="mostrarDetalles">
       <ion-label position="floating">Tiempo Estimado (min)</ion-label>
-      <ion-input [(ngModel)]="tiempoEstimado" required></ion-input>
+      <ion-input aria-label="" [(ngModel)]="tiempoEstimado" required></ion-input>
     </ion-item>
     <ion-item *ngIf="mostrarDetalles">
       <ion-label position="floating">Costo ($)</ion-label>
-      <ion-input [(ngModel)]="costo" type="number" required></ion-input>
+      <ion-input aria-label="" [(ngModel)]="costo" type="number" required></ion-input>
     </ion-item>
   </ion-card>
 </ion-content>
