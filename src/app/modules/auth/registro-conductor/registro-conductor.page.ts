@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 export class RegistroConductorPage implements OnInit {
 
   conductores = localStorage.getItem('conductor');
-
+ 
   tipoVehiculo = '';
   patente = '';
   modelo = '';
@@ -25,7 +25,8 @@ export class RegistroConductorPage implements OnInit {
   color = '';
   anio = 0;
   capacidad = 0;
-  idRuta = 10;
+  tipo = 'conductor';
+  
 
   formRegistroConductor: FormGroup;
 
@@ -39,7 +40,6 @@ export class RegistroConductorPage implements OnInit {
       color: ['', Validators.required],
       anio: ['', Validators.required],
       capacidad: ['', Validators.required],
-      idRuta: ['', Validators.required],
     });   
    }
 
@@ -47,6 +47,7 @@ export class RegistroConductorPage implements OnInit {
       //console.log('datos de usuario1 ', this.conductores)
 
       if(this.formRegistroConductor.valid){
+
         if (this.conductores !== null && this.conductores.includes( this.formRegistroConductor.value.patente)) {
           alert('La patente ya existe');
           return;
@@ -58,13 +59,18 @@ export class RegistroConductorPage implements OnInit {
         this.color = this.formRegistroConductor.value.color;
         this.anio = this.formRegistroConductor.value.anio;
         this.capacidad = this.formRegistroConductor.value.capacidad;
-        this.idRuta = this.formRegistroConductor.value.idRuta;
         
-        this.registroService.registroConductor(this.tipoVehiculo, this.patente, this.modelo, this.marca, this.color, this.anio, this.capacidad, this.idRuta);
+        
+        this.registroService.registroConductor(this.tipoVehiculo, this.patente, this.modelo, this.marca, this.color, this.anio, this.capacidad, this.tipo);
 
         console.log('datos de usuario2 ', this.conductores)
         this.router.navigate(['/login']);
+        
+        localStorage.setItem('esConductor', 'true');
+      }else{
+        alert('Por favor, verifica que todos los campos estén llenos y sean válidos.');
       }
+
     }
 
     cancel() {

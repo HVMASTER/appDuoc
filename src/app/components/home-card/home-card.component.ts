@@ -62,7 +62,7 @@ export class HomeCardComponent  implements OnInit {
     const modal = await this.modalController.create({
       component: 'app-home-card',
       componentProps: {
-        custom_id: this.registroService.modalPrueba()
+        
       }
     });
     await modal.present();
