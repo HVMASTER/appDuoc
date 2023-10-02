@@ -19,6 +19,14 @@ export class HomeCardComponent  implements OnInit {
 
   }
 
+  functionRegistroConductor() {
+    this.router.navigate(['/registro-conductor']);
+  }
+
+  functionRutas() {
+    this.router.navigate(['/rutas']);
+  }
+
   functionFrom() {
     this.router.navigate(['/login']);
   }
