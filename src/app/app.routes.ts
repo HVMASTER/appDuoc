@@ -25,17 +25,18 @@ export const routes: Routes = [
   {
     path: 'registro-conductor',
     loadComponent: () => import('./modules/auth/registro-conductor/registro-conductor.page').then( m => m.RegistroConductorPage)
-  },  {
+  },
+  {
     path: 'home-conductor',
     loadComponent: () => import('./modules/home-conductor/home-conductor.page').then( m => m.HomeConductorPage)
   },
   {
     path: 'rutas',
-    loadComponent: () => import('./modules/auth/rutas/rutas.page').then( m => m.RutasPage)
+    loadComponent: () => import('./modules/rutas/rutas.page').then( m => m.RutasPage)
   },
   {
     path: 'viajes',
-    loadComponent: () => import('./modules/auth/viajes/viajes.page').then( m => m.ViajesPage)
+    loadComponent: () => import('./modules/viajes/viajes.page').then( m => m.ViajesPage)
   },
 
 
