@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-rutas',
@@ -17,12 +18,13 @@ export class RutasPage implements OnInit {
   destino: string = '';
   distancia: string = '';
   tiempoEstimado: string = '';
-  costo: number = 0;
   mostrarDetalles: boolean = false;
 
-  checkboxValue: boolean = false;
+  constructor(private router: Router) { }
 
-  constructor() { }
+  functionLogin() {
+    this.router.navigate(['/login']);
+  }
 
   ngOnInit() {
   }
