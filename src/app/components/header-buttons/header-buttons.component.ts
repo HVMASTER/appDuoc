@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { RegistroService } from 'src/app/modules/auth/auth.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header-buttons',
@@ -16,7 +17,19 @@ export class HeaderButtonsComponent  implements OnInit {
   apellidos= '';
   tipo= '';
 
-  constructor(private registroService: RegistroService) {  }
+
+  constructor(private registroService: RegistroService, private router: Router) {
+
+  }
+
+
+  loginView(){
+    this.router.navigate(['/login']);
+  }
+
+  registroView(){
+    this.router.navigate(['/registro']);
+  }
 
   //Este es el método ngOnInit que se ejecutará cuando el componente se inicialice. Aquí se obtiene el usuario logueado desde el servicio y se asignan sus valores al nombre y apellidos del componente, si existe un usuario logueado.
   ngOnInit() {
