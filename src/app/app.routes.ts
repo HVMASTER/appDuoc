@@ -35,11 +35,11 @@ export const routes: Routes = [
     loadComponent: () => import('./modules/rutas/rutas.page').then( m => m.RutasPage)
   },
   {
-    path: 'viajes',
-    loadComponent: () => import('./modules/viajes/viajes.page').then( m => m.ViajesPage)
+    path: 'solicitud',
+    loadComponent: () => import('./modules/solicitud/solicitud.page').then( m => m.SolicitudPage)
   },
 
-
-
-
+  
+  
+  
 ];
