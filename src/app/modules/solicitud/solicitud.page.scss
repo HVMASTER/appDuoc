@@ -1,0 +1,32 @@
+ion-header {
+    width: 100%;
+    height: 52px;
+    margin-bottom: 20px;
+    background-color: #003785;
+}
+
+ion-content {
+    margin-top: 20px;          
+}
+
+.titulo {
+    text-align: center;
+    font-style: italic;
+    font-size: 25px;
+    color: azure;
+}
+
+@media (max-width: 768px) {
+    ion-content {
+        margin: 20px auto;
+        padding: 10px;
+        border-radius: 20px;
+    }
+
+    ion-header {
+        ion-title {
+            font-size: 1.5rem;
+        }
+    }
+}
+
