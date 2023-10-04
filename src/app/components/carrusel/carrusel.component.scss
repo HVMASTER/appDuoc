@@ -9,6 +9,14 @@
         object-position: center center;
     }
 }
+
+#titulo{
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
 @media (min-width: 600px) {
     .content-slider {
         height: 800px;

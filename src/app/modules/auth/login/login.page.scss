@@ -4,11 +4,10 @@ ion-header {
     background-color: #003785;
 }
 
-.titulo {
+#titulo { 
     text-align: center;
-    font-style: italic;
-    font-size: 25px;
-    color: azure;
+    font-size: 28px;
+    color: white;
 }
 
 ion-buttons {
@@ -17,11 +16,10 @@ ion-buttons {
 
 ion-card {
     margin: 70px auto;
-    max-width: 800px;
+    max-width: 700px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
-    font-style: italic;
 
     ion-card-header {
         ion-card-title {
@@ -36,21 +34,13 @@ ion-button {
     --color: #000000;
 }
 
-.title {
-    font-size: 22px;
-    color:azure; 
-    text-align: left; 
-}
-
 .email {
     padding: 10px;
     text-align: left;
 }
 
-
 @media (max-width: 768px) {
-    ion-card {
-        margin: 20px auto;
+    ion-card {    
         padding: 10px;
         border-radius: 20px;
     }
