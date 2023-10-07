@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IAuth, IAuthConductor } from './auth.interface';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -61,15 +62,14 @@ export class RegistroService {
   ];
 
   //Este es el nombre de la variable
-  usuarioLogueado: IAuth |  null = null; //Esto asigna el valor inicial a la variable. En este caso, la variable usuarioLogueado se inicializa con el valor null
+  // //Esto asigna el valor inicial a la variable. En este caso, la variable usuarioLogueado se inicializa con el valor null
   
-  tipoUsuario: string | null = null;
+  tipoUsuario = '';
+  nombreUsuario = '';
+  apellidosUsuario = '';
 
   //En resumen, este código en el constructor se encarga de inicializar el almacenamiento local con la lista de usuarios registrados en el momento en que se crea una instancia del servicio. Esto asegura que la información de los usuarios registrados esté disponible incluso después de que la página se recargue o cierre.
-  constructor() { 
-    localStorage.setItem('users', JSON.stringify(this.users)); //se crea la variable users en el localstorage y se le asigna el valor de la variable users
-
-    localStorage.setItem('conductor', JSON.stringify(this.conductor));
+  constructor(private router: Router) { 
   }
 
   //En resumen, la función registro toma los detalles del nuevo usuario, crea un objeto de usuario con esos detalles, agrega ese objeto a la lista de usuarios registrados y actualiza el almacenamiento local con la lista actualizada de usuarios.
@@ -108,17 +108,13 @@ export class RegistroService {
   //La función validarCredenciales toma el correo electrónico y la contraseña proporcionados, busca en la lista de usuarios (this.users) y verifica si existe un usuario con esas credenciales. Si existe un usuario, devuelve true, lo que indica que las credenciales son válidas. Si no existe un usuario, devuelve false, indicando que las credenciales son inválidas y el usuario no puede iniciar sesión.
   validarCredenciales(correo: string, contrasena: string): boolean {
     const usuarioEncontrado = this.users.find(user => user.correo === correo && user.contrasena === contrasena);
-
     if (usuarioEncontrado) {
-      this.usuarioLogueado = usuarioEncontrado; // Asigna el usuario logueado
       this.tipoUsuario = usuarioEncontrado.tipo;
+      this.nombreUsuario = usuarioEncontrado.nombre;
+      this.apellidosUsuario = usuarioEncontrado.apellidos;
       return true;
     }
     return false;
-  }
-
-  setTipoUsuario(tipo: string) {
-    this.tipoUsuario = tipo;
   }
 
   simularEnvioCorreoRecuperacion(correo: string): Promise<void> {

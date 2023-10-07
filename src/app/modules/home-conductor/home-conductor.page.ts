@@ -19,12 +19,13 @@ import { RegistroService } from '../auth/auth.service';
 export class HomeConductorPage {
 
   imagenes: CarruselItem[] = []; 
+  sesionStart = localStorage.getItem('sesionStart');
 
   constructor(private registroService: RegistroService) {
     
     this.imagenes = [
       {
-        url: 'assets/img/home-carrusel/rutas-carrusel-1.jpg',
+        url: 'assets/img/home-carrusel/slide-carrusel-1.jpg',
         alt: 'Rutas',
       },
       {
@@ -37,10 +38,5 @@ export class HomeConductorPage {
       },
     ];
    }
-
-  get usuarioLogueado() {
-    return this.registroService.usuarioLogueado;
-  }
-
 
 }

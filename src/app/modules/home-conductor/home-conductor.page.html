@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="tertiary">
+  <ion-toolbar>
     <ion-title class="title">TeLlevoAPP</ion-title>
     <app-header-buttons></app-header-buttons>
   </ion-toolbar>
@@ -9,7 +9,7 @@
 
   <app-carrusel [imagenes]="imagenes" titulo="imagenes referenciales" ></app-carrusel>
 
-  <div *ngIf="usuarioLogueado">
+  <div *ngIf="sesionStart">
     <app-home-card-conductor></app-home-card-conductor>
   </div>
 

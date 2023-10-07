@@ -9,7 +9,7 @@
 
   <app-carrusel [imagenes]="imagenes" titulo="Tu mejor trayecto a casa " ></app-carrusel>
 
-  <div *ngIf="usuarioLogueado">
+  <div *ngIf="sesionStart">
     <app-home-card></app-home-card>
   </div>
 

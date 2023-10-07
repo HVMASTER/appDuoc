@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { HeaderButtonsComponent } from '../../components/header-buttons/header-buttons.component';
 import { HomeCarruselComponent } from '../../components/carrusel/carrusel.component';
@@ -6,6 +6,7 @@ import { CarruselItem } from '../../components/carrusel/carrusel.interface';
 import { CommonModule } from '@angular/common';
 import { HomeCardComponent } from '../../components/home-card/home-card.component';
 import { RegistroService } from 'src/app/modules/auth/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,11 +16,17 @@ import { RegistroService } from 'src/app/modules/auth/auth.service';
   standalone: true,
   imports: [IonicModule, HeaderButtonsComponent, HomeCarruselComponent, CommonModule, HomeCardComponent],
 })
-export class HomePage {
+export class HomePage implements OnInit {
+
+  sesionStart = localStorage.getItem('sesionStart');
 
   imagenes: CarruselItem[] = []; 
 
-  constructor(private registroService: RegistroService) {
+  constructor(private registroService: RegistroService, private router: Router, private _cdr: ChangeDetectorRef) {
+
+    if( !this.sesionStart ){
+      this.router.navigate(['/login']);      
+    }
 
     this.imagenes = [
       {
@@ -37,8 +44,13 @@ export class HomePage {
     ];
   }
 
-  get usuarioLogueado() {
-    return this.registroService.usuarioLogueado;
+  // get usuarioLogueado() {
+  //   return this.registroService.usuarioLogueado;
+  // }
+
+  ngOnInit() {  
+    this._cdr.detectChanges();
+    
   }
 
 }
