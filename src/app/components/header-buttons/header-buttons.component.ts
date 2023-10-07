@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { RegistroService } from 'src/app/modules/auth/auth.service';
 import { CommonModule } from '@angular/common';
@@ -13,13 +13,30 @@ import { Router } from '@angular/router';
 })
 export class HeaderButtonsComponent  implements OnInit {
 
-  nombre= '';
-  apellidos= '';
-  tipo= '';
+  apellidos = localStorage.getItem('user-apellidos');
+  user = localStorage.getItem('user-name');
+  tipoUser = localStorage.getItem('user-tipo');
 
 
-  constructor(private registroService: RegistroService, private router: Router) {
+  validarData = false;
 
+
+  constructor(private registroService: RegistroService, private router: Router, private _cdr: ChangeDetectorRef) {}   
+
+  ngOnInit() {
+    if (this.user) {
+      this.validarData = true;
+      this._cdr.detectChanges();   
+    }
+  }
+
+  logout() {
+    localStorage.removeItem('user-name');
+    localStorage.removeItem('user-tipo');
+    localStorage.removeItem('user-apellidos');
+    localStorage.removeItem('sesionStart');
+    this.router.navigate(['/login']);
+    this._cdr.detectChanges();
   }
 
 
@@ -29,15 +46,5 @@ export class HeaderButtonsComponent  implements OnInit {
 
   registroView(){
     this.router.navigate(['/registro']);
-  }
-
-  //Este es el método ngOnInit que se ejecutará cuando el componente se inicialice. Aquí se obtiene el usuario logueado desde el servicio y se asignan sus valores al nombre y apellidos del componente, si existe un usuario logueado.
-  ngOnInit() {
-    const usuarioLogueado = this.registroService.usuarioLogueado;
-    if (usuarioLogueado) {
-      this.nombre = usuarioLogueado.nombre;
-      this.apellidos = usuarioLogueado.apellidos
-      this.tipo = usuarioLogueado.tipo      
-    }
   }
 }
