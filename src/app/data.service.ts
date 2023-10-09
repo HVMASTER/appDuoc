@@ -1,32 +1,38 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
+
+export interface Alumno{
+  alumnoID: number;
+  nombre: string;
+  apellido: string;
+  rut: string;
+  correo: string;
+  contrasena: string;
+  tipo: string;
+  direccion: {
+    calle: string;
+    comuna: string;
+    ciudad: string;
+    codigo_postal: string;
+  }
+}
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
+  private readonly API = environment.api;
 
-  private apiUrl = 'https://sa-east-1.aws.data.mongodb-api.com/app/data-maeli/endpoint/data/v1';
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  getHeaders() {
-    return new HttpHeaders({
-      "dataSource": "cluster0",
-      "database": "TeLlevoApp",
-      "collection": "Alumnos"
-    })
+  addAlumno(alumno: string):Observable<Alumno>{
+    const body = { nombre: alumno };
+    return this.http.post<Alumno>(this.API, body);
   }
-
-  // Ejemplo de solicitud GET para obtener datos de la base de datos
-  getDatos(): Observable<any> {
-    const headers = this.getHeaders();
-    return this.http.get<any>(`${this.apiUrl}/action/find`, { headers });
-  }
-
-  // Ejemplo de solicitud POST para enviar datos a la base de datos
-  enviarDatos(datos: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/action/find`, datos, { headers: this.getHeaders() });
+  getAlumnos():Observable<Alumno[]>{
+    return this.http.get<Alumno[]>(this.API);
   }
 }
