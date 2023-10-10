@@ -7,6 +7,8 @@ import { CommonModule } from '@angular/common';
 import { HomeCardComponent } from '../../components/home-card/home-card.component';
 import { RegistroService } from 'src/app/modules/auth/auth.service';
 import { Router } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import jwt_decode from 'jwt-decode';
 
 
 @Component({
@@ -15,17 +17,29 @@ import { Router } from '@angular/router';
   styleUrls: ['home.page.scss'],
   standalone: true,
   imports: [IonicModule, HeaderButtonsComponent, HomeCarruselComponent, CommonModule, HomeCardComponent],
+  providers: [RegistroService, HttpClientModule],
 })
 export class HomePage implements OnInit {
-
-  sesionStart = localStorage.getItem('sesionStart');
+  
+  token = localStorage.getItem('token');
+  username: string = '';
+  email: string = '';
+  role: string = '';
 
   imagenes: CarruselItem[] = []; 
 
+
+
   constructor(private registroService: RegistroService, private router: Router, private _cdr: ChangeDetectorRef) {
 
-    if( !this.sesionStart ){
+    if( this.token !== null ){
+      const decoded: any = jwt_decode(this.token);
+      this.username = decoded['username'];
+      this.email = decoded['email'];
+      this.role = decoded['role'];
+    }else{
       this.router.navigate(['/login']);      
+      return;
     }
 
     this.imagenes = [
