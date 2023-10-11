@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from '../environments/environment';
+import { Observable, map } from 'rxjs';
 
 export interface Alumno{
   alumnoID: number;
   nombre: string;
-  apellido: string;
+  apellidos: string;
   rut: string;
   correo: string;
   contrasena: string;
@@ -24,15 +23,29 @@ export interface Alumno{
   providedIn: 'root'
 })
 export class DataService {
-  private readonly API = environment.api;
+
+  url = 'https://sa-east-1.aws.data.mongodb-api.com/app/data-maeli/endpoint/data/v1';
 
   constructor(private http: HttpClient) {}
 
-  addAlumno(alumno: string):Observable<Alumno>{
-    const body = { nombre: alumno };
-    return this.http.post<Alumno>(this.API, body);
+  header = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    .set('Access-Control-Request-Headers', '*')
+    .set('api-key', 'aroYx3Sbi1J7vChjyR5X6odfAnh0xSzvyHlGIFVY8nMv3UWOxz010H8OIAAEstY0')
+    .set('Accept', 'application/json')
+
+  body = {
+    "dataSource": "Cluster0",
+    "database": "TeLlevoApp",
+    "collection": "Alumnos",
   }
+
+  
   getAlumnos():Observable<Alumno[]>{
-    return this.http.get<Alumno[]>(this.API);
+    return this.http.post<Alumno[]>(this.url+"/action/find", this.body, {headers: this.header}).pipe(
+      map(res => res as Alumno[])
+    )
+      
   }
+
 }
