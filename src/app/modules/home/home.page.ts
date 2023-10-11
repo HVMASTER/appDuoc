@@ -8,7 +8,7 @@ import { HomeCardComponent } from '../../components/home-card/home-card.componen
 import { RegistroService } from 'src/app/modules/auth/auth.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { DataService } from 'src/app/data.service';
+import { DataService } from 'src/app/services/data.service';
 
 
 @Component({
