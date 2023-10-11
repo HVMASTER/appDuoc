@@ -3,7 +3,6 @@ import { IonicModule } from '@ionic/angular';
 import { RegistroService } from 'src/app/modules/auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-header-buttons',
@@ -14,12 +13,9 @@ import jwt_decode from 'jwt-decode';
 })
 export class HeaderButtonsComponent  implements OnInit {
 
-  token = localStorage.getItem('token');
-  username: string = '';
-  name: string = '';
-  lastname: string = '';
-  email: string = '';
-  role: string = '';
+  apellidos = localStorage.getItem('user-apellidos');
+  user = localStorage.getItem('user-name');
+  tipoUser = localStorage.getItem('user-tipo');
 
 
   validarData = false;
@@ -28,19 +24,9 @@ export class HeaderButtonsComponent  implements OnInit {
   constructor(private registroService: RegistroService, private router: Router, private _cdr: ChangeDetectorRef) {}   
 
   ngOnInit() {
-    
-    if( this.token !== null ){
-      const decoded: any = jwt_decode(this.token);
-      this.username = decoded['username'];
-      this.name = decoded['name'];
-      this.lastname = decoded['lastNameM'];
-      this.email = decoded['email'];
-      this.role = decoded['role'];
+    if (this.user) {
       this.validarData = true;
-      this._cdr.detectChanges();  
-    }else{
-      this.router.navigate(['/login']);      
-      return;
+      this._cdr.detectChanges();   
     }
   }
 
