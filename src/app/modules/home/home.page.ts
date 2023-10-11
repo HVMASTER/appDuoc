@@ -11,21 +11,16 @@ import { HttpClient } from '@angular/common/http';
 import { DataService } from 'src/app/data.service';
 
 
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
   imports: [IonicModule, HeaderButtonsComponent, HomeCarruselComponent, CommonModule, HomeCardComponent],
-  providers: [RegistroService, HttpClientModule],
 })
 export class HomePage implements OnInit {
-  
-  token = localStorage.getItem('token');
-  username: string = '';
-  email: string = '';
-  role: string = '';
+
+  sesionStart = localStorage.getItem('sesionStart');
 
 
   imagenes: CarruselItem[] = []; 
@@ -33,14 +28,8 @@ export class HomePage implements OnInit {
   constructor(private registroService: RegistroService, private router: Router, private dataService: DataService,
     private http: HttpClient) {
 
-    if( this.token !== null ){
-      const decoded: any = jwt_decode(this.token);
-      this.username = decoded['username'];
-      this.email = decoded['email'];
-      this.role = decoded['role'];
-    }else{
+    if( !this.sesionStart ){
       this.router.navigate(['/login']);      
-      return;
     }
 
     this.imagenes = [
