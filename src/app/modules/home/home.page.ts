@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { HeaderButtonsComponent } from '../../components/header-buttons/header-buttons.component';
 import { HomeCarruselComponent } from '../../components/carrusel/carrusel.component';
@@ -7,8 +7,9 @@ import { CommonModule } from '@angular/common';
 import { HomeCardComponent } from '../../components/home-card/home-card.component';
 import { RegistroService } from 'src/app/modules/auth/auth.service';
 import { Router } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-import jwt_decode from 'jwt-decode';
+import { HttpClient } from '@angular/common/http';
+import { DataService } from 'src/app/data.service';
+
 
 
 @Component({
@@ -26,11 +27,11 @@ export class HomePage implements OnInit {
   email: string = '';
   role: string = '';
 
+
   imagenes: CarruselItem[] = []; 
 
-
-
-  constructor(private registroService: RegistroService, private router: Router, private _cdr: ChangeDetectorRef) {
+  constructor(private registroService: RegistroService, private router: Router, private dataService: DataService,
+    private http: HttpClient) {
 
     if( this.token !== null ){
       const decoded: any = jwt_decode(this.token);
@@ -58,13 +59,15 @@ export class HomePage implements OnInit {
     ];
   }
 
-  // get usuarioLogueado() {
-  //   return this.registroService.usuarioLogueado;
-  // }
-
   ngOnInit() {  
-    this._cdr.detectChanges();
+    
+      this.dataService.getAlumnos().subscribe(res => {
+        console.log(res);
+      }, (error) => {
+        console.log(error);
+      })
     
   }
 
+  
 }
