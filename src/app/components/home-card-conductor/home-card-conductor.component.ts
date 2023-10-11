@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-card-conductor',
@@ -11,8 +12,12 @@ import { CommonModule } from '@angular/common';
 })
 export class HomeCardConductorComponent  implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {}
+
+  functionSolicitud(){
+    this.router.navigate(['/solicitud']);
+  }
 
 }

@@ -8,11 +8,43 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
+  <ion-card class="animate__animated animate__backInRight">
+    <ion-card-header>
+      <!-- Título de la solicitud -->
+      <ion-card-title>Casa</ion-card-title>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <!-- Información de la solicitud -->
+      <!-- Controla cómo se muestran las líneas divisorias entre los elementos de la lista. En este caso, se establece en "none", lo que significa que no habrá líneas divisorias entre los elementos de la lista.-->
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label>Origen:</ion-label>
+          <ion-label class="ubicacion">Álvarez 2336, 2571188 Viña del Mar, Valparaíso, Duoc Viña del mar</ion-label>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label>Destino:</ion-label>
+          <ion-label class="ubicacion">Cerro Alegre, Valparaíso</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+    
     <ion-item>
-      <ion-label></ion-label>
-      <ion-label></ion-label>
-      <ion-button >Aceptar</ion-button>
+      <!-- Botones de acción -->
+      <ion-button expand="block" color="success" >Aceptar</ion-button>
+      <ion-button expand="block" color="danger" >Rechazar</ion-button>
     </ion-item>
-  </ion-list>
+  </ion-card>  
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <!-- Botón para volver al menú principal -->
+      <ion-button routerLink="/home-conductor">
+        Volver al Menú Principal
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

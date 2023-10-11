@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { HeaderButtonsComponent } from "../../components/header-buttons/header-buttons.component";
-import { HomeCardComponent } from "../../components/home-card/home-card.component";
-import { HomeCardConductorComponent } from 'src/app/components/home-card-conductor/home-card-conductor.component';
+import { HomeCardConductorComponent } from "../../components/home-card-conductor/home-card-conductor.component";
 import { HomeCarruselComponent } from "../../components/carrusel/carrusel.component";
 import { CarruselItem } from "../../components/carrusel/carrusel.interface";
 import { RegistroService } from '../auth/auth.service';
@@ -14,7 +13,7 @@ import { RegistroService } from '../auth/auth.service';
     templateUrl: './home-conductor.page.html',
     styleUrls: ['./home-conductor.page.scss'],
     standalone: true,
-    imports: [IonicModule, CommonModule, FormsModule, HeaderButtonsComponent, HomeCardComponent, HomeCarruselComponent, HomeCardConductorComponent]
+    imports: [IonicModule, CommonModule, FormsModule, HeaderButtonsComponent, HomeCarruselComponent, HomeCardConductorComponent]
 })
 export class HomeConductorPage {
 
