@@ -1,15 +1,15 @@
 <ion-toolbar color=""> 
-    <ion-buttons slot="secondary">
-          <ion-button *ngIf="!(validarData)" (click)="loginView()"> Login </ion-button>
-          <ion-button *ngIf= "validarData" (click)="logout()"> Logout </ion-button>
-    </ion-buttons>
-    <ion-buttons slot="primary">
-      <ion-button *ngIf="!(validarData)" (click)="registroView()"> Registrarse </ion-button>
-    </ion-buttons>
+  <ion-buttons slot="secondary">
+        <ion-button *ngIf="!(validarData)" (click)="loginView()"> Login </ion-button>
+        <ion-button *ngIf= "validarData" (click)="logout()"> Logout </ion-button>
+  </ion-buttons>
+  <ion-buttons slot="primary">
+    <ion-button *ngIf="!(validarData)" (click)="registroView()"> Registrarse </ion-button>
+  </ion-buttons>
+
+  <ng-container *ngIf="(validarData)">
+    <ion-title class="title" slot="end" *ngIf="tipoUser === 'user'">¡Hola! {{ user }} {{ apellidos }}</ion-title>
+    <ion-title class="title" slot="end" *ngIf="tipoUser === 'conductor'">¡Hola conductor! {{ user }} {{ apellidos }}</ion-title>  
+  </ng-container>
   
-    <ng-container *ngIf="(validarData)">
-      <ion-title class="title" slot="end" *ngIf="role === 'alumno' || role === 'admin'">¡Hola! {{ name }} {{ lastname }}</ion-title>
-      <ion-title class="title" slot="end" *ngIf="role === 'conductor'">¡Hola conductor! {{ name }} {{ lastname }}</ion-title>  
-    </ng-container>
-    
 </ion-toolbar>
