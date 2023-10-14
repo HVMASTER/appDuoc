@@ -13,7 +13,6 @@ import { Solicitud } from '../interfaces/solicitud.interface';
 export class DataService {
   
   private baseUrl: string;
-  private apiKey = 'aroYx3Sbi1J7vChjyR5X6odfAnh0xSzvyHlGIFVY8nMv3UWOxz010H8OIAAEstY0';
 
 
   constructor(private http: HttpClient) {
@@ -22,10 +21,9 @@ export class DataService {
 
   getHeaders(): HttpHeaders {
     const headers = new HttpHeaders({
-    'Content-Type: application/json': 'application/json',
-    'Access-Control-Request-Headers: *': '*',
-    "api-key": this.apiKey,
-    "Accept": "application/json"   
+      "Content-Type": "application/json",
+      "Access-Control-Request-Headers": "*",         
+      "api-key": "aroYx3Sbi1J7vChjyR5X6odfAnh0xSzvyHlGIFVY8nMv3UWOxz010H8OIAAEstY0",  
     });
     return headers;
   }
@@ -45,11 +43,12 @@ export class DataService {
     
     const body = this.getBody();
 
-    const options = { headers: this.getHeaders()
-    };
-
+    const options = { 
+      headers: this.getHeaders(), 
+     }; 
     return this.http.post<Users[]>(url, body, options)
-  }
+    
+    };
 
   // AlumnoPostMethod(dataSource: string, database: string, collection: string):Observable<Users[]>{
   //   const headers = this.getHeaders();
