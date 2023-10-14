@@ -13,6 +13,7 @@ import { Solicitud } from '../interfaces/solicitud.interface';
 export class DataService {
   
   private baseUrl: string;
+  private apiKey = 'aroYx3Sbi1J7vChjyR5X6odfAnh0xSzvyHlGIFVY8nMv3UWOxz010H8OIAAEstY0';
 
 
   constructor(private http: HttpClient) {
@@ -21,108 +22,117 @@ export class DataService {
 
   getHeaders(): HttpHeaders {
     const headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Access-Control-Request-Headers': '*',
-    'api-key': 'aroYx3Sbi1J7vChjyR5X6odfAnh0xSzvyHlGIFVY8nMv3UWOxz010H8OIAAEstY0',
-    'Accept': 'application/json'   
+    'Content-Type: application/json': 'application/json',
+    'Access-Control-Request-Headers: *': '*',
+    "api-key": this.apiKey,
+    "Accept": "application/json"   
     });
     return headers;
   }
+
+  public getBody(): any {
+    return{
+    "dataSource": "Cluster0",
+    "database": "TeLlevoApp",
+    "collection": "Alumnos",
+    };
+  }
+
   
-  AlumnoGetMethod(dataSource: string, database: string, collection: string):Observable<Users[]>{
-    const headers = this.getHeaders();
-    const body: RequestBody = {
-      dataSource,
-      database,
-      collection,
-    }
+  AlumnoGetMethod():Observable<Users[]>{
+
     const url = `${this.baseUrl}/action/find`;
-    const options = { headers: headers };
-    return this.http.post<Users[]>(url, body, options)     
+    
+    const body = this.getBody();
+
+    const options = { headers: this.getHeaders()
+    };
+
+    return this.http.post<Users[]>(url, body, options)
   }
 
-  AlumnoPostMethod(dataSource: string, database: string, collection: string):Observable<Users[]>{
-    const headers = this.getHeaders();
-    const body: RequestBody = {
-      dataSource,
-      database,
-      collection,
-    }
-    const url = `${this.baseUrl}/action/insertOne`;
-    const options = { headers: headers };
-    return this.http.post<Users[]>(url, body, options)     
-  }
+  // AlumnoPostMethod(dataSource: string, database: string, collection: string):Observable<Users[]>{
+  //   const headers = this.getHeaders();
+  //   const body: RequestBody = {
+  //     dataSource,
+  //     database,
+  //     collection,
+  //   }
+  //   const url = `${this.baseUrl}/action/insertOne`;
+  //   const options = { headers: headers };
+  //   return this.http.post<Users[]>(url, body, options)     
+  // }
 
-  conductorGetMethod(dataSource: string, database: string, collection: string):Observable<Conductor[]>{
-    const headers = this.getHeaders();
-    const body: RequestBody = {
-      dataSource,
-      database,
-      collection,
-    }
-    const url = `${this.baseUrl}/action/find`;
-    const options = { headers: headers };
-    return this.http.post<Conductor[]>(url, body, options)     
-  }
+  // conductorGetMethod(dataSource: string, database: string, collection: string):Observable<Conductor[]>{
+  //   const headers = this.getHeaders();
+  //   const body: RequestBody = {
+  //     dataSource,
+  //     database,
+  //     collection,
+  //   }
+  //   const url = `${this.baseUrl}/action/find`;
+  //   const options = { headers: headers };
+  //   return this.http.post<Conductor[]>(url, body, options)     
+  // }
 
-  conductorPostMethod(dataSource: string, database: string, collection: string):Observable<Conductor[]>{
-    const headers = this.getHeaders();
-    const body: RequestBody = {
-      dataSource,
-      database,
-      collection,
-    }
-    const url = `${this.baseUrl}/action/insertOne`;
-    const options = { headers: headers };
-    return this.http.post<Conductor[]>(url, body, options)     
-  }
+  // conductorPostMethod(dataSource: string, database: string, collection: string):Observable<Conductor[]>{
+  //   const headers = this.getHeaders();
+  //   const body: RequestBody = {
+  //     dataSource,
+  //     database,
+  //     collection,
+  //   }
+  //   const url = `${this.baseUrl}/action/insertOne`;
+  //   const options = { headers: headers };
+  //   return this.http.post<Conductor[]>(url, body, options)     
+  // }
 
-  rutasGetMethod(dataSource: string, database: string, collection: string):Observable<Rutas[]>{
-    const headers = this.getHeaders();
-    const body: RequestBody = {
-      dataSource,
-      database,
-      collection,
-    }
-    const url = `${this.baseUrl}/action/find`;
-    const options = { headers: headers };
-    return this.http.post<Rutas[]>(url, body, options)     
-  }
+  // rutasGetMethod(dataSource: string, database: string, collection: string):Observable<Rutas[]>{
+  //   const headers = this.getHeaders();
+  //   const body: RequestBody = {
+  //     dataSource,
+  //     database,
+  //     collection,
+  //   }
+  //   const url = `${this.baseUrl}/action/find`;
+  //   const options = { headers: headers };
+  //   return this.http.post<Rutas[]>(url, body, options)     
+  // }
 
-  rutasPostMethod(dataSource: string, database: string, collection: string):Observable<Rutas[]>{
-    const headers = this.getHeaders();
-    const body: RequestBody = {
-      dataSource,
-      database,
-      collection,
-    }
-    const url = `${this.baseUrl}/action/insertOne`;
-    const options = { headers: headers };
-    return this.http.post<Rutas[]>(url, body, options)     
-  }
+  // rutasPostMethod(dataSource: string, database: string, collection: string):Observable<Rutas[]>{
+  //   const headers = this.getHeaders();
+  //   const body: RequestBody = {
+  //     dataSource,
+  //     database,
+  //     collection,
+  //   }
+  //   const url = `${this.baseUrl}/action/insertOne`;
+  //   const options = { headers: headers };
+  //   return this.http.post<Rutas[]>(url, body, options)     
+  // }
 
-  solicitudGetMethod(dataSource: string, database: string, collection: string):Observable<Solicitud[]>{
-    const headers = this.getHeaders();
-    const body: RequestBody = {
-      dataSource,
-      database,
-      collection,
-    }
-    const url = `${this.baseUrl}/action/find`;
-    const options = { headers: headers };
-    return this.http.post<Solicitud[]>(url, body, options)     
-  }
+  // solicitudGetMethod(dataSource: string, database: string, collection: string):Observable<Solicitud[]>{
+  //   const headers = this.getHeaders();
+  //   const body: RequestBody = {
+  //     dataSource,
+  //     database,
+  //     collection,
+  //   }
+  //   const url = `${this.baseUrl}/action/find`;
+  //   const options = { headers: headers };
+  //   return this.http.post<Solicitud[]>(url, body, options)     
+  // }
 
-  solicitudPostMethod(dataSource: string, database: string, collection: string):Observable<Solicitud[]>{
-    const headers = this.getHeaders();
-    const body: RequestBody = {
-      dataSource,
-      database,
-      collection,
-    }
-    const url = `${this.baseUrl}/action/insertOne`;
-    const options = { headers: headers };
-    return this.http.post<Solicitud[]>(url, body, options)     
-  }
+  // solicitudPostMethod(dataSource: string, database: string, collection: string):Observable<Solicitud[]>{
+  //   const headers = this.getHeaders();
+  //   const body: RequestBody = {
+  //     dataSource,
+  //     database,
+  //     collection,
+  //   }
+  //   const url = `${this.baseUrl}/action/insertOne`;
+  //   const options = { headers: headers };
+  //   return this.http.post<Solicitud[]>(url, body, options)     
+  // }
 
 }
