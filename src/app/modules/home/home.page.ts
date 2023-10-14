@@ -50,10 +50,10 @@ export class HomePage implements OnInit {
 
   ngOnInit() {  
     
-      this.dataService.getAlumnos().subscribe(res => {
-        console.log(res);
-      }, (error) => {
-        console.log(error);
+      this.dataService.AlumnoGetMethod().subscribe(res => {
+        console.log('respuesta de la api: ', res);
+      }, error => {
+        console.log('Error en la api: ', error);
       })
     
   }
