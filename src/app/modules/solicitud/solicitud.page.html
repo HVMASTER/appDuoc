@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="#003785">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-button (click)="volverAlMenuPrincipal()">Volver</ion-button>
     </ion-buttons>  
     <ion-title class="titulo">Solicitudes</ion-title>
   </ion-toolbar>
@@ -40,11 +40,6 @@
 
 <ion-footer>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <!-- Botón para volver al menú principal -->
-      <ion-button routerLink="/home-conductor">
-        Volver al Menú Principal
-      </ion-button>
-    </ion-buttons>
+    <app-footer></app-footer>
   </ion-toolbar>
 </ion-footer>

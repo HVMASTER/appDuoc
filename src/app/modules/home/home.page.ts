@@ -9,6 +9,7 @@ import { RegistroService } from 'src/app/modules/auth/auth.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from 'src/app/services/data.service';
+import { FooterComponent } from 'src/app/components/footer/footer.component';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonicModule, HeaderButtonsComponent, HomeCarruselComponent, CommonModule, HomeCardComponent],
+  imports: [IonicModule, HeaderButtonsComponent, HomeCarruselComponent, CommonModule, HomeCardComponent, FooterComponent],
 })
 export class HomePage implements OnInit {
 

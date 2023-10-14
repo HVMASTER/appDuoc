@@ -7,13 +7,14 @@ import { HomeCardConductorComponent } from "../../components/home-card-conductor
 import { HomeCarruselComponent } from "../../components/carrusel/carrusel.component";
 import { CarruselItem } from "../../components/carrusel/carrusel.interface";
 import { RegistroService } from '../auth/auth.service';
+import { FooterComponent } from 'src/app/components/footer/footer.component';
 
 @Component({
     selector: 'app-home-conductor',
     templateUrl: './home-conductor.page.html',
     styleUrls: ['./home-conductor.page.scss'],
     standalone: true,
-    imports: [IonicModule, CommonModule, FormsModule, HeaderButtonsComponent, HomeCarruselComponent, HomeCardConductorComponent]
+    imports: [IonicModule, CommonModule, FormsModule, HeaderButtonsComponent, HomeCarruselComponent, HomeCardConductorComponent, FooterComponent]
 })
 export class HomeConductorPage {
 
