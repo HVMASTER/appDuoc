@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { HomePage } from './modules/home/home.page';
+import { HomeConductorPage } from './modules/home-conductor/home-conductor.page';
 
 export const routes: Routes = [
   {
@@ -38,10 +40,24 @@ export const routes: Routes = [
     path: 'solicitud',
     loadComponent: () => import('./modules/solicitud/solicitud.page').then( m => m.SolicitudPage)
   },
-  
-
-
-
-
-
+  {
+    path: 'viajes',
+    loadComponent: () => import('./viajes/viajes.page').then( m => m.ViajesPage)
+  },
+  {
+  path: 'registro-conductor/home',
+  component: HomePage,
+  },
+  {
+    path: 'rutas/home',
+    component: HomePage,
+  },
+  {
+    path: 'viajes/home',
+    component: HomePage,
+  },
+  {
+    path: 'solicitud/home',
+    component: HomeConductorPage,
+  }
 ];

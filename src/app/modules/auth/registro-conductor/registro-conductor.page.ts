@@ -6,13 +6,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RegistroService } from '../auth.service';
 import { Router } from '@angular/router';
+import { FooterComponent } from 'src/app/components/footer/footer.component';
 
 @Component({
   selector: 'app-registro-conductor',
   templateUrl: './registro-conductor.page.html',
   styleUrls: ['./registro-conductor.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule, FooterComponent]
 })
 export class RegistroConductorPage implements OnInit {
 

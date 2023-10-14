@@ -13,15 +13,17 @@ ion-buttons {
     color: yellow;
 }
 
+ion-button {
+    margin-top: 20px;
+    --background: #c1c700;
+    --color: #000000;
+}
+
 .titulo {
     text-align: center;
     font-style: italic;
     font-size: 25px;
     color: azure;
-}
-
-.ubicacion {
-    margin-right: 70%;
 }
 
 @media (max-width: 768px) {
@@ -37,4 +39,3 @@ ion-buttons {
         }
     }
 }
-

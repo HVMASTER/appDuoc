@@ -1,12 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { IonModal } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { RegistroService } from 'src/app/modules/auth/auth.service';
 import { Router } from '@angular/router';
-import { OverlayEventDetail } from '@ionic/core';
-import { ModalController } from '@ionic/angular';
-import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home-card',
@@ -15,81 +11,27 @@ import { AlertController } from '@ionic/angular';
   standalone: true,
   imports: [IonicModule, CommonModule],
 })
-export class HomeCardComponent  implements OnInit {
-
+export class HomeCardComponent implements OnInit {
   message = '';
 
-  @ViewChild(IonModal) modal!: IonModal;
-  modalController: any;
+  constructor(private registroService: RegistroService, private router: Router) {}
 
-  constructor(private registroService: RegistroService, private router: Router, modalController: ModalController, private alertController: AlertController) { }
+  ngOnInit() {}
 
-  cancel() {
-    this.modal.dismiss({ confirmed: true});
-    console.log('cancel');
+  functionFrom() {
     this.router.navigate(['/home']);
   }
 
-  confirm() {
-    this.modal.dismiss({ confirmed: false});
-    this.alertaModal();
-    console.log('confirm');
-  }
-
-  async alertaModal(){
-    const alert = await this.alertController.create({
-      header: 'Viaje solicitado',
-      message: '¡Genial! Has creado un viaje con exito.',
-      buttons: ['OK']
-    });
-
-    await alert.present();
-  }
-
-  onWillDismiss(event: Event){
-    const ev = event as CustomEvent<OverlayEventDetail<string>>;
-    if (ev.detail.role === 'confirm'){
-      
-    };
-  }
-
-  ngOnInit() {
-
-  }
-
-  functionFrom(){
-    this.router.navigate(['/home']);
-  }
-
-  functionRutas(){
+  functionRutas() {
     this.router.navigate(['/rutas']);
   }
 
-  registroConductor(){
+  registroConductor() {
     this.router.navigate(['/registro-conductor']);
   }
 
-  abrirModal() {
-    this.presentModal();
-  }
-
-  async presentModal() {
-
-    const modal = await this.modalController.create({
-      component: 'app-home-card',
-      componentProps: {
-        
-      }
-    });
-    await modal.present();
-
-    const { data } = await modal.onWillDismiss();
-    if (data) {
-      // Se ejecutará si se confirma o cancela el modal, data contendrá la información que necesites
-      console.log('Modal cerrado. Datos recibidos:', data);
-
-      // Redireccionar a la página de inicio
-      this.router.navigate(['/home']);
-    }
+  functionViajes() {
+    this.router.navigate(['/viajes']);
   }
 }
+

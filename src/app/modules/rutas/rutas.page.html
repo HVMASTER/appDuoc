@@ -1,14 +1,14 @@
 <ion-header>
   <ion-toolbar color="#003785" width="0%">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-button (click)="cancel()">Volver</ion-button>
     </ion-buttons>  
     <ion-title id="titulo" class="titulo">Rutas</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content >
-  <ion-card class="animate__animated animate__backInRight" (click)="functionLogin()">
+  <ion-card class="animate__animated animate__backInRight">
     <ion-item>
       <ion-label >Nombre</ion-label>
       <ion-label>{{ nombre }}</ion-label>
@@ -23,3 +23,9 @@
     </ion-item>
   </ion-card>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <app-footer></app-footer>
+  </ion-toolbar>
+</ion-footer>

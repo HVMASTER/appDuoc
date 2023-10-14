@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { FooterComponent } from 'src/app/components/footer/footer.component';
 
 @Component({
   selector: 'app-rutas',
   templateUrl: './rutas.page.html',
   styleUrls: ['./rutas.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, FooterComponent]
 })
 export class RutasPage implements OnInit {
 
@@ -22,8 +23,8 @@ export class RutasPage implements OnInit {
 
   constructor(private router: Router) { }
 
-  functionLogin() {
-    this.router.navigate(['/login']);
+  cancel() {
+    this.router.navigate(['/home']);
   }
 
   ngOnInit() {
