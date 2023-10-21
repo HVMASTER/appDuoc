@@ -62,7 +62,7 @@ export class RegistroConductorPage implements OnInit {
         this.capacidad = this.formRegistroConductor.value.capacidad;
         
         
-        this.registroService.registroConductor(this.tipoVehiculo, this.patente, this.modelo, this.marca, this.color, this.anio, this.capacidad, this.tipo);
+        // this.registroService.registroConductor(this.tipoVehiculo, this.patente, this.modelo, this.marca, this.color, this.anio, this.capacidad, this.tipo);
 
         console.log('datos de usuario2 ', this.conductores)
         this.router.navigate(['/home-conductor']);

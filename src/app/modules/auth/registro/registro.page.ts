@@ -75,7 +75,7 @@ export class RegistroPage implements OnInit {
       this.tipo = 'user';
 
       //solicita el registro y envia los datos
-      this.registroService.registro(this.nombre, this.apellidos, this.rut, this.correo, this.contrasena, this.tipo);
+      // this.registroService.registro(this.nombre, this.apellidos, this.rut, this.correo, this.contrasena, this.tipo);
 
       //console.log('datos de usuario2 ', this.usuarios)
       this.mostrarAlertaRegistro();

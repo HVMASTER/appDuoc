@@ -8,8 +8,8 @@
   </ion-buttons>
 
   <ng-container *ngIf="(validarData)">
-    <ion-title class="title" slot="end" *ngIf="tipoUser === 'user'">¡Hola! {{ user }} {{ apellidos }}</ion-title>
-    <ion-title class="title" slot="end" *ngIf="tipoUser === 'conductor'">¡Hola conductor! {{ user }} {{ apellidos }}</ion-title>  
+    <ion-title class="title" slot="end" *ngIf="tipoUser === 'usuario'">¡Hola! {{ user }} {{ apellido }}</ion-title>
+    <ion-title class="title" slot="end" *ngIf="tipoUser === 'conductor'">¡Hola conductor! {{ user }} {{ apellido }}</ion-title>  
   </ng-container>
   
 </ion-toolbar>
