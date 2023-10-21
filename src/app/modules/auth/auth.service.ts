@@ -23,12 +23,16 @@ export class RegistroService {
     return headers;
   }
 
-  login(data: LoginData) {
+  getUser() {
     const headers = this.getHeaders();
     const user = this.http.get(`${URL}users`, { headers });
-    console.log(user);
-    console.log(data);
-  return user;
+    return user;
+  }
+
+  login(correo: string) {
+    const headers = this.getHeaders();
+    const user = this.http.get(`${URL}users?correo=eq.${correo}`, { headers });
+    return user;
   }
 
 

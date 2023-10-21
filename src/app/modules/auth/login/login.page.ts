@@ -35,10 +35,10 @@ export class LoginPage implements OnInit {
       contrasena: ['', Validators.required],
     }); 
  
-    // if( this.sesionStart ){
-    //   this.router.navigate(['/home']); 
-    //   return;     
-    // }
+     if( this.sesionStart ){
+       this.router.navigate(['/home']); 
+       return;     
+     }
   }
 
   ngOnInit() {
@@ -49,29 +49,25 @@ export class LoginPage implements OnInit {
       alert('Credenciales inválidas');
       return;
     }
-    const credenciales: LoginData = {correo, contrasena};
-    this.registroService.login(credenciales).subscribe({
+
+    this.registroService.login(correo).subscribe({
       next: (Response: any) => {
-        if (Response) {
-          Response.find((user: any) => {
-            if (user.correo === correo && user.contrasena === contrasena) {
-              localStorage.setItem('user-name', user.nombre);
-              localStorage.setItem('user-tipo', user.tipo_user);
-              localStorage.setItem('user-apellido', user.apellido);
-              localStorage.setItem('sesionStart', 'true');
-              if (user.tipo_user === 'usuario') {
-                this.router.navigate(['/home']);
-                return;
-              } 
-              if (user.tipo_user === 'conductor') {
-                this.router.navigate(['/home-conductor']);
-                return;
-              }
-            }else{
-              alert('Credenciales inválidas');
-            }
-          });
-        };
+        if (Response.length !== 0 && Response[0].contrasena === contrasena) {        
+            localStorage.setItem('user-name', Response[0].nombre);
+            localStorage.setItem('user-tipo', Response[0].tipo_user);
+            localStorage.setItem('user-apellido', Response[0].apellido);
+            localStorage.setItem('sesionStart', 'true');
+            if (Response[0].tipo_user === 'usuario') {
+              this.router.navigate(['/home']);
+              return;
+            } 
+            if (Response[0].tipo_user === 'conductor') {
+              this.router.navigate(['/home-conductor']);
+              return;
+            }         
+        } else {
+          alert('Credenciales inválidas');
+        }
       },
       error: (error: any) => {
         if (error.status === 401) {
