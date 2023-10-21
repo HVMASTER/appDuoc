@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderButtonsComponent  implements OnInit {
 
-  apellidos = localStorage.getItem('user-apellidos');
+  apellido = localStorage.getItem('user-apellido');
   user = localStorage.getItem('user-name');
   tipoUser = localStorage.getItem('user-tipo');
 
@@ -33,7 +33,7 @@ export class HeaderButtonsComponent  implements OnInit {
   logout() {
     localStorage.removeItem('user-name');
     localStorage.removeItem('user-tipo');
-    localStorage.removeItem('user-apellidos');
+    localStorage.removeItem('user-apellido');
     localStorage.removeItem('sesionStart');
     this.router.navigate(['/login']);
     this._cdr.detectChanges();

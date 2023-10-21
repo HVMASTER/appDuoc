@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -7,6 +7,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegistroService } from '../auth.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { LoginData } from 'src/app/interfaces/login.interface';
+
 
 @Component({
   selector: 'app-login',
@@ -15,14 +17,12 @@ import { AlertController } from '@ionic/angular';
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule]
 })
-export class LoginPage {
+export class LoginPage implements OnInit {
 
-  // Variables para almacenar el correo y contraseña ingresados en el formulario
-  correo = '';
-  contrasena = '';
   
-  // FormGroup para gestionar el formulario de inicio de sesión
-  // FormBuilder defino las validaciones de mi formulario y le entrego funciones (Validators.required
+  correo: string = '';
+  contrasena: string = '';
+  
 
   formularioLogin: FormGroup;
   sesionStart = localStorage.getItem('sesionStart');
@@ -35,56 +35,100 @@ export class LoginPage {
       contrasena: ['', Validators.required],
     }); 
  
-    if( this.sesionStart ){
-      this.router.navigate(['/home']); 
-      return;     
-    }
+    // if( this.sesionStart ){
+    //   this.router.navigate(['/home']); 
+    //   return;     
+    // }
   }
 
-  //Alerta al iniciar sesión
-  async mostrarAlertaInicioSesion() {
-    const alert = await this.alertController.create({
-      header: 'Sesión Iniciada',
-      message: '¡Bienvenido! Has iniciado sesión con éxito en tu cuenta.',
-      buttons: ['OK']
-    });
-
-    await alert.present();
+  ngOnInit() {
   }
-
-  // Método para manejar el evento de inicio de sesión
-  sesionStartView(){
-      localStorage.setItem('user-name', this.registroService.nombreUsuario);
-      localStorage.setItem('user-tipo', this.registroService.tipoUsuario);
-      localStorage.setItem('user-apellidos', this.registroService.apellidosUsuario);
-      localStorage.setItem('sesionStart', 'true');
-  }
-  iniciarSesion() {
+  
+  login(correo: string, contrasena: string) {
     if (!this.formularioLogin.valid) {
       alert('Credenciales inválidas');
       return;
     }
-      // Aquí realizo la lógica de autenticación con el servicio correspondiente
-    const correo = this.formularioLogin.value.correo;
-    const contrasena = this.formularioLogin.value.contrasena;
-
-    if (!this.registroService.validarCredenciales(correo, contrasena)) {
-      alert('Por favor, verifica que todos los campos estén llenos y sean válidos.');
-      return;
-    }
-    if (this.registroService.tipoUsuario === 'user') {
-      this.sesionStartView();
-      this.router.navigate(['/home']);
-      this.mostrarAlertaInicioSesion() 
-      return;
-    } 
-    if (this.registroService.tipoUsuario === 'conductor') {
-      this.sesionStartView();
-      this.router.navigate(['/home-conductor']);
-      this.mostrarAlertaInicioSesion() 
-      return;
-    }
+    const credenciales: LoginData = {correo, contrasena};
+    this.registroService.login(credenciales).subscribe({
+      next: (Response: any) => {
+        if (Response) {
+          Response.find((user: any) => {
+            if (user.correo === correo && user.contrasena === contrasena) {
+              localStorage.setItem('user-name', user.nombre);
+              localStorage.setItem('user-tipo', user.tipo_user);
+              localStorage.setItem('user-apellido', user.apellido);
+              localStorage.setItem('sesionStart', 'true');
+              if (user.tipo_user === 'usuario') {
+                this.router.navigate(['/home']);
+                return;
+              } 
+              if (user.tipo_user === 'conductor') {
+                this.router.navigate(['/home-conductor']);
+                return;
+              }
+            }else{
+              alert('Credenciales inválidas');
+            }
+          });
+        };
+      },
+      error: (error: any) => {
+        if (error.status === 401) {
+          alert('Credenciales inválidas');
+        }
+        if (error.status === 500) {
+          alert('Error en el servidor');
+        }
+      }
+    });
   }
+
+
+  // //Alerta al iniciar sesión
+  // async mostrarAlertaInicioSesion() {
+  //   const alert = await this.alertController.create({
+  //     header: 'Sesión Iniciada',
+  //     message: '¡Bienvenido! Has iniciado sesión con éxito en tu cuenta.',
+  //     buttons: ['OK']
+  //   });
+
+  //   await alert.present();
+  // }
+
+  // // Método para manejar el evento de inicio de sesión
+  // sesionStartView(){
+  //     localStorage.setItem('user-name', this.registroService.nombreUsuario);
+  //     localStorage.setItem('user-tipo', this.registroService.tipoUsuario);
+  //     localStorage.setItem('user-apellidos', this.registroService.apellidosUsuario);
+  //     localStorage.setItem('sesionStart', 'true');
+  // }
+  // iniciarSesion() {
+  //   if (!this.formularioLogin.valid) {
+  //     alert('Credenciales inválidas');
+  //     return;
+  //   }
+  //     // Aquí realizo la lógica de autenticación con el servicio correspondiente
+  //   const correo = this.formularioLogin.value.correo;
+  //   const contrasena = this.formularioLogin.value.contrasena;
+
+  //   if (!this.registroService.validarCredenciales(correo, contrasena)) {
+  //     alert('Por favor, verifica que todos los campos estén llenos y sean válidos.');
+  //     return;
+  //   }
+  //   if (this.registroService.tipoUsuario === 'user') {
+  //     this.sesionStartView();
+  //     this.router.navigate(['/home']);
+  //     this.mostrarAlertaInicioSesion() 
+  //     return;
+  //   } 
+  //   if (this.registroService.tipoUsuario === 'conductor') {
+  //     this.sesionStartView();
+  //     this.router.navigate(['/home-conductor']);
+  //     this.mostrarAlertaInicioSesion() 
+  //     return;
+  //   }
+  // }
 
 }
 

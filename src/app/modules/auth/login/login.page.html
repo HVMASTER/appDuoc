@@ -12,14 +12,14 @@
       <ion-card-header>
         <ion-card-title >Iniciar Sesión</ion-card-title>
       </ion-card-header>
-      <form [formGroup]="formularioLogin" (ngSubmit)="iniciarSesion()">
+      <form [formGroup]="formularioLogin" (ngSubmit)="login(correo, contrasena)">
         <ion-item>
           <ion-label class= "correo" position="floating">Correo</ion-label>
-          <ion-input label="" formControlName="correo"></ion-input>
+          <ion-input label="" name="correo" [(ngModel)]="correo" formControlName="correo"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating">Contraseña</ion-label>
-          <ion-input label="" formControlName="contrasena" type="password"></ion-input>
+          <ion-input label="" name="contrasena" [(ngModel)]="contrasena" formControlName="contrasena" type="password"></ion-input>
         </ion-item>
         <ion-button expand="block" type="submit" >Iniciar Sesión</ion-button>
         <ion-button expand="block" color="medium" href="/recuperacion">¿Olvidaste tu contraseña?</ion-button>

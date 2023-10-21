@@ -39,7 +39,7 @@ export class RecuperacionPage implements OnInit {
 
   async recuperarContrasena() {
     try {
-      await this.registroService.simularEnvioCorreoRecuperacion(this.correo);
+      // await this.registroService.simularEnvioCorreoRecuperacion(this.correo);
       // Simulación de recuperación de contraseña exitosa
       this.mostrarMensajeExito = true;
       // Redirige al usuario al login
