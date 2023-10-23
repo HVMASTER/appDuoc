@@ -7,35 +7,23 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Detalles del Viaje</ion-card-title>
+      <ion-card-title>Solicitud de viaje</ion-card-title>
     </ion-card-header>
     
     <ion-card-content>
       <ion-list>
         <ion-item>
           <ion-label position="floating">Origen</ion-label>
-          <ion-input label="" type="text" ></ion-input>
+          <ion-input label=""name="origen" [(ngModel)]="origen" type="text" ></ion-input>
         </ion-item>
         
         <ion-item>
           <ion-label position="floating">Destino</ion-label>
-          <ion-input label="" type="text" ></ion-input>
-        </ion-item>
-        
-        <ion-item>
-          <ion-label>Conductor</ion-label>
-          <ion-select label="" placeholder="Selecciona un conductor">
-            <ion-select-option value="" selected disabled>Elige un conductor</ion-select-option>
-            <ion-select-option value="conductor1">Conductor 1</ion-select-option>
-            <ion-select-option value="conductor2">Conductor 2</ion-select-option>
-            <!-- Agrega más opciones según sea necesario -->
-          </ion-select>
-        </ion-item>
-        
-        
+          <ion-input label="" name="destino" [(ngModel)]="destino" type="text" ></ion-input>
+        </ion-item>            
       </ion-list>
 
-      <ion-button expand="block" >Enviar Solicitud</ion-button>
+      <ion-button expand="block" (click)="solicitarViaje(origen, destino)">Enviar Solicitud</ion-button>
       <ion-button expand="block" color="medium" (click)="volverAlMenuPrincipal()">Volver al menú principal</ion-button>
     </ion-card-content>
   </ion-card>
