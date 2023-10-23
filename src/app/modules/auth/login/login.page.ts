@@ -67,6 +67,7 @@ export class LoginPage implements OnInit {
             localStorage.setItem('user-name', Response[0].nombre);
             localStorage.setItem('user-tipo', Response[0].tipo_user);
             localStorage.setItem('user-apellido', Response[0].apellido);
+            localStorage.setItem('user-id', Response[0].id_user);
             localStorage.setItem('sesionStart', 'true');
             if (Response[0].tipo_user === 'usuario') {
               this.mostrarAlertaInicioSesion();

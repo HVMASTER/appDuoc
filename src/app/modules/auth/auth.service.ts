@@ -24,24 +24,26 @@ export class RegistroService {
     return headers;
   }
 
+  //obtiene todos los usuarios
   getUser() {
     const headers = this.getHeaders();
     const user = this.http.get(`${URL}users`, { headers });
     return user;
   }
 
+  //manda datos del registro
   postUser(users: Registro) {
     const headers = this.getHeaders();
     return this.http.post(`${URL}users`, users, { headers } );
   
   }
-
+  
   postDriver(driver: Conductor) {
     const headers = this.getHeaders();
     return this.http.post(`${URL}vehiculos`, driver, { headers } );
   
   }
-
+  
   login(correo: string) {
     const headers = this.getHeaders();
     const user = this.http.get(`${URL}users?correo=eq.${correo}`, { headers });
