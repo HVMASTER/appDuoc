@@ -14,12 +14,7 @@ import { FooterComponent } from 'src/app/components/footer/footer.component';
 })
 export class RutasPage implements OnInit {
 
-  nombre: string = '';
-  origen: string = '';
-  destino: string = '';
-  distancia: string = '';
-  tiempoEstimado: string = '';
-  mostrarDetalles: boolean = false;
+  direccion: string = '';
 
   constructor(private router: Router) { }
 

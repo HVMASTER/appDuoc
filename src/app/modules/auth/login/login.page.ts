@@ -41,7 +41,18 @@ export class LoginPage implements OnInit {
      }
   }
 
+  async mostrarAlertaInicioSesion() {
+    const alert = await this.alertController.create({
+      header: 'Sesión Iniciada',
+      message: '¡Bienvenido! Has iniciado sesión con éxito en tu cuenta.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
   ngOnInit() {
+
   }
   
   login(correo: string, contrasena: string) {
@@ -59,6 +70,7 @@ export class LoginPage implements OnInit {
             localStorage.setItem('user-id', Response[0].id_user);
             localStorage.setItem('sesionStart', 'true');
             if (Response[0].tipo_user === 'usuario') {
+              this.mostrarAlertaInicioSesion();
               this.router.navigate(['/home']);
               return;
             } 
@@ -80,18 +92,7 @@ export class LoginPage implements OnInit {
       }
     });
   }
-
-
-  // //Alerta al iniciar sesión
-  // async mostrarAlertaInicioSesion() {
-  //   const alert = await this.alertController.create({
-  //     header: 'Sesión Iniciada',
-  //     message: '¡Bienvenido! Has iniciado sesión con éxito en tu cuenta.',
-  //     buttons: ['OK']
-  //   });
-
-  //   await alert.present();
-  // }
+}
 
   // // Método para manejar el evento de inicio de sesión
   // sesionStartView(){
@@ -126,8 +127,6 @@ export class LoginPage implements OnInit {
   //     return;
   //   }
   // }
-
-}
 
 
 

@@ -19,14 +19,14 @@ export class RegistroConductorPage implements OnInit {
 
   conductores = localStorage.getItem('conductor');
  
-  tipoVehiculo = '';
+  tipo_vehiculo = '';
   patente = '';
   modelo = '';
   marca = '';
   color = '';
-  anio = 0;
-  capacidad = 0;
-  tipo = 'conductor';
+  anno_fabricacion = 0;
+  telefono = 0;
+  tipo_user = '';
   
 
   formRegistroConductor: FormGroup;
@@ -34,13 +34,13 @@ export class RegistroConductorPage implements OnInit {
   constructor(private formBuilder: FormBuilder , private registroService: RegistroService, private router: Router) {
 
     this.formRegistroConductor = this.formBuilder.group({
-      tipoVehiculo: ['', Validators.required],
+      tipo_vehiculo: ['', Validators.required],
       patente: ['', Validators.required],
       modelo: ['', Validators.required],
       marca: ['', Validators.required],
       color: ['', Validators.required],
-      anio: ['', Validators.required],
-      capacidad: ['', Validators.required],
+      anno_fabricacion: ['', Validators.required],
+      telefono: ['', Validators.required],
     });   
    }
 
@@ -48,26 +48,34 @@ export class RegistroConductorPage implements OnInit {
       //console.log('datos de usuario1 ', this.conductores)
 
       if(this.formRegistroConductor.valid){
+        const userConductor = {
+          tipo_vehiculo: this.formRegistroConductor.value.tipo_vehiculo,
+          patente: this.formRegistroConductor.value.patente,
+          modelo: this.formRegistroConductor.value.modelo,
+          marca: this.formRegistroConductor.value.marca,
+          color: this.formRegistroConductor.value.color,
+          anno_fabricacion: this.formRegistroConductor.value.anno_fabricacion,
+          telefono: this.formRegistroConductor.value.telefono,
+          tipo_user: 'conductor',
+        };
+
 
         if (this.conductores !== null && this.conductores.includes( this.formRegistroConductor.value.patente)) {
           alert('La patente ya existe');
           return;
         }
-        this.tipoVehiculo = this.formRegistroConductor.value.tipoVehiculo;
-        this.patente = this.formRegistroConductor.value.patente;
-        this.modelo = this.formRegistroConductor.value.modelo;
-        this.marca = this.formRegistroConductor.value.marca;
-        this.color = this.formRegistroConductor.value.color;
-        this.anio = this.formRegistroConductor.value.anio;
-        this.capacidad = this.formRegistroConductor.value.capacidad;
-        
-        
+    
+        this.registroService.postDriver(userConductor).subscribe((Response: any) => {
+          console.log(Response);       
+          //this.mostrarAlertaRegistro();
+          this.router.navigate(['/home-conductor']);
+        });
         // this.registroService.registroConductor(this.tipoVehiculo, this.patente, this.modelo, this.marca, this.color, this.anio, this.capacidad, this.tipo);
 
-        console.log('datos de usuario2 ', this.conductores)
-        this.router.navigate(['/home-conductor']);
+        // console.log('datos de usuario2 ', this.conductores)
+        // this.router.navigate(['/home-conductor']);
         
-        localStorage.setItem('esConductor', 'true');
+        // localStorage.setItem('esConductor', 'true');
       }else{
         alert('Por favor, verifica que todos los campos estén llenos y sean válidos.');
       }
