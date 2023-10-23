@@ -6,4 +6,5 @@ export interface Conductor{
     color: string,
     anno_fabricacion: number,
     telefono: number,
+    id_user: number
 }
