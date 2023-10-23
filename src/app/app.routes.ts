@@ -42,7 +42,7 @@ export const routes: Routes = [
   },
   {
     path: 'viajes',
-    loadComponent: () => import('./viajes/viajes.page').then( m => m.ViajesPage)
+    loadComponent: () => import('./modules/viajes/viajes.page').then( m => m.ViajesPage)
   },
   {
   path: 'registro-conductor/home',

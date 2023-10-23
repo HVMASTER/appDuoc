@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegistroService } from '../auth.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Registro } from 'src/app/interfaces/registro.interface';
 
 
 @Component({
@@ -21,24 +22,32 @@ export class RegistroPage implements OnInit {
   usuarios = localStorage.getItem('users'); 
 
   nombre = '';
-  apellidos = '';
+  apellido = '';
   rut = '';
   correo = '';
   contrasena = '';
-  tipo = '';
+  direccion = '';
+  comuna = '';
+  ciudad = '';
+  tipo_user = '';
+
 
   // FormGroup para gestionar el formulario del registro
-  formularioRegistro: FormGroup;
+  formRegistro: FormGroup;
+  sesionStart = localStorage.getItem('sesionStart');
 
   // Constructor del componente: creo mi formlario del registro y le entrego las reglas de validacion asociadas
   constructor(private formBuilder: FormBuilder, private registroService: RegistroService, private router: Router, private alertController: AlertController) {
-    this.formularioRegistro = this.formBuilder.group({
+    this.formRegistro = this.formBuilder.group({
       nombre: ['', Validators.required],
-      apellidos: ['', Validators.required],
+      apellido: ['', Validators.required],
       rut: ['', Validators.required],
       correo: ['', [Validators.required, Validators.email]],
       contrasena: ['', Validators.required],
       confirmarContrasena: ['', Validators.required],
+      direccion: ['', Validators.required],
+      comuna: ['', Validators.required],
+      ciudad: ['', Validators.required],
     });
   }
 
@@ -52,34 +61,35 @@ export class RegistroPage implements OnInit {
     await alert.present();
   }
 
+  
+
+
   registrarse() {
+    if (this.formRegistro.valid) {
+      const userData = {
+        nombre: this.formRegistro.value.nombre,
+        apellido: this.formRegistro.value.apellido,
+        rut: this.formRegistro.value.rut,
+        correo: this.formRegistro.value.correo,
+        contrasena: this.formRegistro.value.contrasena,
+        direccion: this.formRegistro.value.direccion,
+        comuna: this.formRegistro.value.comuna,
+        ciudad: this.formRegistro.value.ciudad,
+        tipo_user: 'usuario',
+      };
 
-
-    if (this.formularioRegistro.valid) {
-
-      if (this.formularioRegistro.value.contrasena != this.formularioRegistro.value.confirmarContrasena) {
+      if (this.formRegistro.value.contrasena != this.formRegistro.value.confirmarContrasena) {
         alert('Las contraseñas no coinciden');
         return;
       }
 
-      if (this.usuarios !== null && this.usuarios.includes(this.formularioRegistro.value.correo)) {
-        alert('El correo ya existe');
-        return;
-      }
-
-      this.nombre = this.formularioRegistro.value.nombre;
-      this.apellidos = this.formularioRegistro.value.apellidos
-      this.rut = this.formularioRegistro.value.rut;
-      this.correo = this.formularioRegistro.value.correo;
-      this.contrasena = this.formularioRegistro.value.contrasena;
-      this.tipo = 'user';
-
-      //solicita el registro y envia los datos
-      // this.registroService.registro(this.nombre, this.apellidos, this.rut, this.correo, this.contrasena, this.tipo);
-
-      //console.log('datos de usuario2 ', this.usuarios)
-      this.mostrarAlertaRegistro();
-      this.router.navigate(['/login']);
+      //asigna los valores del formulario a las variables
+      this.registroService.postUser(userData).subscribe((Response: any) => {
+        console.log(Response);       
+        this.mostrarAlertaRegistro();
+        this.router.navigate(['/login']);
+      });
+      
     } else {
       alert('Por favor, verifica que todos los campos estén llenos y sean válidos.');
     }

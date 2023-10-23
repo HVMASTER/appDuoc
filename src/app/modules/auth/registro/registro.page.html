@@ -12,14 +12,14 @@
     <ion-card-header>
       <ion-card-title class="title">Registro</ion-card-title>
     </ion-card-header>
-    <form [formGroup]="formularioRegistro" (ngSubmit)="registrarse()">
+    <form [formGroup]="formRegistro" (ngSubmit)="registrarse()">
       <ion-item>
         <ion-label position="floating">Nombre</ion-label>
         <ion-input label="" formControlName="nombre"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Apellidos</ion-label>
-        <ion-input label="" formControlName="apellidos"></ion-input>
+        <ion-label position="floating">Apellido</ion-label>
+        <ion-input label="" formControlName="apellido"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Rut</ion-label>
@@ -36,6 +36,18 @@
       <ion-item>
         <ion-label position="floating">Confirmar contraseña</ion-label>
         <ion-input label="" formControlName="confirmarContrasena" type="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">direccion</ion-label>
+        <ion-input label="" formControlName="direccion"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">comuna</ion-label>
+        <ion-input label="" formControlName="comuna"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">ciudad</ion-label>
+        <ion-input label="" formControlName="ciudad"></ion-input>
       </ion-item>
       <ion-button expand="block" type="submit" >Registrarse</ion-button>
     </form>
