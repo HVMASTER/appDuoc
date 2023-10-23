@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { RegistroService } from '../auth.service';
 import { Router } from '@angular/router';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registro-conductor',
@@ -31,7 +32,7 @@ export class RegistroConductorPage implements OnInit {
 
   formRegistroConductor: FormGroup;
 
-  constructor(private formBuilder: FormBuilder , private registroService: RegistroService, private router: Router) {
+  constructor(private formBuilder: FormBuilder , private registroService: RegistroService, private router: Router, private alertController: AlertController) {
 
     this.formRegistroConductor = this.formBuilder.group({
       tipo_vehiculo: ['', Validators.required],
@@ -43,6 +44,16 @@ export class RegistroConductorPage implements OnInit {
       telefono: ['', Validators.required],
     });   
    }
+
+    async mostrarAlertaRegistroConductor() {
+      const alert = await this.alertController.create({
+        header: 'Registro Exitoso',
+        message: '¡Felicidades! Te has registrado como conductor. ¡Bienvenido a nuestra comunidad!',
+        buttons: ['OK']
+      });
+
+      await alert.present();
+    }
 
    registroConductor() {
       //console.log('datos de usuario1 ', this.conductores)
@@ -57,6 +68,7 @@ export class RegistroConductorPage implements OnInit {
           anno_fabricacion: this.formRegistroConductor.value.anno_fabricacion,
           telefono: this.formRegistroConductor.value.telefono,
           tipo_user: 'conductor',
+          id_user: Number(localStorage.getItem('user-id'))
         };
 
 
@@ -67,15 +79,10 @@ export class RegistroConductorPage implements OnInit {
     
         this.registroService.postDriver(userConductor).subscribe((Response: any) => {
           console.log(Response);       
-          //this.mostrarAlertaRegistro();
+          this.mostrarAlertaRegistroConductor();
           this.router.navigate(['/home-conductor']);
         });
-        // this.registroService.registroConductor(this.tipoVehiculo, this.patente, this.modelo, this.marca, this.color, this.anio, this.capacidad, this.tipo);
 
-        // console.log('datos de usuario2 ', this.conductores)
-        // this.router.navigate(['/home-conductor']);
-        
-        // localStorage.setItem('esConductor', 'true');
       }else{
         alert('Por favor, verifica que todos los campos estén llenos y sean válidos.');
       }
