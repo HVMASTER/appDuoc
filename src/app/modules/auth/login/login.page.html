@@ -1,9 +1,6 @@
 <ion-header>
-  <ion-toolbar color="#003785">
-    <ion-buttons slot="end">
-      
-    </ion-buttons>  
-    <ion-title id="titulo" >Login</ion-title>
+  <ion-toolbar color="#003785">  
+    <ion-title id="titulo">Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -23,6 +20,9 @@
           <ion-input label="" name="contrasena" [(ngModel)]="contrasena" formControlName="contrasena" type="password"></ion-input>
         </ion-item>
         <ion-button expand="block" type="submit" >Iniciar Sesión</ion-button>
+        <div>
+          <ion-button expand="block" href="/registro">Registrarse</ion-button>
+        </div>
         <ion-button expand="block" color="medium" href="/recuperacion">¿Olvidaste tu contraseña?</ion-button>
       </form>
       <ion-button href="/registro">Registrarse</ion-button>
