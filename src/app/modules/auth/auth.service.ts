@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { IAuth, IAuthConductor } from './auth.interface';
-import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { LoginData } from 'src/app/interfaces/login.interface';
 import { environment } from 'src/environments/environment';
+import { Users } from 'src/app/interfaces/user.interface';
+import { Observable } from 'rxjs';
+import { Registro } from '../../interfaces/registro.interface';
 
 const URL = environment.apiurl;
 const KEY = environment.apikey;
@@ -27,6 +27,12 @@ export class RegistroService {
     const headers = this.getHeaders();
     const user = this.http.get(`${URL}users`, { headers });
     return user;
+  }
+
+  postUser(users: Registro) {
+    const headers = this.getHeaders();
+    return this.http.post(`${URL}users`, users, { headers } );
+  
   }
 
   login(correo: string) {
