@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Users } from 'src/app/interfaces/user.interface';
 import { Observable } from 'rxjs';
 import { Registro } from '../../interfaces/registro.interface';
+import { Conductor } from 'src/app/interfaces/conductor.interface';
 
 const URL = environment.apiurl;
 const KEY = environment.apikey;
@@ -32,6 +33,12 @@ export class RegistroService {
   postUser(users: Registro) {
     const headers = this.getHeaders();
     return this.http.post(`${URL}users`, users, { headers } );
+  
+  }
+
+  postDriver(driver: Conductor) {
+    const headers = this.getHeaders();
+    return this.http.post(`${URL}vehiculos`, driver, { headers } );
   
   }
 
