@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-viajes',
@@ -15,7 +16,33 @@ import { FooterComponent } from 'src/app/components/footer/footer.component';
 })
 export class ViajesPage implements OnInit {
 
-  constructor(private router: Router, private alertController: AlertController) { }
+  origen: string = '';
+  destino: string = '';
+
+  constructor(private router: Router, private alertController: AlertController, private data: DataService) { }
+
+  solicitarViaje(origen: string, destino: string){
+    if (origen === '' || destino === '') {
+      alert('Por favor, ingrese todos los campos');
+      return;
+    }
+
+    this.data.postSolicitud({
+      origen: origen,
+      destino: destino,
+      estado: 'pendiente',
+      id_user: Number(localStorage.getItem('user-id'))
+    }).subscribe({
+      next: (Response: any) => {
+        this.alertaModal();
+        this.router.navigate(['/home']);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
+  }
+
 
   async alertaModal(){
     const alert = await this.alertController.create({
