@@ -92,10 +92,6 @@ export class RegistroConductorPage implements OnInit {
     cancel() {
       this.router.navigate(['/home']);
     }
-  
-    confirm() {
-      this.router.navigate(['/home']);
-    }
 
   ngOnInit() {
     
