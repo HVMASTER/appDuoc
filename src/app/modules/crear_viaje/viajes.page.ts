@@ -30,7 +30,7 @@ export class ViajesPage implements OnInit {
     this.data.postSolicitud({
       origen: origen,
       destino: destino,
-      estado: 'pendiente',
+      estado: 'Disponible',
       id_user: Number(localStorage.getItem('user-id'))
     }).subscribe({
       next: (Response: any) => {

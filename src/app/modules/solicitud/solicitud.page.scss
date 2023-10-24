@@ -20,8 +20,25 @@ ion-buttons {
     color: azure;
 }
 
+.label{
+    width: 50px;
+    white-space: normal;
+    
+}
+
 .ubicacion {
-    margin-right: 70%;
+    white-space: nowrap;      /* No permite el salto de línea */
+    overflow: hidden;        /* Oculta el contenido que desborda */
+    text-overflow: ellipsis; /* Agrega puntos suspensivos (...) al final */
+    max-width: 100%;         /* Asegura que no exceda el ancho del contenedor */
+    display: inline-block; 
+}
+
+.button{
+    display: flex;
+    margin-right: 15px;
+    margin-left: 15px;
+    justify-content: center;
 }
 
 @media (max-width: 768px) {
