@@ -31,7 +31,7 @@ export class HomeCardComponent implements OnInit {
   }
 
   functionViajes() {
-    this.router.navigate(['/viajes']);
+    this.router.navigate(['/solicitud']);
   }
 }
 

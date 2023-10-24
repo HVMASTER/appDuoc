@@ -27,4 +27,16 @@ export class DataService {
     return this.http.post(`${URL}solicitudes`, solicitud, { headers } );
   }
 
+  getSolicitud() {
+    const headers = this.getHeaders();
+    const solicitud = this.http.get<Solicitud>(`${URL}solicitudes`, { headers });
+    return solicitud;
+  }
+
+  getSolicDisp() {
+    const headers = this.getHeaders();
+    const solicitud = this.http.get<Solicitud[]>(`${URL}solicitudes?estado=eq.Disponible`, { headers });
+    return solicitud;
+  }
+
 }

@@ -35,13 +35,17 @@ export class RegistroService {
   postUser(users: Registro) {
     const headers = this.getHeaders();
     return this.http.post(`${URL}users`, users, { headers } );
-  
   }
   
   postDriver(driver: Conductor) {
     const headers = this.getHeaders();
     return this.http.post(`${URL}vehiculos`, driver, { headers } );
-  
+  }
+
+  getDriver(id_user: number) {
+    const headers = this.getHeaders();
+    const driver = this.http.get(`${URL}vehiculos?id_user=eq.${id_user}`, { headers });
+    return driver;
   }
   
   login(correo: string) {
@@ -49,6 +53,8 @@ export class RegistroService {
     const user = this.http.get(`${URL}users?correo=eq.${correo}`, { headers });
     return user;
   }
+
+
 
 
   // users: IAuth[] = [

@@ -17,7 +17,7 @@ export class HomeCardConductorComponent  implements OnInit {
   ngOnInit() {}
 
   functionSolicitud(){
-    this.router.navigate(['/solicitud']);
+    this.router.navigate(['/viajes']);
   }
 
 }

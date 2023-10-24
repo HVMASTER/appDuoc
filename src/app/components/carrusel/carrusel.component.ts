@@ -10,7 +10,7 @@ import { CarruselItem } from './carrusel.interface';
   styleUrls: ['./carrusel.component.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule],
-})
+}) 
 
 export class HomeCarruselComponent  implements OnInit {
 

@@ -69,6 +69,18 @@ export class LoginPage implements OnInit {
             localStorage.setItem('user-apellido', Response[0].apellido);
             localStorage.setItem('user-id', Response[0].id_user);
             localStorage.setItem('sesionStart', 'true');
+
+            this.registroService.getDriver(Response[0].id_user).subscribe({
+              next: (Response: any) => {
+                if (Response.length > 0) {
+                  localStorage.setItem('user-id', Response[0].id_vehiculo);
+                  this.router.navigate(['/home-conductor']);
+                }
+              },
+              error: (error) => {
+                console.log(error);
+              }
+            });
             if (Response[0].tipo_user === 'usuario') {
               this.mostrarAlertaInicioSesion();
               this.router.navigate(['/home']);

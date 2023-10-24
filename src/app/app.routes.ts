@@ -41,8 +41,8 @@ export const routes: Routes = [
     loadComponent: () => import('./modules/solicitud/solicitud.page').then( m => m.SolicitudPage)
   },
   {
-    path: 'viajes',
-    loadComponent: () => import('./modules/viajes/viajes.page').then( m => m.ViajesPage)
+    path: 'crear_viaje',
+    loadComponent: () => import('./modules/crear_viaje/viajes.page').then( m => m.ViajesPage)
   },
   {
   path: 'registro-conductor/home',

@@ -8,34 +8,29 @@
 </ion-header>
 
 <ion-content>
-  <ion-card class="animate__animated animate__backInRight">
+  <ion-card *ngFor="let solicitud of solicitudesDisp" class="animate__animated animate__backInRight">
     <ion-card-header>
-      <!-- Título de la solicitud -->
-      <ion-card-title>Casa</ion-card-title>
+      <ion-card-title>Solicitud de Viaje</ion-card-title>
     </ion-card-header>
-    
     <ion-card-content>
-      <!-- Información de la solicitud -->
-      <!-- Controla cómo se muestran las líneas divisorias entre los elementos de la lista. En este caso, se establece en "none", lo que significa que no habrá líneas divisorias entre los elementos de la lista.-->
       <ion-list lines="none">
         <ion-item>
-          <ion-label>Origen:</ion-label>
-          <ion-label class="ubicacion">Álvarez 2336, 2571188 Viña del Mar, Valparaíso, Duoc Viña del mar</ion-label>
+          <ion-label class="label">Origen:</ion-label>
+          <ion-label class="ubicacion">{{ solicitud.origen }}</ion-label>
         </ion-item>
-        
         <ion-item>
-          <ion-label>Destino:</ion-label>
-          <ion-label class="ubicacion">Cerro Alegre, Valparaíso</ion-label>
+          <ion-label class="label">Destino:</ion-label>
+          <ion-label class="ubicacion">{{ solicitud.destino }}</ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>
-    
-    <ion-item>
-      <!-- Botones de acción -->
-      <ion-button expand="block" color="success" >Aceptar</ion-button>
-      <ion-button expand="block" color="danger" >Rechazar</ion-button>
-    </ion-item>
-  </ion-card>  
+    <div class="button">
+      <ion-item>
+        <ion-button expand="block" color="success">Aceptar</ion-button>
+        <ion-button expand="block" color="danger">Rechazar</ion-button>
+      </ion-item>
+    </div>
+  </ion-card>
 </ion-content>
 
 <ion-footer>
