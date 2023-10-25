@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Solicitud } from '../interfaces/solicitud.interface';
+import { ObtenerSolicitud, Solicitud } from '../interfaces/solicitud.interface';
 import { environment } from 'src/environments/environment';
 
   const URL = environment.apiurl;
@@ -36,6 +36,12 @@ export class DataService {
   getSolicDisp() {
     const headers = this.getHeaders();
     const solicitud = this.http.get<Solicitud[]>(`${URL}solicitudes?estado=eq.Disponible`, { headers });
+    return solicitud;
+  }
+
+  obtSolicitudDisp() {
+    const headers = this.getHeaders();
+    const solicitud = this.http.get<ObtenerSolicitud[]>(`${URL}solicitudes?estado=eq.Disponible`, { headers });
     return solicitud;
   }
 
