@@ -19,7 +19,7 @@ export class ViajesPage implements OnInit {
   origen: string = '';
   destino: string = '';
 
-  constructor(private router: Router, private alertController: AlertController, private data: DataService) { }
+  constructor(private router: Router, private alertController: AlertController, private dataService: DataService) { }
 
   solicitarViaje(origen: string, destino: string){
     if (origen === '' || destino === '') {
@@ -27,15 +27,15 @@ export class ViajesPage implements OnInit {
       return;
     }
 
-    this.data.postSolicitud({
-      origen: origen,
+    this.dataService.postSolicitud({
+      origen: origen, 
       destino: destino,
       estado: 'Disponible',
       id_user: Number(localStorage.getItem('user-id'))
     }).subscribe({
       next: (Response: any) => {
         this.alertaModal();
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home-conductor']); 
       },
       error: (error) => {
         console.log(error);
