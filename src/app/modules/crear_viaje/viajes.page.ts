@@ -19,7 +19,7 @@ export class ViajesPage implements OnInit {
   origen: string = '';
   destino: string = '';
 
-  constructor(private router: Router, private alertController: AlertController, private data: DataService) { }
+  constructor(private router: Router, private alertController: AlertController, private dataService: DataService) { }
 
   solicitarViaje(origen: string, destino: string){
     if (origen === '' || destino === '') {
@@ -27,7 +27,7 @@ export class ViajesPage implements OnInit {
       return;
     }
 
-    this.data.postSolicitud({
+    this.dataService.postSolicitud({
       origen: origen,
       destino: destino,
       estado: 'Disponible',
