@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { AlertController } from '@ionic/angular';
 
+
 @Component({
   selector: 'app-registro-conductor',
   templateUrl: './registro-conductor.page.html',
@@ -28,6 +29,7 @@ export class RegistroConductorPage implements OnInit {
   anno_fabricacion = 0;
   telefono = 0;
   tipo_user = '';
+  idUser = Number(localStorage.getItem('user-id'))
   
 
   formRegistroConductor: FormGroup;
@@ -67,8 +69,7 @@ export class RegistroConductorPage implements OnInit {
           color: this.formRegistroConductor.value.color,
           anno_fabricacion: this.formRegistroConductor.value.anno_fabricacion,
           telefono: this.formRegistroConductor.value.telefono,
-          tipo_user: 'conductor',
-          id_user: Number(localStorage.getItem('user-id'))
+          id_user: this.idUser
         };
 
 
@@ -76,9 +77,11 @@ export class RegistroConductorPage implements OnInit {
           alert('La patente ya existe');
           return;
         }
-    
-        this.registroService.postDriver(userConductor).subscribe((Response: any) => {
-          console.log(Response);       
+
+        this.registroService.updateUserTipo(this.idUser, 'conductor').subscribe((Response: any) => {
+          console.log(Response);
+        });
+        this.registroService.postDriver(userConductor).subscribe((Response: any) => {     
           this.mostrarAlertaRegistroConductor();
           this.router.navigate(['/home-conductor']);
         });

@@ -36,6 +36,14 @@ export class RegistroService {
     const headers = this.getHeaders();
     return this.http.post(`${URL}users`, users, { headers } );
   }
+
+  updateUserTipo(idUser: number, userTipo: string) {
+    const headers = this.getHeaders();
+    const data = this.http.patch(`${URL}users?id_user=eq.${idUser}&tipo_user=eq.${userTipo}`, { headers });
+    console.log(data);
+    console.log(idUser, userTipo);
+    return data;
+  }
   
   postDriver(driver: Conductor) {
     const headers = this.getHeaders();
