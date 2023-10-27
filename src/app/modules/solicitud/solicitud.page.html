@@ -31,7 +31,7 @@
       </ion-card-content>
       <div class="button">
         <ion-item>
-          <ion-button  expand="block" color="success">Aceptar</ion-button>
+          <ion-button (click)="aceptarSolicitud(solicitud.id_solicitud, id_user, solicitud.id_vehiculo)" expand="block" color="success">Aceptar</ion-button>
           <ion-button expand="block" color="danger">Rechazar</ion-button>
         </ion-item>
       </div>

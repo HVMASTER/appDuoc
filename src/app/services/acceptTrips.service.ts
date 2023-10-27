@@ -32,6 +32,16 @@ export class AcceptTripsService {
       );
   }
 
+  getIdVehiculoUser(id: number): Observable<number> {
+    const headers = this.getHeaders();
+    return this.http.get<any>(`${URL}vehiculos?id_user=eq.${id}`, { headers })
+      .pipe(
+        map(data => { 
+          return data;
+        })
+      );   
+  }
+
  
 
 }

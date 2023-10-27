@@ -4,10 +4,10 @@ import { IonicModule } from '@ionic/angular';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Solicitud, ObtenerSolicitud } from 'src/app/interfaces/solicitud.interface';
+import { Solicitud, ObtenerSolicitud, ObtenerId } from 'src/app/interfaces/solicitud.interface';
 import { AcceptTripsService } from 'src/app/services/acceptTrips.service';
 import { DataService } from 'src/app/services/data.service';
-import { forkJoin, map } from 'rxjs';
+import { Observable, forkJoin, map, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-solicitud',
@@ -19,11 +19,18 @@ import { forkJoin, map } from 'rxjs';
 export class SolicitudPage implements OnInit {
   
   solicitudesDisp: ObtenerSolicitud[] = [];
+  obtenerId: ObtenerId[] = []; 
+
+  id_user = Number(localStorage.getItem('user-id'));
 
   constructor(private router: Router, private dataService: DataService, private acceptTripsService: AcceptTripsService) {}
 
   getTotalFound(id: number) {
     return this.acceptTripsService.getCountAccepTrips(id);
+  }
+
+  aceptarSolicitud(id_solicitud: number, id_usuario: number, id_vehiculo: number) {
+    console.log(id_solicitud, id_usuario, id_vehiculo);
   }
 
   cargarSolicitudes() {
@@ -58,7 +65,7 @@ export class SolicitudPage implements OnInit {
       for (let i = 0; i < asientosDisponibles.length; i++) {
         this.solicitudesDisp[i].asientos = asientosDisponibles[i];
       }
-    });
+    });   
   }
 
   volverAlMenuPrincipal() {

@@ -73,7 +73,7 @@ export class LoginPage implements OnInit {
             this.registroService.getDriver(Response[0].id_user).subscribe({
               next: (Response: any) => {
                 if (Response.length > 0) {
-                  localStorage.setItem('user-id', Response[0].id_vehiculo);
+                  localStorage.setItem('vehiculo-id', Response[0].id_vehiculo);
                   this.router.navigate(['/home-conductor']);
                 }
               },

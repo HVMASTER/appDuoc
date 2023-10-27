@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { DataService } from 'src/app/services/data.service';
+import { AcceptTripsService } from 'src/app/services/acceptTrips.service';
 
 @Component({
   selector: 'app-viajes',
@@ -18,8 +19,9 @@ export class ViajesPage implements OnInit {
 
   origen: string = '';
   destino: string = '';
+  id_vehiculo = Number(localStorage.getItem('vehiculo_id'));
 
-  constructor(private router: Router, private alertController: AlertController, private dataService: DataService) { }
+  constructor(private router: Router, private alertController: AlertController, private dataService: DataService, private accepTrips: AcceptTripsService) { }
 
   solicitarViaje(origen: string, destino: string){
     if (origen === '' || destino === '') {
@@ -31,6 +33,7 @@ export class ViajesPage implements OnInit {
       origen: origen,
       destino: destino,
       estado: 'Disponible',
+      id_vehiculo: this.id_vehiculo,
       id_user: Number(localStorage.getItem('user-id'))
     }).subscribe({
       next: (Response: any) => {
@@ -62,3 +65,4 @@ export class ViajesPage implements OnInit {
   }
 
 }
+
