@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Users } from 'src/app/interfaces/user.interface';
 import { Observable } from 'rxjs';
@@ -40,6 +40,12 @@ export class RegistroService {
   postDriver(driver: Conductor) {
     const headers = this.getHeaders();
     return this.http.post(`${URL}vehiculos`, driver, { headers } );
+  }
+
+  //actualiza el dato tipo usuario por conductor
+  updateUserTipo(id_user: number): Observable<HttpErrorResponse | any>{
+    const headers = this.getHeaders();
+    return this.http.patch<any>(URL+'users?id_user=eq.'+id_user,{ tipo_user: 'conductor'},{ headers , observe: 'response' });
   }
 
   getDriver(id_user: number) {

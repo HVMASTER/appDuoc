@@ -27,7 +27,6 @@ export class RegistroConductorPage implements OnInit {
   color = '';
   anno_fabricacion = 0;
   telefono = 0;
-  tipo_user = '';
   
 
   formRegistroConductor: FormGroup;
@@ -67,15 +66,17 @@ export class RegistroConductorPage implements OnInit {
           color: this.formRegistroConductor.value.color,
           anno_fabricacion: this.formRegistroConductor.value.anno_fabricacion,
           telefono: this.formRegistroConductor.value.telefono,
-          tipo_user: 'conductor',
           id_user: Number(localStorage.getItem('user-id'))
         };
-
 
         if (this.conductores !== null && this.conductores.includes( this.formRegistroConductor.value.patente)) {
           alert('La patente ya existe');
           return;
         }
+
+        this.registroService.updateUserTipo(userConductor.id_user).subscribe((data) => {
+          console.log(data);
+        })
     
         this.registroService.postDriver(userConductor).subscribe((Response: any) => {
           console.log(Response);       
