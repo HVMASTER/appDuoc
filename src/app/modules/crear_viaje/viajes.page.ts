@@ -58,7 +58,7 @@ export class ViajesPage implements OnInit {
   }
 
   volverAlMenuPrincipal() {
-    this.router.navigate(['/home']); // Redirecciona a la página correspondiente
+    this.router.navigate(['/home-conductor']); // Redirecciona a la página correspondiente
   }
 
   ngOnInit() {
