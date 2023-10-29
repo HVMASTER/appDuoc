@@ -20,12 +20,11 @@ ion-buttons {
 }
 
 ion-card {
-    margin: 70px 0 70px 10px;
-    max-width: 390px;
+    margin: 70px auto;
+    max-width: 800px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
-    font-style: normal;
 
     ion-card-header {
         ion-card-title {
@@ -41,6 +40,7 @@ ion-card {
 
 @media (max-width: 768px) {
     ion-card {
+        margin: 20px auto;
         padding: 10px;
         border-radius: 20px;
     }

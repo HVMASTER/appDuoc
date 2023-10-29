@@ -44,5 +44,21 @@ export const routes: Routes = [
     path: 'crear-viaje',
     loadComponent: () => import('./modules/crear_viaje/viajes.page').then( m => m.ViajesPage)
   },
-  
+  //Rutas del Footer
+  {
+    path: 'registro-conductor/home',
+    component: HomePage,
+    },
+    {
+      path: 'rutas/home',
+      component: HomePage,
+    },
+    {
+      path: 'solicitud/home',
+      component: HomePage,
+    },
+    {
+      path: 'crear-viaje/home',
+      component: HomeConductorPage,
+    }, 
 ];
