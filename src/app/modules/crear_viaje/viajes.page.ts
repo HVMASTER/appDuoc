@@ -21,7 +21,9 @@ export class ViajesPage implements OnInit {
   destino: string = '';
   id_vehiculo = Number(localStorage.getItem('vehiculo-id'));
 
+
   constructor(private router: Router, private alertController: AlertController, private dataService: DataService, private accepTrips: AcceptTripsService) { }
+
 
   solicitarViaje(origen: string, destino: string) {
     if (origen === '' || destino === '') {

@@ -22,9 +22,9 @@ export class HomeCardComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  functionRutas() {
-    this.router.navigate(['/rutas']);
-  }
+  // functionRutas() {
+  //   this.router.navigate(['/rutas']);
+  // }
 
   registroConductor() {
     this.router.navigate(['/registro-conductor']);

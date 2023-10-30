@@ -12,6 +12,7 @@ import { forkJoin, map } from 'rxjs';
 import { DatosConductor } from 'src/app/interfaces/conductor.interface';
 
 
+
 @Component({
   selector: 'app-solicitud',
   templateUrl: './solicitud.page.html',
@@ -24,11 +25,12 @@ export class SolicitudPage implements OnInit {
   solicitudesDisp: ObtenerSolicitud[] = [];
   id_user = Number(localStorage.getItem('user-id'));
   datosConductor: DatosConductor[] = [];
+  solicitudSeleccionada: ObtenerSolicitud | null = null;
+  mostrarModal = false;
+  datosVehiculos: DatosConductor | null = null;
  
 
-
   constructor(private router: Router, private dataService: DataService, private acceptTripsService: AcceptTripsService, private alertController: AlertController) {
-
     
   }
 
@@ -75,13 +77,21 @@ export class SolicitudPage implements OnInit {
 
   async obtDatosConductor(id_vehiculo: number){
     await this.acceptTripsService.getDatosConductor(id_vehiculo).subscribe((datosConductor) => {
-      this.datosConductor = datosConductor;
-      console.log(this.datosConductor);
+      this.datosVehiculos = datosConductor[0];
+      console.log(this.datosVehiculos);
     });
     return this.datosConductor;
   }
 
 
+  asientosDisponibles(id: Number) {
+    let asientosDisponibles = 0;
+    
+    return asientosDisponibles;
+    
+  }
+
+    
   cargarSolicitudes() {
     this.dataService.obtSolicitudDisp().subscribe((data) => {
       for (const obtSolicitud of data) {
@@ -118,8 +128,21 @@ export class SolicitudPage implements OnInit {
 
   }
 
+  seleccionarSolicitud(solicitud : ObtenerSolicitud){
+    this.solicitudSeleccionada = solicitud;
+    this.obtDatosConductor(this.solicitudSeleccionada.id_vehiculo);
+    this.cerrarModal();
+    this.mostrarModal = true;
+  }
+
+  cerrarModal(){
+    this.mostrarModal = false;
+  }
+
+
   volverAlMenuPrincipal() {
     this.router.navigate(['/home']);
   }
+
 }
 
