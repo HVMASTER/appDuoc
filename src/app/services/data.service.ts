@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ObtenerId, ObtenerSolicitud, Solicitud } from '../interfaces/solicitud.interface';
 import { environment } from 'src/environments/environment';
@@ -11,6 +11,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class DataService {
+
+  estado: string = 'Aceptado';
 
   constructor(private http: HttpClient) {  
   }
@@ -31,6 +33,11 @@ export class DataService {
     const headers = this.getHeaders();
     const solicitud = this.http.get<Solicitud[]>(`${URL}solicitudes?estado=eq.Disponible`, { headers });
     return solicitud;
+  }
+
+  updateEstadoSolicitud(id_solicitud: number): Observable<HttpErrorResponse | any>{
+    const headers = this.getHeaders();
+    return this.http.patch<any>(URL+'solicitudes?id_solicitud=eq.'+id_solicitud,{ estado: this.estado},{ headers , observe: 'response' });
   }
 
   obtSolicitudDisp() {

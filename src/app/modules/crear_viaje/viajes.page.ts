@@ -19,11 +19,11 @@ export class ViajesPage implements OnInit {
 
   origen: string = '';
   destino: string = '';
-  id_vehiculo = Number(localStorage.getItem('vehiculo_id'));
+  id_vehiculo = Number(localStorage.getItem('vehiculo-id'));
 
   constructor(private router: Router, private alertController: AlertController, private dataService: DataService, private accepTrips: AcceptTripsService) { }
 
-  solicitarViaje(origen: string, destino: string){
+  solicitarViaje(origen: string, destino: string) {
     if (origen === '' || destino === '') {
       alert('Por favor, ingrese todos los campos');
       return;
@@ -38,7 +38,7 @@ export class ViajesPage implements OnInit {
     }).subscribe({
       next: (Response: any) => {
         this.alertaModal();
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home-conductor']);
       },
       error: (error) => {
         console.log(error);
@@ -47,7 +47,7 @@ export class ViajesPage implements OnInit {
   }
 
 
-  async alertaModal(){
+  async alertaModal() {
     const alert = await this.alertController.create({
       header: 'Viaje solicitado',
       message: '¡Genial! Has creado un viaje con exito.',

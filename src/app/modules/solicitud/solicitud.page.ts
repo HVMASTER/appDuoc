@@ -30,6 +30,9 @@ export class SolicitudPage implements OnInit {
   }
 
   aceptarSolicitud(id_solicitud: number, id_usuario: number, id_vehiculo: number) {
+    this.dataService.updateEstadoSolicitud(id_solicitud).subscribe((data) => {
+      console.log(data);
+    })
     console.log(id_solicitud, id_usuario, id_vehiculo);
   }
 

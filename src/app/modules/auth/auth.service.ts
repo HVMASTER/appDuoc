@@ -15,6 +15,8 @@ const KEY = environment.apikey;
 })
 export class RegistroService {
 
+  tipo_user: string = 'conductor';
+
   constructor(private http: HttpClient) { }
 
   private getHeaders() {
@@ -45,7 +47,7 @@ export class RegistroService {
   //actualiza el dato tipo usuario por conductor
   updateUserTipo(id_user: number): Observable<HttpErrorResponse | any>{
     const headers = this.getHeaders();
-    return this.http.patch<any>(URL+'users?id_user=eq.'+id_user,{ tipo_user: 'conductor'},{ headers , observe: 'response' });
+    return this.http.patch<any>(URL+'users?id_user=eq.'+id_user,{ tipo_user: this.tipo_user},{ headers , observe: 'response' });
   }
 
   getDriver(id_user: number) {
