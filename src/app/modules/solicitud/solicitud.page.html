@@ -33,7 +33,7 @@
         <ion-item>
           <ion-button (click)="aceptarSolicitud(solicitud.id_solicitud, id_user, solicitud.id_vehiculo)" expand="block" color="success">Aceptar</ion-button>
           <ion-button expand="block" color="danger">Rechazar</ion-button>
-          <ion-button (click)="seleccionarSolicitud()" color="warning"></ion-button>
+          <ion-button (click)="seleccionarSolicitud(solicitud)" color="warning">Vehiculo</ion-button>
         </ion-item>
       </div>
     </ion-card>
@@ -48,27 +48,27 @@
           </ion-toolbar>
         </ion-header>
         <ion-content>
-          <ion-list *ngIf="datosConductor && datosConductor.length > 0">
+          <ion-list *ngIf="datosVehiculos">
             <ion-item>
-              <ion-label>Patente: {{ datosConductor[0].patente }}</ion-label>
+              <ion-label>Patente: {{ datosVehiculos.patente }}</ion-label>
             </ion-item>
             <ion-item>
-              <ion-label>Marca: {{ datosConductor[0].marca }}</ion-label>
+              <ion-label>Marca: {{ datosVehiculos.marca }}</ion-label>
             </ion-item>
             <ion-item>
-              <ion-label>Modelo: {{ datosConductor[0].modelo }}</ion-label>
+              <ion-label>Modelo: {{ datosVehiculos.modelo }}</ion-label>
             </ion-item>
             <ion-item>
-              <ion-label>Tipo de vehiculo: {{ datosConductor[0].tipo_vehiculo }}</ion-label>
+              <ion-label>Tipo de vehiculo: {{ datosVehiculos.tipo_vehiculo }}</ion-label>
             </ion-item>
             <ion-item>
-              <ion-label>Color: {{ datosConductor[0].color }}</ion-label>
+              <ion-label>Color: {{ datosVehiculos.color }}</ion-label>
             </ion-item>
             <ion-item>
-              <ion-label>Año de fabricacion: {{ datosConductor[0].anno_fabricacion }}</ion-label>
+              <ion-label>Año de fabricacion: {{ datosVehiculos.anno_fabricacion }}</ion-label>
             </ion-item>
             <ion-item>
-              <ion-label>Telefono del conductor: +56{{ datosConductor[0].telefono }}</ion-label>
+              <ion-label>Telefono del conductor: +56{{ datosVehiculos.telefono }}</ion-label>
             </ion-item>
           </ion-list>
           <ion-button (click)="cerrarModal()" expand="block" color="success">Aceptar</ion-button>

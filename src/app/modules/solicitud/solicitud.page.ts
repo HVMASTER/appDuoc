@@ -26,6 +26,7 @@ export class SolicitudPage implements OnInit {
   datosConductor: DatosConductor[] = [];
   solicitudSeleccionada: ObtenerSolicitud | null = null;
   mostrarModal = false;
+  datosVehiculos: DatosConductor | null = null;
  
 
 
@@ -77,8 +78,8 @@ export class SolicitudPage implements OnInit {
 
   async obtDatosConductor(id_vehiculo: number){
     await this.acceptTripsService.getDatosConductor(id_vehiculo).subscribe((datosConductor) => {
-      this.datosConductor = datosConductor;
-      console.log(this.datosConductor);
+      this.datosVehiculos = datosConductor[0];
+      console.log(this.datosVehiculos);
     });
     return this.datosConductor;
   }
@@ -120,9 +121,10 @@ export class SolicitudPage implements OnInit {
 
   }
 
-  seleccionarSolicitud(){
-    this.solicitudSeleccionada = this.solicitudesDisp[0];
+  seleccionarSolicitud(solicitud : ObtenerSolicitud){
+    this.solicitudSeleccionada = solicitud;
     this.obtDatosConductor(this.solicitudSeleccionada.id_vehiculo);
+    this.cerrarModal();
     this.mostrarModal = true;
   }
 
