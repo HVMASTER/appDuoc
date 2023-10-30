@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Observable, map } from 'rxjs';
 import { Conductor, DatosConductor } from '../interfaces/conductor.interface';
 
+
   const URL = environment.apiurl;
   const KEY = environment.apikey; 
 
@@ -63,6 +64,7 @@ export class AcceptTripsService {
     const headers = this.getHeaders();
     return this.http.get<DatosConductor[]>(`${URL}vehiculos?id_vehiculo=eq.${id_vehiculo}`, { headers });
   }
+
 
 
 }

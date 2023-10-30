@@ -12,6 +12,7 @@ import { forkJoin, map } from 'rxjs';
 import { DatosConductor } from 'src/app/interfaces/conductor.interface';
 
 
+
 @Component({
   selector: 'app-solicitud',
   templateUrl: './solicitud.page.html',
@@ -29,9 +30,7 @@ export class SolicitudPage implements OnInit {
   datosVehiculos: DatosConductor | null = null;
  
 
-
   constructor(private router: Router, private dataService: DataService, private acceptTripsService: AcceptTripsService, private alertController: AlertController) {
-
     
   }
 
@@ -85,6 +84,14 @@ export class SolicitudPage implements OnInit {
   }
 
 
+  asientosDisponibles(id: Number) {
+    let asientosDisponibles = 0;
+    
+    return asientosDisponibles;
+    
+  }
+
+    
   cargarSolicitudes() {
     this.dataService.obtSolicitudDisp().subscribe((data) => {
       for (const obtSolicitud of data) {
@@ -136,5 +143,6 @@ export class SolicitudPage implements OnInit {
   volverAlMenuPrincipal() {
     this.router.navigate(['/home']);
   }
+
 }
 

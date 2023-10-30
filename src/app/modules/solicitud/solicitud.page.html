@@ -26,6 +26,7 @@
           <ion-item>
             <ion-label class="asientos">Asientos disponibles</ion-label>
             <span>{{ solicitud.asientos }}</span>
+
           </ion-item>
         </ion-list>
       </ion-card-content>
@@ -33,6 +34,7 @@
         <ion-item>
           <ion-button (click)="aceptarSolicitud(solicitud.id_solicitud, id_user, solicitud.id_vehiculo)" expand="block" color="success">Aceptar</ion-button>
           <ion-button (click)="seleccionarSolicitud(solicitud)" color="warning">Vehiculo</ion-button>
+
         </ion-item>
       </div>
     </ion-card>

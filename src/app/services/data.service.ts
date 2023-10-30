@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ObtenerSolicitud, Solicitud } from '../interfaces/solicitud.interface';
+import { GuardarSolicitud } from '../interfaces/solicitud.interface';
 import { environment } from 'src/environments/environment';
 
   const URL = environment.apiurl;
@@ -24,7 +25,7 @@ export class DataService {
     return headers;
   }
 
-  postSolicitud(solicitud: Solicitud) {
+  postSolicitud(solicitud: GuardarSolicitud) {
     const headers = this.getHeaders();
     return this.http.post(`${URL}solicitudes`, solicitud, { headers } );
   }
