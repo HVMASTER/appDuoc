@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { ObtenerSolicitud, Solicitud } from '../interfaces/solicitud.interface';
 import { environment } from 'src/environments/environment';
 
