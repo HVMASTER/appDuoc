@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Solicitud, ObtenerSolicitud } from '../interfaces/solicitud.interface';
 import { environment } from 'src/environments/environment';
 import { Observable, map } from 'rxjs';
+import { Conductor, DatosConductor } from '../interfaces/conductor.interface';
 
   const URL = environment.apiurl;
   const KEY = environment.apikey; 
@@ -32,9 +33,9 @@ export class AcceptTripsService {
       );
   }
 
-  getIdVehiculoUser(id: number): Observable<number> {
+  getIdVehiculoUser(id: number): Observable<Conductor> {
     const headers = this.getHeaders();
-    return this.http.get<any>(`${URL}vehiculos?id_user=eq.${id}`, { headers })
+    return this.http.get<Conductor>(`${URL}vehiculos?id_user=eq.${id}`, { headers })
       .pipe(
         map(data => { 
           return data;
@@ -42,6 +43,26 @@ export class AcceptTripsService {
       );   
   }
 
+  postDatosAcceptTrips(id_solicitud: number, id_user: number, id_vehiculo: number) {
+    const headers = this.getHeaders();
+    const datos = {
+      id_solicitud: id_solicitud,
+      id_user: id_user,
+      id_vehiculo: id_vehiculo
+      
+    }
+    return this.http.post(`${URL}accept_trips`, datos, { headers });
+  }
  
+  getSolicitudesAceptadasPorUsuario(id_user: number) {
+    const headers = this.getHeaders();
+    return this.http.get<ObtenerSolicitud[]>(`${URL}accept_trips?id_user=eq.${id_user}`, { headers });
+  }
+
+  getDatosConductor(id_vehiculo: number) {
+    const headers = this.getHeaders();
+    return this.http.get<DatosConductor[]>(`${URL}vehiculos?id_vehiculo=eq.${id_vehiculo}`, { headers });
+  }
+
 
 }
