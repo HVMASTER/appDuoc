@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { ObtenerId, ObtenerSolicitud, Solicitud } from '../interfaces/solicitud.interface';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ObtenerSolicitud, Solicitud } from '../interfaces/solicitud.interface';
 import { environment } from 'src/environments/environment';
 
   const URL = environment.apiurl;
@@ -44,12 +43,6 @@ export class DataService {
     const headers = this.getHeaders();
     const solicitud = this.http.get<ObtenerSolicitud[]>(`${URL}solicitudes?estado=eq.Disponible`, { headers });
     return solicitud;
-  }
-
-  getIdVehiculo(): Observable<ObtenerId[]> {
-    const headers = this.getHeaders();
-    const idVehiculo = this.http.get<ObtenerId[]>(`${URL}vehiculos?select=id_vehiculo`, { headers });
-    return idVehiculo;
   }
 
 

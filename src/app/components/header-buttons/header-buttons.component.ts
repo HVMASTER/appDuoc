@@ -34,6 +34,8 @@ export class HeaderButtonsComponent  implements OnInit {
     localStorage.removeItem('user-name');
     localStorage.removeItem('user-tipo');
     localStorage.removeItem('user-apellido');
+    localStorage.removeItem('user-id');
+    localStorage.removeItem('vehiculo-id');
     localStorage.removeItem('sesionStart');
     this.router.navigate(['/login']);
     this._cdr.detectChanges();
