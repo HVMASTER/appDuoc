@@ -24,6 +24,8 @@ export class SolicitudPage implements OnInit {
   solicitudesDisp: ObtenerSolicitud[] = [];
   id_user = Number(localStorage.getItem('user-id'));
   datosConductor: DatosConductor[] = [];
+  solicitudSeleccionada: ObtenerSolicitud | null = null;
+  mostrarModal = false;
  
 
 
@@ -117,6 +119,17 @@ export class SolicitudPage implements OnInit {
     }); 
 
   }
+
+  seleccionarSolicitud(){
+    this.solicitudSeleccionada = this.solicitudesDisp[0];
+    this.obtDatosConductor(this.solicitudSeleccionada.id_vehiculo);
+    this.mostrarModal = true;
+  }
+
+  cerrarModal(){
+    this.mostrarModal = false;
+  }
+
 
   volverAlMenuPrincipal() {
     this.router.navigate(['/home']);
