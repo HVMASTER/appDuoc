@@ -11,6 +11,8 @@ import { environment } from 'src/environments/environment';
 })
 export class DataService {
 
+  estado: string = 'Aceptado';
+
   constructor(private http: HttpClient) {  
   }
 
@@ -30,6 +32,11 @@ export class DataService {
     const headers = this.getHeaders();
     const solicitud = this.http.get<Solicitud[]>(`${URL}solicitudes?estado=eq.Disponible`, { headers });
     return solicitud;
+  }
+
+  updateEstadoSolicitud(id_solicitud: number): Observable<HttpErrorResponse | any>{
+    const headers = this.getHeaders();
+    return this.http.patch<any>(URL+'solicitudes?id_solicitud=eq.'+id_solicitud,{ estado: this.estado},{ headers , observe: 'response' });
   }
 
   obtSolicitudDisp() {
