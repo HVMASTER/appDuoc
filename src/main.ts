@@ -20,6 +20,5 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(IonicModule.forRoot({}), HttpClientModule),
     provideRouter(routes),
     provideAnimations(),
-    AuthGuard,
 ],
 });

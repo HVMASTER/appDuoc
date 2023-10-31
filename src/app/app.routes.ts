@@ -1,9 +1,7 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes } from '@angular/router';
 import { HomePage } from './modules/home/home.page';
 import { HomeConductorPage } from './modules/home-conductor/home-conductor.page';
 import { AuthGuard } from './guard/authUser.guard';
-import { AuthGuardConductor } from './guard/auth-conductor.guard';
 
 export const routes: Routes = [
   {
@@ -13,8 +11,8 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    // canActivate: [AuthGuard],
     loadComponent: () => import('./modules/home/home.page').then((m) => m.HomePage),
+    canActivate: [AuthGuard],
   }
   ,
   {
@@ -31,13 +29,14 @@ export const routes: Routes = [
   },
   {
     path: 'registro-conductor',
-    // canActivate: [AuthGuard],
-    loadComponent: () => import('./modules/auth/registro-conductor/registro-conductor.page').then( m => m.RegistroConductorPage)
+
+    loadComponent: () => import('./modules/auth/registro-conductor/registro-conductor.page').then( m => m.RegistroConductorPage),
+    canActivate: [AuthGuard],
   },
   {
     path: 'home-conductor',
-    // canActivate: [AuthGuardConductor],
-    loadComponent: () => import('./modules/home-conductor/home-conductor.page').then( m => m.HomeConductorPage)
+    loadComponent: () => import('./modules/home-conductor/home-conductor.page').then( m => m.HomeConductorPage),
+    canActivate: [AuthGuard],
   },
   {
     path: 'rutas',
@@ -45,13 +44,13 @@ export const routes: Routes = [
   },
   {
     path: 'solicitud',
-    // canActivate: [AuthGuard],
-    loadComponent: () => import('./modules/solicitud/solicitud.page').then( m => m.SolicitudPage)
+    loadComponent: () => import('./modules/solicitud/solicitud.page').then( m => m.SolicitudPage),
+    canActivate: [AuthGuard],
   },
   {
     path: 'crear-viaje',
-    // canActivate: [AuthGuardConductor],
-    loadComponent: () => import('./modules/crear_viaje/viajes.page').then( m => m.ViajesPage)
+    loadComponent: () => import('./modules/crear_viaje/viajes.page').then( m => m.ViajesPage),
+    canActivate: [AuthGuard],
   },
   //Rutas del Footer
   {
