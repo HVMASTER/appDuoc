@@ -29,10 +29,6 @@ export class HomePage implements OnInit {
   constructor(private registroService: RegistroService, private router: Router, private dataService: DataService,
     private http: HttpClient) {
 
-    if( !this.sesionStart ){
-      this.router.navigate(['/login']);      
-    }
-
     this.imagenes = [
       {
         url: 'assets/img/home-carrusel/slide-carrusel-1.jpg',
