@@ -13,7 +13,7 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     loadComponent: () => import('./modules/home/home.page').then((m) => m.HomePage),
   }
   ,
@@ -31,12 +31,12 @@ export const routes: Routes = [
   },
   {
     path: 'registro-conductor',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     loadComponent: () => import('./modules/auth/registro-conductor/registro-conductor.page').then( m => m.RegistroConductorPage)
   },
   {
     path: 'home-conductor',
-    canActivate: [AuthGuardConductor],
+    // canActivate: [AuthGuardConductor],
     loadComponent: () => import('./modules/home-conductor/home-conductor.page').then( m => m.HomeConductorPage)
   },
   {
@@ -45,12 +45,12 @@ export const routes: Routes = [
   },
   {
     path: 'solicitud',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     loadComponent: () => import('./modules/solicitud/solicitud.page').then( m => m.SolicitudPage)
   },
   {
     path: 'crear-viaje',
-    canActivate: [AuthGuardConductor],
+    // canActivate: [AuthGuardConductor],
     loadComponent: () => import('./modules/crear_viaje/viajes.page').then( m => m.ViajesPage)
   },
   //Rutas del Footer
