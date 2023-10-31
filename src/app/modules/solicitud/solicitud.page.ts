@@ -67,9 +67,9 @@ export class SolicitudPage implements OnInit {
           this.alertaModalAccept();
           this.obtDatosConductor(id_vehiculo);
         });
-        this.dataService.updateEstadoSolicitud(id_solicitud).subscribe((data) => {
-          console.log(data);
-        })
+        // this.dataService.updateEstadoSolicitud(id_solicitud).subscribe((data) => {
+        //   console.log(data);
+        // })
         console.log('ID_SOLICITUD: ', id_solicitud, 'ID_USUARIO: ', id_user, 'ID_VEHICULO: ', id_vehiculo);
       }
     });
