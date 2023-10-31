@@ -20,4 +20,8 @@ export class HomeCardConductorComponent  implements OnInit {
     this.router.navigate(['/crear-viaje']);
   }
 
+  verSolicitud(){
+    this.router.navigate(['/ver-solicitud']);
+  }
+
 }

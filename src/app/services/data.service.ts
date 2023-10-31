@@ -47,5 +47,11 @@ export class DataService {
     return solicitud;
   }
 
+  getSolicitudAceptada(id_user: number) {
+    const headers = this.getHeaders();
+    const solicitud = this.http.get<ObtenerSolicitud[]>(`${URL}solicitudes?estado=eq.Aceptado&id_user=eq.${id_user}`, { headers });
+    return solicitud;
+  }
+
 
 }

@@ -68,5 +68,9 @@ export const routes: Routes = [
     {
       path: 'crear-viaje/home',
       component: HomeConductorPage,
-    }, 
+    },   {
+    path: 'ver-solicitud',
+    loadComponent: () => import('./modules/ver-solicitud/ver-solicitud.page').then( m => m.VerSolicitudPage)
+  },
+
 ];
