@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Users } from 'src/app/interfaces/user.interface';
 import { Observable } from 'rxjs';
 import { Registro } from '../../interfaces/registro.interface';
 import { Conductor } from 'src/app/interfaces/conductor.interface';
