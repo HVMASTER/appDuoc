@@ -23,8 +23,7 @@ import { DatosConductor } from 'src/app/interfaces/conductor.interface';
 export class SolicitudPage implements OnInit {
   
   solicitudesDisp: ObtenerSolicitud[] = [];
-  id_user = Number(localStorage.getItem('user-id'));
-  datosConductor: DatosConductor[] = [];
+  id_user = Number(localStorage.getItem('user-id')); 
   solicitudSeleccionada: ObtenerSolicitud | null = null;
   mostrarModal = false;
   datosVehiculos: DatosConductor | null = null;
@@ -32,10 +31,6 @@ export class SolicitudPage implements OnInit {
 
   constructor(private router: Router, private dataService: DataService, private acceptTripsService: AcceptTripsService, private alertController: AlertController) {
     
-  }
-
-  getTotalFound(id: number) {
-    return this.acceptTripsService.getCountAccepTrips(id);
   }
 
   async alertaModalAccept(){
@@ -56,16 +51,25 @@ export class SolicitudPage implements OnInit {
     await alert.present();
   }
 
+  async obtDatosConductor(id_vehiculo: number){
+    await this.acceptTripsService.getDatosConductor(id_vehiculo).subscribe((datosConductor) => {
+      this.datosVehiculos = datosConductor[0];
+      console.log(this.datosVehiculos);
+    });
+    return this.datosVehiculos;
+  }
+
   async aceptarSolicitud(id_solicitud: number, id_user: number, id_vehiculo: number) {
     this.acceptTripsService.getSolicitudesAceptadasPorUsuario(id_user).subscribe((solicitudesAceptadas) => {
       if (solicitudesAceptadas && solicitudesAceptadas.length > 0) {
         this.alertaModalError();
         console.log('El usuario ya tiene una solicitud aceptada.');
-        this.obtDatosConductor(id_vehiculo);
       } else {
         this.acceptTripsService.postDatosAcceptTrips(id_solicitud, id_user, id_vehiculo).subscribe((data) => {
           this.alertaModalAccept();
-          this.obtDatosConductor(id_vehiculo);
+          setTimeout(() => {
+          window.location.reload();
+          }, 2000);
         });
         // this.dataService.updateEstadoSolicitud(id_solicitud).subscribe((data) => {
         //   console.log(data);
@@ -75,12 +79,9 @@ export class SolicitudPage implements OnInit {
     });
     }
 
-  async obtDatosConductor(id_vehiculo: number){
-    await this.acceptTripsService.getDatosConductor(id_vehiculo).subscribe((datosConductor) => {
-      this.datosVehiculos = datosConductor[0];
-      console.log(this.datosVehiculos);
-    });
-    return this.datosConductor;
+  
+  getTotalFound(id: number) {
+    return this.acceptTripsService.getCountAccepTrips(id);
   }
 
 
@@ -91,19 +92,6 @@ export class SolicitudPage implements OnInit {
     
   }
 
-    
-  cargarSolicitudes() {
-    this.dataService.obtSolicitudDisp().subscribe((data) => {
-      for (const obtSolicitud of data) {
-        // Calcula los asientos disponibles para cada solicitud y agrégalo al objeto
-        this.calcularAsientosDisponibles(obtSolicitud).subscribe((asientos) => {
-          obtSolicitud.asientos = asientos;
-          this.solicitudesDisp.push(obtSolicitud);
-        });
-      }
-    });
-  }
-
   calcularAsientosDisponibles(solicitud: ObtenerSolicitud) {
     return this.getTotalFound(solicitud.id_solicitud).pipe(
       map((total) => {
@@ -112,7 +100,21 @@ export class SolicitudPage implements OnInit {
       })
     );
   }
-  
+
+    
+  cargarSolicitudes() {
+    this.dataService.obtSolicitudDisp().subscribe((data) => {
+      for (const obtSolicitud of data) {
+        // Calcula los asientos disponibles para cada solicitud y lo agrega al objeto
+        this.calcularAsientosDisponibles(obtSolicitud).subscribe((asientos) => {
+          obtSolicitud.asientos = asientos;
+          this.solicitudesDisp.push(obtSolicitud);
+        });
+      }
+    });
+  }
+
+  //inicia cargando las solicitudes disponibles y calculando los asientos disponibles para cada una de ellas. Luego, actualiza las solicitudes en solicitudesDisp con esta información
   ngOnInit() {
     this.cargarSolicitudes();
 
