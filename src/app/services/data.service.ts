@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class DataService {
 
-  estado: string = 'Aceptado';
+  estado: string = 'Espera';
 
   constructor(private http: HttpClient) {  
   }
@@ -44,7 +44,7 @@ export class DataService {
 
   obtSolicitudDisp() {
     const headers = this.getHeaders();
-    const solicitud = this.http.get<ObtenerSolicitud[]>(`${URL}solicitudes?estado=eq.Disponible`, { headers });
+    const solicitud = this.http.get<ObtenerSolicitud[]>(`${URL}solicitudes?estado`, { headers });
     return solicitud;
   }
 
