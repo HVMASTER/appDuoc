@@ -23,6 +23,7 @@ export interface ObtenerSolicitud {
     origen: string;
     destino: string;
     asientos: number;
+    estado: string;
     id_vehiculo: any;
 }
 
@@ -31,3 +32,21 @@ export interface ObtenerId{
     id_solicitud: number;
     id_vehiculo: number;
 }
+
+export interface DatosUsuarios{
+    id_solicitud: number;
+    nombre: string;
+    apellido: string;
+    telefono: string;
+    email: string;
+}
+
+export interface solicitudAlumno{
+    id_solicitud: number;
+    id_user: number;
+    nombre: string;
+    apellido: string;
+    tipo_user: string;
+    
+}
+

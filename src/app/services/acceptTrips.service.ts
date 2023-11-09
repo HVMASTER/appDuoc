@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Solicitud, ObtenerSolicitud } from '../interfaces/solicitud.interface';
+import { Solicitud, ObtenerSolicitud, DatosUsuarios, solicitudAlumno } from '../interfaces/solicitud.interface';
 import { environment } from 'src/environments/environment';
 import { Observable, map } from 'rxjs';
 import { Conductor, DatosConductor } from '../interfaces/conductor.interface';
@@ -64,6 +64,18 @@ export class AcceptTripsService {
     const headers = this.getHeaders();
     return this.http.get<DatosConductor[]>(`${URL}vehiculos?id_vehiculo=eq.${id_vehiculo}`, { headers });
   }
+
+  getUsuariosPorSolicitud(id_solicitud: number) {
+    const headers = this.getHeaders();
+    return this.http.get<DatosUsuarios[]>(`${URL}accept_trips?id_solicitud=eq.${id_solicitud}`, { headers });
+  }
+
+  getDatosSolicitud(id_solicitud: number) {
+    const headers = this.getHeaders();
+    return this.http.get<solicitudAlumno[]>(`${URL}accept_trips?id_solicitud=eq.${id_solicitud}`, { headers });
+  }
+
+
 
 
 

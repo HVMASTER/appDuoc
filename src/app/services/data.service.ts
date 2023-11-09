@@ -30,6 +30,7 @@ export class DataService {
     return this.http.post(`${URL}solicitudes`, solicitud, { headers } );
   }
 
+
   getSolicDisp() {
     const headers = this.getHeaders();
     const solicitud = this.http.get<Solicitud[]>(`${URL}solicitudes?estado=eq.Disponible`, { headers });
@@ -47,11 +48,17 @@ export class DataService {
     return solicitud;
   }
 
-  getSolicitudAceptada(id_user: number) {
+  getSolicitudUser(id_user: number) {
     const headers = this.getHeaders();
-    const solicitud = this.http.get<ObtenerSolicitud[]>(`${URL}solicitudes?estado=eq.Aceptado&id_user=eq.${id_user}`, { headers });
+    const solicitud = this.http.get<ObtenerSolicitud[]>(`${URL}solicitudes?id_user=eq.${id_user}`, { headers });
     return solicitud;
   }
+
+  // getSolicitudEspera(id_user: number) {
+  //   const headers = this.getHeaders();
+  //   const solicitud = this.http.get<ObtenerSolicitud[]>(`${URL}solicitudes?estado=eq.Espera&id_user=eq.${id_user}`, { headers });
+  //   return solicitud;
+  // }
 
 
 }

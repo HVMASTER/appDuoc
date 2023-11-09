@@ -1,0 +1,69 @@
+ion-header {
+    width: 100%;
+    height: 52px;
+    margin-bottom: 20px;
+    background-color: #003785;
+}
+
+ion-content {
+    margin-top: 20px;          
+}
+
+ion-buttons {
+    color: yellow;
+}
+
+.titulo {
+    text-align: center;
+    font-style: italic;
+    font-size: 25px;
+    color: azure;
+}
+
+.label{
+    width: 50px;
+    white-space: normal;
+    
+}
+
+.ubicacion {
+    white-space: nowrap;      /* No permite el salto de línea */
+    overflow: hidden;        /* Oculta el contenido que desborda */
+    text-overflow: ellipsis; /* Agrega puntos suspensivos (...) al final */
+    max-width: 100%;         /* Asegura que no exceda el ancho del contenedor */
+    display: inline-block; 
+}
+
+.button{
+    display: flex;
+    margin-right: 15px;
+    margin-left: 15px;
+    justify-content: center;
+}
+
+.block {
+    width: 100%;
+    height: 50rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  ion-modal {
+    --height: 80%;
+  }
+
+@media (max-width: 768px) {
+    ion-content {
+        margin: 20px auto;
+        padding: 10px;
+        border-radius: 20px;
+    }
+
+    ion-header {
+        ion-title {
+            font-size: 1.5rem;
+        }
+    }
+}
+
