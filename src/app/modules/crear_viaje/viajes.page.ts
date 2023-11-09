@@ -20,6 +20,7 @@ export class ViajesPage implements OnInit {
   origen: string = '';
   destino: string = '';
   id_vehiculo = Number(localStorage.getItem('vehiculo-id'));
+  id_user = Number(localStorage.getItem('user-id'));
 
 
   constructor(private router: Router, private alertController: AlertController, private dataService: DataService, private accepTrips: AcceptTripsService) { }
@@ -31,28 +32,53 @@ export class ViajesPage implements OnInit {
       return;
     }
 
-    this.dataService.postSolicitud({
-      origen: origen,
-      destino: destino,
-      estado: 'Disponible',
-      id_vehiculo: this.id_vehiculo,
-      id_user: Number(localStorage.getItem('user-id'))
-    }).subscribe({
-      next: (Response: any) => {
-        this.alertaModal();
-        this.router.navigate(['/home-conductor']);
-      },
-      error: (error) => {
-        console.log(error);
+    this.dataService.getSolicitudUser(this.id_user).subscribe({
+      next: (solicitudes) => {
+        const solicitudEspera = solicitudes.some(solicitud => solicitud.estado === 'Espera');
+
+        if (solicitudEspera) {
+          this.alertaModalError();
+        } else {
+          this.dataService.postSolicitud({
+            origen: origen,
+            destino: destino,
+            estado: 'Disponible',
+            id_vehiculo: this.id_vehiculo,
+            id_user: Number(localStorage.getItem('user-id'))
+          }).subscribe({
+            next: (Response: any) => {
+              this.alertaModal();
+              this.router.navigate(['/home-conductor']);
+            },
+            error: (error) => {
+              console.log(error);
+            }
+          });
+        }
       }
     });
   }
+        
+        
+
+
+    
 
 
   async alertaModal() {
     const alert = await this.alertController.create({
       header: 'Viaje solicitado',
       message: '¡Genial! Has creado un viaje con exito.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  async alertaModalError() {
+    const alert = await this.alertController.create({
+      header: 'Ups!',
+      message: 'Ya tienes una solicitud en espera. Termina tu viaje actual para crear uno nuevo.',
       buttons: ['OK']
     });
 
