@@ -9,38 +9,38 @@
 
 <ion-content>
   <div *ngFor="let solicitud of solicitudesDisp" >
-    <ion-card class="animate__animated animate__backInRight">
-      <ion-card-header>
-        <ion-card-title>Solicitud de Viaje</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-list lines="none">
-          <ion-item>
-            <ion-label class="label">Origen:</ion-label>
-            <ion-label class="ubicacion">{{ solicitud.origen }}</ion-label>
+    <div *ngIf="solicitud.estado === 'Disponible' || solicitud.estado === 'Espera'">
+      <ion-card class="animate__animated animate__backInRight">
+        <ion-card-header>
+          <ion-card-title>Solicitud de Viaje</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list lines="none">
+            <ion-item>
+              <ion-label class="label">Origen:</ion-label>
+              <ion-label class="ubicacion">{{ solicitud.origen }}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label class="label">Destino:</ion-label>
+              <ion-label class="ubicacion">{{ solicitud.destino }}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label class="asientos">Asientos disponibles</ion-label>
+              <span>{{ solicitud.asientos }}</span>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+        <div class="button">
+          <ion-item *ngIf="solicitud.asientos > 0 && solicitud.asientos <= 4">
+            <ion-button (click)="aceptarSolicitud(solicitud.id_solicitud, id_user, solicitud.id_vehiculo)" expand="block" color="success">Aceptar</ion-button>
+            <ion-button (click)="seleccionarSolicitud(solicitud)" color="warning">Vehiculo</ion-button>
           </ion-item>
-          <ion-item>
-            <ion-label class="label">Destino:</ion-label>
-            <ion-label class="ubicacion">{{ solicitud.destino }}</ion-label>
+          <ion-item *ngIf="solicitud.asientos === 0">
+            <span>Vehiculo sin asientos disponibles</span>
           </ion-item>
-          <ion-item>
-            <ion-label class="asientos">Asientos disponibles</ion-label>
-            <span>{{ solicitud.asientos }}</span>
-
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-      <div class="button">
-        <ion-item *ngIf="solicitud.asientos > 0 && solicitud.asientos <= 4">
-          <ion-button (click)="aceptarSolicitud(solicitud.id_solicitud, id_user, solicitud.id_vehiculo)" expand="block" color="success">Aceptar</ion-button>
-          <ion-button (click)="seleccionarSolicitud(solicitud)" color="warning">Vehiculo</ion-button>
-
-        </ion-item>
-        <ion-item *ngIf="solicitud.asientos === 0">
-          <span>Vehiculo sin asientos disponibles</span>
-        </ion-item>
-      </div>
-    </ion-card>
+        </div>
+      </ion-card>
+    </div>
   </div>
 </ion-content>
 

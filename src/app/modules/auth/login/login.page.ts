@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegistroService } from '../auth.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { LoginData } from 'src/app/interfaces/login.interface';
+
 
 
 @Component({
