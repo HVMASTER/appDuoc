@@ -61,18 +61,19 @@ export class SolicitudPage implements OnInit {
 
   async aceptarSolicitud(id_solicitud: number, id_user: number, id_vehiculo: number) {
     this.acceptTripsService.getSolicitudesAceptadasPorUsuario(id_user).subscribe((solicitudesAceptadas) => {
-      if (solicitudesAceptadas && solicitudesAceptadas.length > 0) this.alertaModalError();
-      if (!solicitudesAceptadas){             
+      if (solicitudesAceptadas && solicitudesAceptadas.length > 0) {
+        
+      } else {
         this.acceptTripsService.postDatosAcceptTrips(id_solicitud, id_user, id_vehiculo).subscribe((data) => {
           this.alertaModalAccept();
           setTimeout(() => {
           window.location.reload();
           }, 2000);
         });
-        
-        this.dataService.updateEstadoSolicitud(id_solicitud).subscribe((data) => {
-          console.log(data);
-        })
+        // this.dataService.updateEstadoSolicitud(id_solicitud).subscribe((data) => {
+        //   console.log(data);
+        // })
+        console.log('ID_SOLICITUD: ', id_solicitud, 'ID_USUARIO: ', id_user, 'ID_VEHICULO: ', id_vehiculo);
       }
     });
     }

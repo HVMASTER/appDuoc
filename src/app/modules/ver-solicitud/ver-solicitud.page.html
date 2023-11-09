@@ -23,21 +23,22 @@
             <ion-label class="label">Destino:</ion-label>
             <ion-label class="ubicacion">{{ solicitudConductor.destino }}</ion-label>
           </ion-item>
-          <ion-item>
-            <ion-label class="asientos">Asientos disponibles:</ion-label>
-            <span>{{ solicitudConductor.asientos }}</span>
-          </ion-item>
+          <div class="asientos">
+            <ion-item *ngIf="solicitudConductor.asientos > 0 && solicitudConductor.asientos <= 4">
+              <ion-label class="asientos">Asientos disponibles:</ion-label>
+                <span>{{ solicitudConductor.asientos }}</span>
+            </ion-item>
+            <ion-item *ngIf="solicitudConductor.asientos === 0">
+              <span>Vehiculo sin asientos disponibles</span>
+            </ion-item>
+          </div>
         </ion-list>
       </ion-card-content>
       <div class="button">
         <ion-item>
           <ion-button expand="block" color="success">Iniciar Viaje</ion-button>
           <ion-button (click)="abrirModal()" color="warning">Alumnos</ion-button>
-
         </ion-item>
-        <!-- <ion-item *ngIf="solicitudConductor.asientos === 0">
-          <span>Vehiculo sin asientos disponibles</span>
-        </ion-item> -->
       </div>
     </ion-card>
   </div>
