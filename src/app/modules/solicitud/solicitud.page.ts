@@ -62,7 +62,7 @@ export class SolicitudPage implements OnInit {
   async aceptarSolicitud(id_solicitud: number, id_user: number, id_vehiculo: number) {
     this.acceptTripsService.getSolicitudesAceptadasPorUsuario(id_user).subscribe((solicitudesAceptadas) => {
       if (solicitudesAceptadas && solicitudesAceptadas.length > 0) {
-        
+        this.alertaModalError();
       } else {
         this.acceptTripsService.postDatosAcceptTrips(id_solicitud, id_user, id_vehiculo).subscribe((data) => {
           this.alertaModalAccept();
