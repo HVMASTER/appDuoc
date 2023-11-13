@@ -1,9 +1,9 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header>
+  <ion-toolbar color="#003785">
     <ion-buttons slot="start">
       <ion-button (click)="volverAlMenuPrincipal()">Volver</ion-button>
-    </ion-buttons>
-    <ion-title>Estado de tu solicitud</ion-title>
+    </ion-buttons>  
+    <ion-title class="titulo">Estado de tu solicitud</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -26,10 +26,10 @@
           <div class="asientos">
             <ion-item *ngIf="solicitudConductor.asientos > 0 && solicitudConductor.asientos <= 4">
               <ion-label class="asientos">Asientos disponibles:</ion-label>
-                <span>{{ solicitudConductor.asientos }}</span>
+                <span class="greenText">{{ solicitudConductor.asientos }}</span>
             </ion-item>
             <ion-item *ngIf="solicitudConductor.asientos === 0">
-              <span>Vehiculo sin asientos disponibles</span>
+              <span class="redText">Vehiculo sin asientos disponibles</span>
             </ion-item>
           </div>
         </ion-list>
