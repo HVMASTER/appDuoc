@@ -11,36 +11,48 @@
 <ion-content>
   <ion-card class="animate__animated animate__backInRight">
     <ion-card-header>
-      <ion-card-title>Registro</ion-card-title>
+      <ion-card-title>Registra tu vehiculo</ion-card-title>
     </ion-card-header>
     <form [formGroup]="formRegistroConductor" (ngSubmit)="registroConductor()">
       <ion-item>
         <ion-label position="floating">Patente</ion-label>
-        <ion-input label="" formControlName="patente"></ion-input>
+        <ion-input placeholder="Ingresa la patente de tu vehiculo" formControlName="patente"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Marca</ion-label>
-        <ion-input label="" formControlName="marca"></ion-input>
+        <span class="textoSelecionado" *ngIf="formRegistroConductor.get('marca')?.value">Marca:
+          {{ formRegistroConductor.get('marca')?.value }}
+        </span>
+        <ion-button class="botonSeleccionar" (click)="abrirPickerMarca()">Seleccionar</ion-button>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Modelo</ion-label>
-        <ion-input label="" formControlName="modelo"></ion-input>
+        <ion-input placeholder="Ingresa el modelo de tu vehiculo" formControlName="modelo"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Tipo de vehiculo</ion-label>
-        <ion-input label="" formControlName="tipo_vehiculo"></ion-input>
+        <span class="textoSelecionado" *ngIf="formRegistroConductor.get('tipo_vehiculo')?.value">Tipo de vehiculo:
+          {{ formRegistroConductor.get('tipo_vehiculo')?.value }}
+        </span>
+        <ion-button class="botonSeleccionar" (click)="abrirPickerTipo()">Seleccionar</ion-button>       
       </ion-item>
       <ion-item>
         <ion-label position="floating">Color</ion-label>
-        <ion-input label="" formControlName="color" ></ion-input>
+        <span class="textoSelecionado" *ngIf="formRegistroConductor.get('color')?.value">Color:
+          {{ formRegistroConductor.get('color')?.value }}
+        </span>
+        <ion-button class="botonSeleccionar" (click)="abrirPickerColor()">Seleccionar</ion-button>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Año de fabricacion</ion-label>
-        <ion-input label="" formControlName="anno_fabricacion" ></ion-input>
+        <span class="textoSelecionado" *ngIf="formRegistroConductor.get('anno_fabricacion')?.value">Año de fabricación:
+          {{ formRegistroConductor.get('anno_fabricacion')?.value }}
+        </span>
+        <ion-button class="botonSeleccionar" (click)="abrirPickerAnno()">Seleccionar</ion-button>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Telefono</ion-label>
-        <ion-input label="" formControlName="telefono" ></ion-input>
+        <ion-input placeholder="+56..." formControlName="telefono" ></ion-input>
       </ion-item> 
       <ion-button class="button" expand="block" type="submit">Registrarse como conductor</ion-button>
     </form>

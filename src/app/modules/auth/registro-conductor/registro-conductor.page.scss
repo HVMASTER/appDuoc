@@ -15,6 +15,19 @@ ion-header {
     background: yellow;
 }
 
+.textoSelecionado {
+    display: contents;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+  
+  .botonSeleccionar {
+    margin-left: auto;
+    padding-bottom: 10px;
+    display: block;
+    text-align: right;
+  }
+
 ion-buttons {
     color: yellow;
 }
@@ -28,7 +41,7 @@ ion-card {
 
     ion-card-header {
         ion-card-title {
-            font-size: 1.0rem;
+            font-size: 2.0rem;
         }
     }
 

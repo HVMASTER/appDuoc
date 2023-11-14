@@ -48,6 +48,28 @@ ion-buttons {
     align-items: center;
     justify-content: center;
   }
+
+  ion-item {
+    ion-label.label {
+      width: 120px; 
+    }
+  
+    span {     
+        font-weight: bold;
+
+        &.greenText {
+            color: green;
+            padding-right: 100px;
+            
+        }
+
+        &.redText {
+            color: red;
+            width: max-content;
+            font-weight: normal;
+        }
+    }
+  }
   
   ion-modal {
     --height: 80%;
