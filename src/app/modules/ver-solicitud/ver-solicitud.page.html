@@ -8,7 +8,8 @@
 </ion-header>
 
 <ion-content>
-  <div *ngFor="let solicitudConductor of solicitudConductor" >
+  <ion-label *ngIf="tieneSolicitudesActivas === false"> ACA SE DEBE VER ALGO</ion-label>
+  <div *ngFor="let solicitudesConductor of solicitudConductor" >
     <ion-card class="animate__animated animate__backInRight">
       <ion-card-header>
         <ion-card-title>Solicitud de Viaje en curso</ion-card-title>
@@ -17,18 +18,18 @@
         <ion-list lines="none">
           <ion-item>
             <ion-label class="label">Origen:</ion-label>
-            <ion-label class="ubicacion">{{ solicitudConductor.origen }}</ion-label>
+            <ion-label class="ubicacion">{{ solicitudesConductor.origen }}</ion-label>
           </ion-item>
           <ion-item>
             <ion-label class="label">Destino:</ion-label>
-            <ion-label class="ubicacion">{{ solicitudConductor.destino }}</ion-label>
+            <ion-label class="ubicacion">{{ solicitudesConductor.destino }}</ion-label>
           </ion-item>
           <div class="asientos">
-            <ion-item *ngIf="solicitudConductor.asientos > 0 && solicitudConductor.asientos <= 4">
+            <ion-item *ngIf="solicitudesConductor.asientos > 0 && solicitudesConductor.asientos <= 4">
               <ion-label class="asientos">Asientos disponibles:</ion-label>
-                <span class="greenText">{{ solicitudConductor.asientos }}</span>
+                <span class="greenText">{{ solicitudesConductor.asientos }}</span>
             </ion-item>
-            <ion-item *ngIf="solicitudConductor.asientos === 0">
+            <ion-item *ngIf="solicitudesConductor.asientos === 0">
               <span class="redText">Vehiculo sin asientos disponibles</span>
             </ion-item>
           </div>

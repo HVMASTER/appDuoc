@@ -25,6 +25,7 @@ export class VerSolicitudPage implements OnInit {
   solicitudConductor: ObtenerSolicitud[] = [];
   solicitudesDisp: ObtenerSolicitud[] = [];
   mostrarModal = false;
+  tieneSolicitudesActivas: boolean = false;
 
 
 
@@ -136,6 +137,11 @@ export class VerSolicitudPage implements OnInit {
   
   ngOnInit() {
     this.obtSolicitudes()
+
+    this.tieneSolicitudesActivas = this.solicitudConductor.some(
+      (solicitud) => solicitud.id_solicitud !== null,
+    );
+    console.log('¿Tiene solicitudes activas?', this.tieneSolicitudesActivas);
 
     const observables = this.solicitudConductor.map((solicitud) => {
       return this.calcularAsientosDisponibles(solicitud);
