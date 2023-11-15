@@ -10,13 +10,14 @@ import { VerSolicitudService } from '../../services/verSolicitud.service';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
+import { MapComponent } from 'src/app/components/map/map.component';
 
 @Component({
   selector: 'app-ver-solicitud',
   templateUrl: './ver-solicitud.page.html',
   styleUrls: ['./ver-solicitud.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, MapComponent]
 })
 export class VerSolicitudPage implements OnInit {
 
@@ -25,6 +26,7 @@ export class VerSolicitudPage implements OnInit {
   solicitudConductor: ObtenerSolicitud[] = [];
   solicitudesDisp: ObtenerSolicitud[] = [];
   mostrarModal = false;
+  mostrarModalMaps = false;
 
 
 
@@ -89,8 +91,16 @@ export class VerSolicitudPage implements OnInit {
     this.mostrarModal = true;
   }
 
+  abrirModalMaps(){
+    this.mostrarModalMaps = true;
+  }
+
   cerrarModal(){
     this.mostrarModal = false;
+  }
+
+  cerrarModalMaps(){
+    this.mostrarModalMaps = false;
   }
 
   volverAlMenuPrincipal() {
