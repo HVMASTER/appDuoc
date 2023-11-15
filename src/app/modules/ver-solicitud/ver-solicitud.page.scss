@@ -6,7 +6,7 @@ ion-header {
 }
 
 ion-content {
-    margin-top: 20px;          
+    margin-top: 20px;
 }
 
 ion-buttons {
@@ -20,21 +20,25 @@ ion-buttons {
     color: azure;
 }
 
-.label{
+.label {
     width: 50px;
     white-space: normal;
-    
+
 }
 
 .ubicacion {
-    white-space: nowrap;      /* No permite el salto de línea */
-    overflow: hidden;        /* Oculta el contenido que desborda */
-    text-overflow: ellipsis; /* Agrega puntos suspensivos (...) al final */
-    max-width: 100%;         /* Asegura que no exceda el ancho del contenedor */
-    display: inline-block; 
+    white-space: nowrap;
+    /* No permite el salto de línea */
+    overflow: hidden;
+    /* Oculta el contenido que desborda */
+    text-overflow: ellipsis;
+    /* Agrega puntos suspensivos (...) al final */
+    max-width: 100%;
+    /* Asegura que no exceda el ancho del contenedor */
+    display: inline-block;
 }
 
-.button{
+.button {
     display: flex;
     margin-right: 15px;
     margin-left: 15px;
@@ -47,20 +51,29 @@ ion-buttons {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+}
 
-  ion-item {
+.custom-modal {
+    border-radius: 30px;
+}
+
+.custom-modal ion-content {
+    background: #ffffff;
+    border-radius: 10px;
+}
+
+ion-item {
     ion-label.label {
-      width: 120px; 
+        width: 120px;
     }
-  
-    span {     
+
+    span {
         font-weight: bold;
 
         &.greenText {
             color: green;
             padding-right: 100px;
-            
+
         }
 
         &.redText {
@@ -69,11 +82,11 @@ ion-buttons {
             font-weight: normal;
         }
     }
-  }
-  
-  ion-modal {
+}
+
+ion-modal {
     --height: 80%;
-  }
+}
 
 @media (max-width: 768px) {
     ion-content {
@@ -88,4 +101,3 @@ ion-buttons {
         }
     }
 }
-
