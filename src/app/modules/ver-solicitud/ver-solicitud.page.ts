@@ -10,13 +10,14 @@ import { VerSolicitudService } from '../../services/verSolicitud.service';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
+import { FooterComponent } from 'src/app/components/footer/footer.component';
 
 @Component({
   selector: 'app-ver-solicitud',
   templateUrl: './ver-solicitud.page.html',
   styleUrls: ['./ver-solicitud.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, FooterComponent]
 })
 export class VerSolicitudPage implements OnInit {
 
