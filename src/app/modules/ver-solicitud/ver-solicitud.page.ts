@@ -11,13 +11,14 @@ import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
+import { MapComponent } from 'src/app/components/map/map.component';
 
 @Component({
   selector: 'app-ver-solicitud',
   templateUrl: './ver-solicitud.page.html',
   styleUrls: ['./ver-solicitud.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, FooterComponent]
+  imports: [IonicModule, CommonModule, FormsModule, FooterComponent, MapComponent]
 })
 export class VerSolicitudPage implements OnInit {
 
@@ -27,6 +28,7 @@ export class VerSolicitudPage implements OnInit {
   solicitudesDisp: ObtenerSolicitud[] = [];
   mostrarModal = false;
   tieneSolicitudesActivas: boolean = false;
+  mostrarModalMaps = false;
 
 
 
@@ -91,8 +93,16 @@ export class VerSolicitudPage implements OnInit {
     this.mostrarModal = true;
   }
 
+  abrirModalMaps(){
+    this.mostrarModalMaps = true;
+  }
+
   cerrarModal(){
     this.mostrarModal = false;
+  }
+
+  cerrarModalMaps(){
+    this.mostrarModalMaps = false;
   }
 
   volverAlMenuPrincipal() {
