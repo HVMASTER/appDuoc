@@ -8,39 +8,44 @@
 </ion-header>
 
 <ion-content>
-  <div *ngFor="let solicitudConductor of solicitudConductor" >
-    <ion-card class="animate__animated animate__backInRight">
-      <ion-card-header>
-        <ion-card-title>Solicitud de Viaje en curso</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-list lines="none">
-          <ion-item>
-            <ion-label class="label">Origen:</ion-label>
-            <ion-label class="ubicacion">{{ solicitudConductor.origen }}</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label class="label">Destino:</ion-label>
-            <ion-label class="ubicacion">{{ solicitudConductor.destino }}</ion-label>
-          </ion-item>
-          <div class="asientos">
-            <ion-item *ngIf="solicitudConductor.asientos > 0 && solicitudConductor.asientos <= 4">
-              <ion-label class="asientos">Asientos disponibles:</ion-label>
-                <span class="greenText">{{ solicitudConductor.asientos }}</span>
+<div class="contenedorTexto" *ngIf="!tieneSolicitudesActivas"> 
+  <span class="textoSolicitudes">No tienes ninguna solicitud en curso. crea una solicitud y podrás ver su estado aquí.</span>
+</div>
+  <div *ngIf="tieneSolicitudesActivas">
+    <div *ngFor="let solicitudesConductor of solicitudConductor" >
+      <ion-card class="animate__animated animate__backInRight">
+        <ion-card-header>
+          <ion-card-title>Solicitud de Viaje en curso</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list lines="none">
+            <ion-item>
+              <ion-label class="label">Origen:</ion-label>
+              <ion-label class="ubicacion">{{ solicitudesConductor.origen }}</ion-label>
             </ion-item>
-            <ion-item *ngIf="solicitudConductor.asientos === 0">
-              <span class="redText">Vehiculo sin asientos disponibles</span>
+            <ion-item>
+              <ion-label class="label">Destino:</ion-label>
+              <ion-label class="ubicacion">{{ solicitudesConductor.destino }}</ion-label>
             </ion-item>
-          </div>
-        </ion-list>
-      </ion-card-content>
-      <div class="button">
-        <ion-item>
-          <ion-button expand="block" color="success" (click)="abrirModalMaps()">Iniciar Viaje</ion-button>
-          <ion-button (click)="abrirModal()" color="warning">Alumnos</ion-button>
-        </ion-item>
-      </div>
-    </ion-card>
+            <div class="asientos">
+              <ion-item *ngIf="solicitudesConductor.asientos > 0 && solicitudesConductor.asientos <= 4">
+                <ion-label class="asientos">Asientos disponibles:</ion-label>
+                  <span class="greenText">{{ solicitudesConductor.asientos }}</span>
+              </ion-item>
+              <ion-item *ngIf="solicitudesConductor.asientos === 0">
+                <span class="redText">Vehiculo sin asientos disponibles</span>
+              </ion-item>
+            </div>
+          </ion-list>
+        </ion-card-content>
+        <div class="button">
+          <ion-item>
+            <ion-button expand="block" color="success">Iniciar Viaje</ion-button>
+            <ion-button (click)="abrirModal()" color="warning">Alumnos</ion-button>
+          </ion-item>
+        </div>
+      </ion-card>
+    </div>
   </div>
 </ion-content>
 
@@ -62,17 +67,9 @@
   </ng-template>
 </ion-modal>
 
-<ion-modal [isOpen]="mostrarModalMaps" [initialBreakpoint]="1" [breakpoints]="[0, 1]" [backdropDismiss]="false" class="custom-modal">
-  <ng-template>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title></ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content>
-      <app-map></app-map>
-      <ion-button (click)="cerrarModalMaps()" expand="block" color="success">Aceptar</ion-button>
-    </ion-content>
-  </ng-template>
-</ion-modal>
+<ion-footer>
+  <ion-toolbar>
+    <app-footer></app-footer>
+  </ion-toolbar>
+</ion-footer>
 
