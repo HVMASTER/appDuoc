@@ -63,10 +63,10 @@ export class VerSolicitudPage implements OnInit {
     this.dataService.getSolicitudUser(this.id_user).subscribe({
       next: async (solicitud) => {
         for (const obtSoliConductor of solicitud) {
-          if (obtSoliConductor.estado === 'Aceptado' || obtSoliConductor.estado === 'Espera') {
+          if (obtSoliConductor.estado === 'Aceptado' || obtSoliConductor.estado === 'Espera' || obtSoliConductor.estado === 'Disponible') {
             const datosAccept = await this.solicitudesAceptadas(obtSoliConductor.id_solicitud);
   
-            for (const alumnos of datosAccept as any[]) {
+            for (const alumnos of datosAccept as ObtenerSolicitud[]) {
               const datosAlumnos = await this.datosAlumnos(alumnos.id_user) as { nombre: string, apellido: string, tipo_user: string }[];
               console.log('DATOS ALUMNOS: ', datosAlumnos);
               this.solicitudAlumno.push({
@@ -132,17 +132,34 @@ export class VerSolicitudPage implements OnInit {
       }
     });
   }
+
+  solicitudActiva(id_user: number) {
+    this.dataService.getSolicitudUser(id_user).subscribe({
+      next: (data) => {
+        console.log('Solicitud activa: ', data);
+        const numSolicitud = data.map((solicitud) => solicitud.id_solicitud);
+        if (numSolicitud.length > 0) {
+          this.tieneSolicitudesActivas = true;
+        } else {
+          this.tieneSolicitudesActivas = false;
+        }
+      }
+    });
+  }
   
 
 
   
   ngOnInit() {
     this.obtSolicitudes()
+    console.log('Solicitudes conductor: ', this.solicitudConductor);
+    
+    this.solicitudActiva(this.id_user)
 
-    this.tieneSolicitudesActivas = this.solicitudConductor.some(
-      (solicitud) => solicitud.id_solicitud !== null,
-    );
-    console.log('¿Tiene solicitudes activas?', this.tieneSolicitudesActivas);
+    // this.tieneSolicitudesActivas = this.solicitudConductor.some(
+    //   (solicitud) => solicitud.id_solicitud !== null,
+    // );
+    // console.log('¿Tiene solicitudes activas?', this.tieneSolicitudesActivas);
 
     const observables = this.solicitudConductor.map((solicitud) => {
       return this.calcularAsientosDisponibles(solicitud);
