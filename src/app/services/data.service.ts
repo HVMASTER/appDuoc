@@ -42,7 +42,7 @@ export class DataService {
     return this.http.patch<any>(URL+'solicitudes?id_solicitud=eq.'+id_solicitud,{ estado: this.estado},{ headers , observe: 'response' });
   }
 
-  obtSolicitudDisp() {
+  obtSolicitudDisp(): Observable<ObtenerSolicitud[]> {
     const headers = this.getHeaders();
     const solicitud = this.http.get<ObtenerSolicitud[]>(`${URL}solicitudes?estado`, { headers });
     return solicitud;
