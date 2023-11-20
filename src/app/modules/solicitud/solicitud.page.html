@@ -37,6 +37,9 @@
           </ion-list>
         </ion-card-content>
         <div class="button">
+          <ion-item *ngIf="solicitud.aceptada">
+            <ion-button (click)="abrirModalMaps()" color="tertiary">Ver viaje</ion-button>
+          </ion-item>
           <ion-item *ngIf="!solicitud.aceptada && solicitud.asientos > 0 && solicitud.asientos <= 4">
             <ion-button (click)="aceptarSolicitud(solicitud.id_solicitud, id_user, solicitud.id_vehiculo, solicitud.estado)" expand="block" color="success">Aceptar</ion-button>
           </ion-item>
