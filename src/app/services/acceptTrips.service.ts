@@ -44,18 +44,19 @@ export class AcceptTripsService {
       );   
   }
 
-  postDatosAcceptTrips(id_solicitud: number, id_user: number, id_vehiculo: number) {
+  postDatosAcceptTrips(id_solicitud: number, id_user: number, id_vehiculo: number, estado: string) {
     const headers = this.getHeaders();
     const datos = {
       id_solicitud: id_solicitud,
       id_user: id_user,
-      id_vehiculo: id_vehiculo
+      id_vehiculo: id_vehiculo,
+      estado: 'aceptada'
       
     }
     return this.http.post(`${URL}accept_trips`, datos, { headers });
   }
  
-  getSolicitudesAceptadasPorUsuario(id_user: number) {
+  getSolicitudesAceptadasPorUsuario(id_user: number): Observable<ObtenerSolicitud[]> {
     const headers = this.getHeaders();
     return this.http.get<ObtenerSolicitud[]>(`${URL}accept_trips?id_user=eq.${id_user}`, { headers });
   }

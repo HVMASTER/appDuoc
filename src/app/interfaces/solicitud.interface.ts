@@ -24,7 +24,8 @@ export interface ObtenerSolicitud {
     destino: string;
     asientos: number;
     estado: string;
-    id_vehiculo: any;
+    id_vehiculo: number;
+    aceptada: boolean;
 }
 
 export interface ObtenerId{
@@ -48,5 +49,9 @@ export interface solicitudAlumno{
     apellido: string;
     tipo_user: string;
     
+}
+
+export interface tipoSolicitud{
+    estado: string;
 }
 
