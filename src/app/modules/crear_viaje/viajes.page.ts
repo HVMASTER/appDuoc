@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {  FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { DataService } from 'src/app/services/data.service';
 import { AcceptTripsService } from 'src/app/services/acceptTrips.service';
+import { GmapService } from '../../services/gmaps/gmap.service';
+import { debounceTime, from } from 'rxjs';
 
 @Component({
   selector: 'app-viajes',
@@ -21,9 +23,12 @@ export class ViajesPage implements OnInit {
   destino: string = '';
   id_vehiculo = Number(localStorage.getItem('vehiculo-id'));
   id_user = Number(localStorage.getItem('user-id'));
+  origenMap: any;
+  destinoMap: string = '';
 
+  constructor(private router: Router, private alertController: AlertController, private dataService: DataService, private accepTrips: AcceptTripsService, private GmapService: GmapService) {
 
-  constructor(private router: Router, private alertController: AlertController, private dataService: DataService, private accepTrips: AcceptTripsService) { }
+   }
 
 
   solicitarViaje(origen: string, destino: string) {
@@ -58,12 +63,6 @@ export class ViajesPage implements OnInit {
       }
     });
   }
-        
-        
-
-
-    
-
 
   async alertaModal() {
     const alert = await this.alertController.create({
@@ -80,7 +79,7 @@ export class ViajesPage implements OnInit {
       header: 'Ups!',
       message: 'Ya tienes una solicitud en espera. Termina tu viaje actual para crear uno nuevo.',
       buttons: ['OK']
-    });
+    }); 
 
     await alert.present();
   }
@@ -89,7 +88,26 @@ export class ViajesPage implements OnInit {
     this.router.navigate(['/home-conductor']); // Redirecciona a la página correspondiente
   }
 
+  // Función para buscar la dirección en el mapa
+  searchAdress(event) {
+    if (this.origen.length >= 5) {
+      debounceTime(2000);// Espera 2 segundos para realizar la búsqueda
+      this.GmapService.autoComplete(this.origen).then((result: any) => {
+        this.origenMap = result;
+        console.log('origen: ', this.origenMap);
+      });
+    }
+  }
+
+  // Función para seleccionar la dirección en el mapa
+  selectItem(item) {
+    this.origenMap = [];
+    this.origen = item; 
+  }
+
   ngOnInit() {
+
+    
   }
 
 }

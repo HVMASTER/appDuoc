@@ -89,6 +89,10 @@ ion-buttons {
     border-radius: 10px;
 }
 
+.selectorItems{
+    cursor:pointer;//cambia el cursor a mano
+}
+
 ion-item {
     ion-label.label {
         width: 120px;

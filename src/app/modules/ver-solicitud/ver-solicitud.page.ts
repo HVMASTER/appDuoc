@@ -12,6 +12,7 @@ import { map } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { MapComponent } from 'src/app/components/map/map.component';
+import { GmapService } from 'src/app/services/gmaps/gmap.service';
 
 @Component({
   selector: 'app-ver-solicitud',
@@ -29,10 +30,12 @@ export class VerSolicitudPage implements OnInit {
   mostrarModal = false;
   tieneSolicitudesActivas: boolean = false;
   mostrarModalMaps = false;
+  origen: string = '';
+  destino: string = '';
 
 
 
-  constructor(private acceptTripsService: AcceptTripsService, private dataService: DataService, private registroService: RegistroService, private verSolicitudService: VerSolicitudService, private router: Router) { }
+  constructor(private acceptTripsService: AcceptTripsService, private dataService: DataService, private registroService: RegistroService, private verSolicitudService: VerSolicitudService, private router: Router, private gmapsService: GmapService) { }
 
 
   async solicitudesAceptadas(id_solicitud: number) {
@@ -93,7 +96,9 @@ export class VerSolicitudPage implements OnInit {
     this.mostrarModal = true;
   }
 
-  abrirModalMaps(){
+  abrirModalMaps(origen: string, destino: string){
+    this.origen = origen;
+    this.destino = destino;
     this.mostrarModalMaps = true;
   }
 
@@ -156,7 +161,6 @@ export class VerSolicitudPage implements OnInit {
       }
     });
   }
-  
 
 
   
@@ -180,7 +184,6 @@ export class VerSolicitudPage implements OnInit {
         this.solicitudesDisp[i].asientos = asientosDisponibles[i];
       }
     });
-  
   }
   
 }

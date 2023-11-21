@@ -32,6 +32,8 @@ export class SolicitudPage implements OnInit {
   datosVehiculos: DatosConductor | null = null;
   botonAceptar = true;
   loadingData = false;
+  origen: string = '';
+  destino: string = '';
  
 
   constructor(private router: Router, private dataService: DataService, private acceptTripsService: AcceptTripsService, private alertController: AlertController, private gmapService: GmapService) {
