@@ -24,12 +24,11 @@ export class ViajesPage implements OnInit {
   id_vehiculo = Number(localStorage.getItem('vehiculo-id'));
   id_user = Number(localStorage.getItem('user-id'));
   origenMap: any;
-  destinoMap: string = '';
+  destinoMap: any;
 
   constructor(private router: Router, private alertController: AlertController, private dataService: DataService, private accepTrips: AcceptTripsService, private GmapService: GmapService) {
 
    }
-
 
   solicitarViaje(origen: string, destino: string) {
     if (origen === '' || destino === '') {
@@ -89,7 +88,7 @@ export class ViajesPage implements OnInit {
   }
 
   // Función para buscar la dirección en el mapa
-  searchAdress(event) {
+  searchAdressOrigin(event) {
     if (this.origen.length >= 5) {
       debounceTime(2000);// Espera 2 segundos para realizar la búsqueda
       this.GmapService.autoComplete(this.origen).then((result: any) => {
@@ -99,10 +98,27 @@ export class ViajesPage implements OnInit {
     }
   }
 
+  // Función para buscar la dirección en el mapa
+  searchAdressDestination(event) {
+    if (this.destino.length >= 5) {
+      debounceTime(2000);// Espera 2 segundos para realizar la búsqueda
+      this.GmapService.autoComplete(this.destino).then((result: any) => {
+        this.destinoMap = result;
+        console.log('destino: ', this.destinoMap);
+      });
+    }
+  }
+
   // Función para seleccionar la dirección en el mapa
-  selectItem(item) {
+  selectItemOrigin(item) {
     this.origenMap = [];
     this.origen = item; 
+  }
+
+  // Función para seleccionar la dirección en el mapa
+  selectItemDestination(item) {
+    this.destinoMap = [];
+    this.destino = item;
   }
 
   ngOnInit() {

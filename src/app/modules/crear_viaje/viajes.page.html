@@ -17,10 +17,10 @@
       <ion-list>
         <ion-item>
           <ion-label position="floating">Origen</ion-label>
-          <ion-input label=""name="origen" [(ngModel)]="origen" type="text" (keypress)="searchAdress($event)"></ion-input>
+          <ion-input label=""name="origen" [(ngModel)]="origen" type="text" (keypress)="searchAdressOrigin($event)"></ion-input>
           <div *ngIf="origen.length >= 5">
             <ion-list>
-              <ion-item *ngFor="let item of origenMap" (click)="selectItem(item?.description)">
+              <ion-item *ngFor="let item of origenMap" (click)="selectItemOrigin(item?.description)">
                 <ion-label class="selectorItems">{{ item?.description }}</ion-label>
               </ion-item>
             </ion-list>
@@ -29,7 +29,14 @@
         
         <ion-item>
           <ion-label position="floating">Destino</ion-label>
-          <ion-input label="" name="destino" [(ngModel)]="destino" type="text" ></ion-input>
+          <ion-input label="" name="destino" [(ngModel)]="destino" type="text" (keypress)="searchAdressDestination($event)" ></ion-input>
+          <div *ngIf="destino.length >= 5">
+            <ion-list>
+              <ion-item *ngFor="let item of destinoMap" (click)="selectItemDestination(item?.description)">
+                <ion-label class="selectorItems">{{ item?.description }}</ion-label>
+              </ion-item>
+            </ion-list>
+          </div>
         </ion-item>            
       </ion-list>
 
