@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ObtenerSolicitud, Solicitud } from '../interfaces/solicitud.interface';
 import { GuardarSolicitud } from '../interfaces/solicitud.interface';
 import { environment } from 'src/environments/environment';
+import { Coordinates } from '../interfaces/coordinates.interface';
 
   const URL = environment.apiurl;
   const KEY = environment.apikey; 
@@ -47,11 +48,17 @@ export class DataService {
     const solicitud = this.http.get<ObtenerSolicitud[]>(`${URL}solicitudes?estado`, { headers });
     return solicitud;
   }
-
+ 
   getSolicitudUser(id_user: number) {
     const headers = this.getHeaders();
     const solicitud = this.http.get<ObtenerSolicitud[]>(`${URL}solicitudes?id_user=eq.${id_user}`, { headers });
     return solicitud;
+  }
+
+  getCoordenadas(id_user: number) {
+    const headers = this.getHeaders();
+    const coordenadas = this.http.get<Coordinates>(`${URL}solicitudes?id_user=eq.${id_user}`, { headers });
+    return coordenadas;
   }
 
   // getSolicitudEspera(id_user: number) {

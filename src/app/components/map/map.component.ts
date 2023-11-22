@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { GmapService } from 'src/app/services/gmaps/gmap.service';
 
@@ -12,26 +12,54 @@ export class MapComponent  implements OnInit, OnDestroy {
 
   @ViewChild('map', {static: true}) mapElementRef: ElementRef;
   googleMaps: any;
-  source: any = { lat: -33.033611507141515, lng: -71.53317344099422 };
-  dest: any = { lat: -33.024471184403545, lng: -71.55180894757042 };
+  // source: any = { lat: -33.033611507141515, lng: -71.53317344099422 };
+  // dest: any = { lat: -33.024471184403545, lng: -71.55180894757042 };
   map: any;
   directionsService: any;
   directionsDisplay: any;
   source_marker: any;
   destination_marker: any;
   trackSub: Subscription;
+  @Input()
+  origen: any;
+  @Input()
+  destino: any;
+  
+  origenLat: string = '';
+  origenLng: string = '';
+  destLat: string = '';
+  destLng: string = '';
 
   constructor(
     private maps: GmapService,
     private renderer: Renderer2,
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('origen: ', this.origen);
+    console.log('destino: ', this.destino);
+    
+    // Obtener las coordenadas de origen
+    this.maps.getGeocodingData(this.origen).then((result: any) => {
+      this.origenLat = result.lat;
+      this.origenLng = result.lng;
+      console.log('origen: ', this.origenLat, this.origenLng);
+    });
+    
+    // Obtener las coordenadas de destino
+    this.maps.getGeocodingData(this.destino).then((result: any) => {
+      this.destLat = result.lat;
+      this.destLng = result.lng;
+      console.log('destino: ', this.destLat, this.destLng);
+    });
+
+  }
 
   ngAfterViewInit() {
     this.loadMap();
   }
 
+  // Función para cargar el mapa de Google Maps
   async loadMap() {
     try {
       console.log('map');
@@ -39,7 +67,7 @@ export class MapComponent  implements OnInit, OnDestroy {
       const mapEl = this.mapElementRef.nativeElement;
       // Crear un nuevo mapa con algunas opciones de configuración
       this.map = new googleMaps.Map(mapEl, {
-        center: { lat: this.source.lat, lng: this.source.lng },
+        center: { lat: this.origenLat, lng: this.origenLng },
         disableDefaultUI: true,
         zoom: 13,
       });
@@ -52,8 +80,8 @@ export class MapComponent  implements OnInit, OnDestroy {
       const sourceIconUrl = 'assets/img/car.png';
       const destinationIconUrl = 'assets/img/pin.png';
       
-      const source_position = new googleMaps.LatLng(this.source.lat, this.source.lng);
-      const destination_position = new googleMaps.LatLng(this.dest.lat, this.dest.lng);
+      const source_position = new googleMaps.LatLng(this.origenLat, this.origenLng);
+      const destination_position = new googleMaps.LatLng(this.destLat, this.destLng);
 
       const source_icon = {
         url: sourceIconUrl,
@@ -110,8 +138,8 @@ export class MapComponent  implements OnInit, OnDestroy {
   // Función para dibujar la ruta utilizando el servicio de direcciones de Google Maps
   drawRoute() {
     this.directionsService.route({
-      origin: this.source,
-      destination: this.dest,
+      origin: this.origen,
+      destination: this.destino,
       travelMode: 'DRIVING',
       provideRouteAlternatives: true
     }, (response, status) => {
