@@ -73,32 +73,24 @@ export class MapComponent  implements OnInit, OnDestroy {
       this.map = new googleMaps.Map(mapEl, {
         center: { lat: this.origenLat, lng: this.origenLng },
         disableDefaultUI: true,
-        zoom: 13,
+        zoom: 10,
       });
       // Inicializar los servicios de direcciones de Google Maps
       this.directionsService = new googleMaps.DirectionsService;
       this.directionsDisplay = new googleMaps.DirectionsRenderer();
       this.directionsDisplay.setMap(this.map);
-
-      // Configurar iconos y posiciones de los marcadores de origen y destino
-      const sourceIconUrl = '';
-      const destinationIconUrl = '';
       
       const source_position = new googleMaps.LatLng(this.origenLat, this.origenLng);
-      const destination_position = new googleMaps.LatLng(this.destLat, this.destLng);
+      //const destination_position = new googleMaps.LatLng(this.destLat, this.destLng);
 
       const source_icon = {
-        url: sourceIconUrl,
+        //url: sourceIconUrl,
         scaledSize: new googleMaps.Size(35, 35), // scaled size
         origin: new googleMaps.Point(0, 0), // origin
         anchor: new googleMaps.Point(17.5, 35) // anchor
       };
-      const destination_icon = {
-        url: destinationIconUrl,
-        scaledSize: new googleMaps.Size(35, 35), // scaled size
-        origin: new googleMaps.Point(0, 0), // origin
-        anchor: new googleMaps.Point(17.5, 35) // anchor
-      };
+
+      // Crear marcador de origen y agregarlo al mapa
       this.source_marker = new googleMaps.Marker({
         map: this.map,
         position: source_position,
@@ -106,12 +98,9 @@ export class MapComponent  implements OnInit, OnDestroy {
         icon: source_icon,
       });
 
-      // Crear marcadores de origen y destino y establecerlos en el mapa
+      // Crear marcador de destino y agregarlo al mapa
       this.destination_marker = new googleMaps.Marker({
         map: this.map,
-        position: destination_position,
-        animation: googleMaps.Animation.DROP,
-        icon: destination_icon
       });
 
       this.source_marker.setMap(this.map);

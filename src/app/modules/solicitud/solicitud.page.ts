@@ -160,7 +160,9 @@ export class SolicitudPage implements OnInit {
     this.mostrarModal = false;
   }
 
-  abrirModalMaps(){
+  abrirModalMaps(origen: string, destino: string){
+    this.origen = origen;
+    this.destino = destino;
     this.mostrarModalMaps = true;
   }
 
