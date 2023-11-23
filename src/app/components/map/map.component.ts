@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 import { GmapService } from 'src/app/services/gmaps/gmap.service';
 
 @Component({
@@ -25,10 +25,10 @@ export class MapComponent  implements OnInit, OnDestroy {
   @Input()
   destino: any;
   
-  origenLat: string = '';
-  origenLng: string = '';
-  destLat: string = '';
-  destLng: string = '';
+  origenLat: number;
+  origenLng: number;
+  destLat: number;
+  destLng: number;
 
   constructor(
     private maps: GmapService,
@@ -56,7 +56,11 @@ export class MapComponent  implements OnInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.loadMap();
+    timer(500).subscribe(() => {
+      this.loadMap();
+    }, err => {
+      console.log(err);
+    });
   }
 
   // Función para cargar el mapa de Google Maps
@@ -73,27 +77,27 @@ export class MapComponent  implements OnInit, OnDestroy {
       });
       // Inicializar los servicios de direcciones de Google Maps
       this.directionsService = new googleMaps.DirectionsService;
-      this.directionsDisplay = new googleMaps.DirectionsRenderer;
       this.directionsDisplay = new googleMaps.DirectionsRenderer();
+      this.directionsDisplay.setMap(this.map);
 
       // Configurar iconos y posiciones de los marcadores de origen y destino
-      const sourceIconUrl = 'assets/img/car.png';
-      const destinationIconUrl = 'assets/img/pin.png';
+      const sourceIconUrl = '';
+      const destinationIconUrl = '';
       
       const source_position = new googleMaps.LatLng(this.origenLat, this.origenLng);
       const destination_position = new googleMaps.LatLng(this.destLat, this.destLng);
 
       const source_icon = {
         url: sourceIconUrl,
-        scaledSize: new googleMaps.Size(50, 50), // scaled size
+        scaledSize: new googleMaps.Size(35, 35), // scaled size
         origin: new googleMaps.Point(0, 0), // origin
-        anchor: new googleMaps.Point(0, 0) // anchor
+        anchor: new googleMaps.Point(17.5, 35) // anchor
       };
       const destination_icon = {
         url: destinationIconUrl,
-        scaledSize: new googleMaps.Size(50, 50), // scaled size
+        scaledSize: new googleMaps.Size(35, 35), // scaled size
         origin: new googleMaps.Point(0, 0), // origin
-        anchor: new googleMaps.Point(0, 0) // anchor
+        anchor: new googleMaps.Point(17.5, 35) // anchor
       };
       this.source_marker = new googleMaps.Marker({
         map: this.map,
@@ -114,15 +118,6 @@ export class MapComponent  implements OnInit, OnDestroy {
       this.destination_marker.setMap(this.map);
 
       // Configurar el servicio de direcciones para mostrar las rutas en el mapa
-      this.directionsDisplay.setMap(this.map);
-      this.directionsDisplay.setOptions({
-        polylineOptions: {
-          strokeWeight: 4,
-          strokeOpacity: 1,
-          strokeColor: 'black'
-        },
-        suppressMarkers: true
-      });
 
       // Dibujar la ruta inicial
       await this.drawRoute();
@@ -157,12 +152,12 @@ export class MapComponent  implements OnInit, OnDestroy {
     });
   }
 
-  changeMarkerPosition(data) {
-    const newPosition = { lat: data?.lat, lng: data?.lng }; // Set the new marker position coordinates
-    this.source_marker.setPosition(newPosition);
-    // this.map.panTo(newPosition); // Pan the map to the new marker position
-    this.drawRoute();
-  }
+  // changeMarkerPosition(data) {
+  //   const newPosition = { lat: data?.lat, lng: data?.lng }; // Set the new marker position coordinates
+  //   this.source_marker.setPosition(newPosition);
+  //   // this.map.panTo(newPosition); // Pan the map to the new marker position
+  //   this.drawRoute();
+  // }
 
   // Método para desuscribirse de la suscripción para evitar pérdidas de memoria
   ngOnDestroy(): void {
