@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -118,7 +118,6 @@ export class VerSolicitudPage implements OnInit {
     return this.acceptTripsService.getCountAccepTrips(id);
   }
 
-
   asientosDisponibles(id: Number) {
     let asientosDisponibles = 0;
     
@@ -162,7 +161,10 @@ export class VerSolicitudPage implements OnInit {
     });
   }
 
-
+  @ViewChild(MapComponent) mapComponent: MapComponent;
+  centrarEnOrigen() {
+    this.mapComponent.centrarMapaEnOrigen();
+  }
   
   ngOnInit() {
     this.obtSolicitudes()

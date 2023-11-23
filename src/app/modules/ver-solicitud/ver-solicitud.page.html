@@ -76,7 +76,13 @@
     </ion-header>
     <ion-content>
       <app-map origen="{{ origen }}" destino="{{ destino }}"></app-map>
-      <ion-button (click)="cerrarModalMaps()" expand="block" color="success">Aceptar</ion-button>
+      <ion-button (click)="centrarEnOrigen()" class="floating-button-origin" shape="round" color="primary">
+        <ion-icon name="logo-ionic" size="large"></ion-icon>
+        Centrar en Origen
+      </ion-button>
+      <ion-button (click)="cerrarModalMaps()" class="floating-button-close" shape="round" color="danger">
+        <ion-icon name="logo-ionic" size="large"></ion-icon>
+        Finalizar viaje</ion-button>
     </ion-content>
   </ng-template>
 </ion-modal>

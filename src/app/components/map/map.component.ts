@@ -148,6 +148,15 @@ export class MapComponent  implements OnInit, OnDestroy {
   //   this.drawRoute();
   // }
 
+  centrarMapaEnOrigen() {
+    // Verifica si el mapa y las coordenadas de origen existen
+    if (this.map && this.origenLat !== undefined && this.origenLng !== undefined) {
+    // Centra el mapa en las coordenadas de origen
+      this.map.setCenter({ lat: this.origenLat, lng: this.origenLng });
+      
+    }
+  }
+
   // Método para desuscribirse de la suscripción para evitar pérdidas de memoria
   ngOnDestroy(): void {
       if(this.trackSub) this.trackSub.unsubscribe();
