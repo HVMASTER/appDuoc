@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Solicitud, ObtenerSolicitud, DatosUsuarios, solicitudAlumno } from '../interfaces/solicitud.interface';
 import { environment } from 'src/environments/environment';
 import { Observable, map } from 'rxjs';
@@ -13,6 +13,8 @@ import { Conductor, DatosConductor } from '../interfaces/conductor.interface';
   providedIn: 'root'
 })
 export class AcceptTripsService {
+
+  estado: string = 'Finalizado';
 
   constructor(private http: HttpClient) {  
   }
@@ -50,7 +52,7 @@ export class AcceptTripsService {
       id_solicitud: id_solicitud,
       id_user: id_user,
       id_vehiculo: id_vehiculo,
-      estado: 'aceptada'
+      estado: 'aceptado'
       
     }
     return this.http.post(`${URL}accept_trips`, datos, { headers });
@@ -74,6 +76,11 @@ export class AcceptTripsService {
   getDatosSolicitud(id_solicitud: number) {
     const headers = this.getHeaders();
     return this.http.get<solicitudAlumno[]>(`${URL}accept_trips?id_solicitud=eq.${id_solicitud}`, { headers });
+  }
+
+  updateEstadoSolicitud(id_solicitud: number): Observable<HttpErrorResponse | any>{
+    const headers = this.getHeaders();
+    return this.http.patch<any>(`${URL}accept_trips?id_solicitud=eq.${id_solicitud}`,{ estado: this.estado},{ headers , observe: 'response' });
   }
 
 

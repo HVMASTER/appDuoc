@@ -115,13 +115,22 @@ export class VerSolicitudPage implements OnInit {
         solicitud.map((solicitudes) => {
           const id_solicitud = solicitudes.id_solicitud;
   
-          // Actualiza el estado de la solicitud a "Finalizado"
+          // Actualiza el estado de la solicitud del conductor a "Finalizado"
           this.dataService.updateEstadoSolicitud(id_solicitud).subscribe(
             (response) => {
-              console.log('Estado de solicitud actualizado correctamente:', response);
+              console.log('Estado de solicitud del conductor actualizado correctamente:', response);
             },
             (error) => {
-              console.error('Error al actualizar el estado de la solicitud:', error);
+              console.error('Error al actualizar el estado de la solicitud del conductor:', error);
+            });
+
+          // Actualiza el estado de la solicitud del alumno a "Finalizado"
+          this.acceptTripsService.updateEstadoSolicitud(id_solicitud).subscribe(
+            (response) => {
+              console.log('Estado de solicitud de alumno actualizado correctamente:', response);
+            },
+            (error) => {
+              console.error('Error al actualizar el estado de la solicitud del alumno:', error);
             });
         });
       }
