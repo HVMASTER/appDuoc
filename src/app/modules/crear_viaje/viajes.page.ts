@@ -38,7 +38,7 @@ export class ViajesPage implements OnInit {
 
     this.dataService.getSolicitudUser(this.id_user).subscribe({
       next: (solicitudes) => {
-        const solicitudEspera = solicitudes.some(solicitud => solicitud.estado === 'Espera');
+        const solicitudEspera = solicitudes.some(solicitud => solicitud.estado === 'Disponible');
 
         if (solicitudEspera) {
           this.alertaModalError();

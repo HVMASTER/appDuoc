@@ -8,7 +8,7 @@ import { AcceptTripsService } from '../../services/acceptTrips.service';
 import { RegistroService } from '../auth/auth.service';
 import { VerSolicitudService } from '../../services/verSolicitud.service';
 import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { map, timeout } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { MapComponent } from 'src/app/components/map/map.component';
@@ -32,6 +32,7 @@ export class VerSolicitudPage implements OnInit {
   mostrarModalMaps = false;
   origen: string = '';
   destino: string = '';
+  estado: string = 'Finalizado';
 
 
 
@@ -106,8 +107,25 @@ export class VerSolicitudPage implements OnInit {
     this.mostrarModal = false;
   }
 
-  cerrarModalMaps(){
+  cerrarModalMaps() {
     this.mostrarModalMaps = false;
+  
+    this.dataService.getSolicitudUser(this.id_user).subscribe({
+      next: (solicitud) => {
+        solicitud.map((solicitudes) => {
+          const id_solicitud = solicitudes.id_solicitud;
+  
+          // Actualiza el estado de la solicitud a "Finalizado"
+          this.dataService.updateEstadoSolicitud(id_solicitud).subscribe(
+            (response) => {
+              console.log('Estado de solicitud actualizado correctamente:', response);
+            },
+            (error) => {
+              console.error('Error al actualizar el estado de la solicitud:', error);
+            });
+        });
+      }
+    });
   }
 
   volverAlMenuPrincipal() {
@@ -151,8 +169,8 @@ export class VerSolicitudPage implements OnInit {
     this.dataService.getSolicitudUser(id_user).subscribe({
       next: (data) => {
         console.log('Solicitud activa: ', data);
-        const numSolicitud = data.map((solicitud) => solicitud.id_solicitud);
-        if (numSolicitud.length > 0) {
+        const estado = data.map((solicitud) => solicitud.estado);
+        if (estado.includes('Disponible')) {
           this.tieneSolicitudesActivas = true;
         } else {
           this.tieneSolicitudesActivas = false;
@@ -171,11 +189,6 @@ export class VerSolicitudPage implements OnInit {
     console.log('Solicitudes conductor: ', this.solicitudConductor);
     
     this.solicitudActiva(this.id_user)
-
-    // this.tieneSolicitudesActivas = this.solicitudConductor.some(
-    //   (solicitud) => solicitud.id_solicitud !== null,
-    // );
-    // console.log('¿Tiene solicitudes activas?', this.tieneSolicitudesActivas);
 
     const observables = this.solicitudConductor.map((solicitud) => {
       return this.calcularAsientosDisponibles(solicitud);

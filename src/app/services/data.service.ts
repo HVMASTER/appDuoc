@@ -14,7 +14,7 @@ import { Coordinates } from '../interfaces/coordinates.interface';
 })
 export class DataService {
 
-  estado: string = 'Espera';
+  estado: string = 'Finalizado';
 
   constructor(private http: HttpClient) {  
   }
