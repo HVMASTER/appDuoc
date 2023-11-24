@@ -67,10 +67,16 @@ export class SolicitudPage implements OnInit {
   }
 
   async aceptarSolicitud(id_solicitud: number, id_user: number, id_vehiculo: number, estado: string) {
+    // Obtener todas las solicitudes aceptadas para el usuario
     this.acceptTripsService.getSolicitudesAceptadasPorUsuario(id_user).subscribe((solicitudesAceptadas) => {
-      if (solicitudesAceptadas && solicitudesAceptadas.length > 0) {
+      // Filtrar las solicitudes que tienen un estado 'aceptado'
+      const solicitudesEnCurso = solicitudesAceptadas.filter(solicitud => solicitud.estado === 'aceptado');
+  
+      if (solicitudesEnCurso.length > 0) {
+        // Ya hay una solicitud en curso, mostrar alerta de error
         this.alertaModalError();
       } else {
+        // No hay solicitudes en curso, proceder con la acción
         this.acceptTripsService.postDatosAcceptTrips(id_solicitud, id_user, id_vehiculo, estado).subscribe((data) => {
           this.alertaModalAccept();
           this.solicitudAceptada();
