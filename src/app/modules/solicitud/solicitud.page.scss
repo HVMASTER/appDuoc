@@ -74,9 +74,18 @@ ion-buttons {
         }
     }
   }
+
+  .floating-button {
+    position: absolute;
+    bottom: 16px; 
+    left: 50%;
+    transform: translateX(-55%);
+    z-index: 10; 
+  }
   
   ion-modal {
-    --height: 80%;
+    --height: 100%;
+    
   }
 
 @media (max-width: 768px) {

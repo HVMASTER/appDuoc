@@ -93,6 +93,22 @@ ion-buttons {
     cursor:pointer;//cambia el cursor a mano
 }
 
+.floating-button-origin{
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-55%);
+    z-index: 10;
+}
+
+.floating-button-close {
+    position: absolute;
+    bottom: 16px; 
+    left: 50%;
+    transform: translateX(-55%);
+    z-index: 10; 
+  }
+
 ion-item {
     ion-label.label {
         width: 120px;
@@ -116,7 +132,7 @@ ion-item {
 }
 
 ion-modal {
-    --height: 80%;
+    --height: 100%;
 }
 
 @media (max-width: 768px) {
