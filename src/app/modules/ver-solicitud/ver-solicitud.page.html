@@ -67,13 +67,8 @@
   </ng-template>
 </ion-modal>
 
-<ion-modal [isOpen]="mostrarModalMaps" [initialBreakpoint]="1" [breakpoints]="[0, 1]" [backdropDismiss]="false" class="custom-modal">
+<ion-modal [isOpen]="mostrarModalMaps" [initialBreakpoint]="1" [breakpoints]="[0, 1]" [backdropDismiss]="false">
   <ng-template>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title></ion-title>
-      </ion-toolbar>
-    </ion-header>
     <ion-content>
       <app-map origen="{{ origen }}" destino="{{ destino }}"></app-map>
       <ion-button (click)="centrarEnOrigen()" class="floating-button-origin" shape="round" color="primary">

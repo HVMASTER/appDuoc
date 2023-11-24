@@ -27,8 +27,8 @@ export class SolicitudPage implements OnInit {
   solicitudesDisp: ObtenerSolicitud[] = [];
   id_user = Number(localStorage.getItem('user-id')); 
   solicitudSeleccionada: ObtenerSolicitud | null = null;
-  mostrarModal = false;
-  mostrarModalMaps = false;
+  mostrarModal: boolean = false;
+  mostrarModalMaps: boolean = false;
   datosVehiculos: DatosConductor | null = null;
   botonAceptar = true;
   loadingData = false;
