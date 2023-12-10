@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="#003785"> 
+    <ion-title class="titulo">TeLlevoAPP</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <div class="ion-text-center">
+          <p>TeLlevoAPP es una solución innovadora para abordar los desafíos de transporte que enfrentan los alumnos al regresar a casa después de las clases presenciales.</p>
+
+          <p>Es una aplicación móvil fácil de usar que permite a los alumnos programar y organizar viajes compartidos entre ellos.</p>
+        </div>
+
+        <h2 class="subtitulo">Principales Características de la App</h2>
+
+        <div class="features">
+          <div class="element1">
+            <h2>Programación de Viajes</h2>
+            <p>Los alumnos con vehículos propios pueden programar sus viajes de regreso a casa, estableciendo el costo del viaje y los horarios disponibles.</p>
+          </div>
+
+          <div class="element2">
+            <h2>Búsqueda de Transporte</h2>
+            <p>Los alumnos sin vehículos pueden buscar vehículos disponibles para llevarlos a casa, brindándoles una opción de transporte confiable.</p>
+          </div>
+
+          <div class="element3">
+            <h2>Solicitud de Viajes Compartidos</h2>
+            <p>La aplicación permite a los alumnos solicitar viajar con otros estudiantes que ofrecen transporte, fomentando la colaboración y la comunidad estudiantil.</p>
+          </div>
+
+          <div class="element4">
+            <h2>Sostenibilidad Ambiental</h2>
+            <p>Contribuye a la reducción de la huella de carbono al promover viajes compartidos y reducir la necesidad de vehículos individuales.</p>  
+          </div>
+
+          <div class="element5">
+            <h2>Reducción de Tiempos de Búsqueda</h2>
+            <p>TeLlevoAPP reduce significativamente los tiempos necesarios para encontrar transporte de regreso a casa, mejorando la eficiencia y la comodidad.</p>
+          </div>
+
+          <div class="element6">
+            <h2>Compañerismo</h2>
+            <p>Fomenta el compañerismo al facilitar la interacción y organización conjunta de viajes.</p>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <div class="ion-text-center">
+          <ion-button color="primary"  (click)="abrirDownloadApp()">
+            <ion-icon name="logo-android"></ion-icon>
+            Descarga la App
+            <ion-icon name="logo-android"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

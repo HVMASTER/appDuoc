@@ -6,7 +6,7 @@ import { AuthGuard } from './guard/authUser.guard';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'presentation',
     pathMatch: 'full',
   },
   {
@@ -72,5 +72,15 @@ export const routes: Routes = [
     path: 'ver-solicitud',
     loadComponent: () => import('./modules/ver-solicitud/ver-solicitud.page').then( m => m.VerSolicitudPage)
   },
+  {
+    path: 'download-app',
+    loadComponent: () => import('./modules/download-app/download-app.page').then( m => m.DownloadAppPage)
+  },
+  {
+    path: 'presentation',
+    loadComponent: () => import('./modules/presentation/presentation.page').then( m => m.PresentationPage)
+  },
+
+
 
 ];
