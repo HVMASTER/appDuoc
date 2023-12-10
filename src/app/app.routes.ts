@@ -6,7 +6,7 @@ import { AuthGuard } from './guard/authUser.guard';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'presentation',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {
