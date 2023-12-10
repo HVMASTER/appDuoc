@@ -28,6 +28,10 @@ export class PresentationPage implements OnInit {
     }
   }
 
+  login() {
+    this.router.navigate(['/login']);
+  }
+
   ngOnInit() {
   }
 
